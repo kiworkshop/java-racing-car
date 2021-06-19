@@ -28,4 +28,17 @@ public class CarTest {
         assertThat(cars.get(1).getName()).isEqualTo(car2Name);
         assertThat(cars.get(1).getPosition()).isEqualTo(0);
     }
+
+    @Test
+    void 차_이동시키기() {
+        // given
+        Car car = new Car("car");
+
+        // when
+        car.move();
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(1);
+    }
+
 }
