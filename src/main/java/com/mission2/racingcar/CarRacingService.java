@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class CarRacingService {
     public static final int MAX_NAME_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
+    public static final int FORWARD = 4;
 
     public static boolean checkCarNames(String[] cars, int maxCount) {
         boolean checker = true;
@@ -14,5 +15,14 @@ public class CarRacingService {
         }
 
         return checker;
+    }
+
+    public boolean compareRandom() {
+        int randomNumber = (int) (Math.random() * 10);
+        if (randomNumber > FORWARD) {
+            
+        }
+
+        return false;
     }
 }
