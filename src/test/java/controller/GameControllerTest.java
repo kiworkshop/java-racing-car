@@ -48,7 +48,7 @@ class GameControllerTest {
     @DisplayName("각 이름이 5자 초과일 경우, 예외가 발생한다.")
     void validateNameLength() {
         //given
-        List<String> names = Arrays.asList("bean, sean, jean");
+        List<String> names = Arrays.asList("bennie");
 
         //when //then
         assertThatThrownBy(() -> gameController.validateNameLength(names))
