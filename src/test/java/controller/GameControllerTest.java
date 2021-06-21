@@ -55,4 +55,17 @@ class GameControllerTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("이름은 5자 이하여야 합니다.");
     }
+
+    @Test
+    @DisplayName("0-9 중 하나의 숫자를 random하게 생성하여 반환한다.")
+    void generateRandomNumber() {
+        for (int i = 0; i < 100; i++) {
+            //when
+            int randomNumber = gameController.generateRandomNumber();
+            //then
+            assertThat(randomNumber).isGreaterThanOrEqualTo(0);
+            assertThat(randomNumber).isLessThanOrEqualTo(9);
+        }
+
+    }
 }
