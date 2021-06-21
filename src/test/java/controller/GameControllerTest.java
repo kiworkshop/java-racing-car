@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import view.InputView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,5 +42,17 @@ class GameControllerTest {
 
         //then
         assertThat(names.size()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("각 이름이 5자 초과일 경우, 예외가 발생한다.")
+    void validateNameLength() {
+        //given
+        List<String> names = Arrays.asList("bean, sean, jean");
+
+        //when //then
+        assertThatThrownBy(() -> gameController.validateNameLength(names))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("이름은 5자 이하여야 합니다.");
     }
 }
