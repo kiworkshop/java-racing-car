@@ -1,5 +1,7 @@
 package view;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -7,6 +9,7 @@ public class InputView {
 
     public String inputNames() {
         String inputNames = scanner.next();
+        StringUtils.isBlank(inputNames);
         return inputNames.trim();
     }
 }
