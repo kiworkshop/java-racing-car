@@ -2,15 +2,14 @@ package controller;
 
 import view.InputView;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameController {
     private static final int ADVANCE_DETERMINATION_RANGE = 10;
     private static final String DEFAULT_DELIMITER = ",";
     private static final int MAX_NAME_LENGTH = 5;
     private static final Random random = new Random();
+    private static final int START_POSITION = 0;
 
     private final InputView inputView;
 
@@ -20,7 +19,9 @@ public class GameController {
 
     public void start() {
         String names = inputView.inputNames();
-        List<String> splitNames = split(names);
+        List<String> carNames = split(names);
+        validateNameLength(carNames);
+        createCars(carNames);
     }
 
     public List<String> split(String names) {
@@ -43,8 +44,13 @@ public class GameController {
         }
     }
 
+    public Map<String, Integer> createCars(List<String> carNames) {
+        Map<String, Integer> cars = new HashMap<>();
+        carNames.forEach(carName -> cars.put(carName, START_POSITION));
+        return cars;
+    }
+
     public int generateRandomNumber() {
         return random.nextInt(ADVANCE_DETERMINATION_RANGE);
     }
-    
 }
