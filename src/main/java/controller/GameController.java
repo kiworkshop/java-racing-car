@@ -4,10 +4,13 @@ import view.InputView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class GameController {
+    private static final int ADVANCE_DETERMINATION_RANGE = 10;
     private static final String DEFAULT_DELIMITER = ",";
     private static final int MAX_NAME_LENGTH = 5;
+    private static final Random random = new Random();
 
     private final InputView inputView;
 
@@ -39,4 +42,9 @@ public class GameController {
             throw new RuntimeException("이름은 5자 이하여야 합니다.");
         }
     }
+
+    public int generateRandomNumber() {
+        return random.nextInt(ADVANCE_DETERMINATION_RANGE);
+    }
+    
 }
