@@ -3,8 +3,13 @@ package controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import view.InputView;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class GameControllerTest {
@@ -22,8 +27,19 @@ class GameControllerTest {
         String names = "bean";
 
         //when //then
-        assertThatThrownBy(() -> gameController.validateDelimiter(names))
+        assertThatThrownBy(() -> gameController.split(names))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("\",\"가 포함되어야 합니다.");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"bean, sean, jean : 3", "bean, cean : 2"}, delimiter = ':')
+    @DisplayName("','를 기준으로 이름을 분리하여 이름 목록을 반환한다.")
+    void split(String inputNames, int expected) {
+        //when
+        List<String> names = gameController.split(inputNames);
+
+        //then
+        assertThat(names.size()).isEqualTo(expected);
     }
 }
