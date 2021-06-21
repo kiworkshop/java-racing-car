@@ -9,6 +9,7 @@ import view.InputView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -62,10 +63,25 @@ class GameControllerTest {
         for (int i = 0; i < 100; i++) {
             //when
             int randomNumber = gameController.generateRandomNumber();
+
             //then
             assertThat(randomNumber).isGreaterThanOrEqualTo(0);
             assertThat(randomNumber).isLessThanOrEqualTo(9);
         }
+    }
 
+    @Test
+    @DisplayName("자동차에 이름과 위치정보를 부여한다.")
+    void createCars() {
+        //given
+        List<String> carNames = Arrays.asList("bean", "tom", "john");
+
+        //when
+        Map<String, Integer> cars = gameController.createCars(carNames);
+
+        //then
+        cars.values()
+                .forEach(position -> assertThat(position).isEqualTo(0));
+        assertThat(cars.size()).isEqualTo(carNames.size());
     }
 }
