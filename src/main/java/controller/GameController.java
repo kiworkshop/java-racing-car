@@ -12,6 +12,7 @@ public class GameController {
     private static final int START_POSITION = 0;
     private static final int ADVANCE_CONDITION = 4;
     private static final int ADVANCE = 1;
+    private static final int GAME_OVER = 0;
 
     private final InputView inputView;
 
@@ -24,6 +25,7 @@ public class GameController {
         List<String> carNames = split(names);
         validateNameLength(carNames);
         Map<String, Integer> cars = createCars(carNames);
+        int race = race(rounds, cars);
     }
 
     public List<String> split(String names) {
@@ -52,14 +54,24 @@ public class GameController {
         return cars;
     }
 
-    public int generateRandomNumber() {
-        return random.nextInt(ADVANCE_DETERMINATION_RANGE);
+    public int race(int rounds, Map<String, Integer> cars) {
+        while (rounds > GAME_OVER) {
+            cars.entrySet()
+                    .forEach(car -> advance(car, generateRandomNumber()));
+            rounds--;
+        }
+
+        return rounds;
     }
 
     public void advance(Map.Entry<String, Integer> car, int randomNumber) {
         if (checkAdvanceCondition(randomNumber)) {
             car.setValue(car.getValue() + ADVANCE);
         }
+    }
+
+    public int generateRandomNumber() {
+        return random.nextInt(ADVANCE_DETERMINATION_RANGE);
     }
 
     public boolean checkAdvanceCondition(int randomNumber) {
