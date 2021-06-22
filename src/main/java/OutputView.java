@@ -8,7 +8,7 @@ public class OutputView {
     public void askRepeatCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
     }
-    
+
     public void printRaceStart() {
         System.out.println("실행 결과");
     }
