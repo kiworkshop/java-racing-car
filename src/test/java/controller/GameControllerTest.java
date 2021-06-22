@@ -116,4 +116,19 @@ class GameControllerTest {
         assertThat(advancedCar.getValue()).isEqualTo(1);
         assertThat(stoppedCar.getValue()).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("자동차와 시도 횟수를 인자로 받아, 시도 횟수가 0이 될때까지 경주한다.")
+    void race() {
+        //given
+        int rounds = 5;
+        List<String> carNames = Arrays.asList("bean", "tom", "john");
+        Map<String, Integer> cars = gameController.createCars(carNames);
+
+        //when
+        int leftRounds = gameController.race(rounds, cars);
+
+        //then
+        assertThat(leftRounds).isEqualTo(0);
+    }
 }
