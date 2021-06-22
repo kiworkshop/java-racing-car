@@ -1,21 +1,22 @@
 package com.mission2.racingcar;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 
 import static com.mission2.racingcar.CarRacingService.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class CarRacingTests {
 
-    CarRacingService service = CarRacingService.getInstance();
+    static CarRacingService service;
+
+    @BeforeAll
+    public static void beforeAll() {
+        service = new CarRacingService();
+    }
 
     @Test
     @DisplayName("자동차 이름을 입력을 받는다")

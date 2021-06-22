@@ -12,16 +12,6 @@ public class CarRacingService {
     public static final int FORWARD = 4;
     public static final String DELIMITER = ",";
 
-    private static final CarRacingService service = new CarRacingService();
-
-    public static CarRacingService getInstance() {
-        return service;
-    }
-
-    private CarRacingService() {
-
-    }
-
     public boolean checkCarNames(String[] cars, int maxCount) {
         boolean checker = true;
         long count = Arrays.stream(cars).filter(car -> car.length() > maxCount).count();
@@ -95,7 +85,7 @@ public class CarRacingService {
 
     public void setScore(Car car) {
         int randomNumber = (int) (Math.random() * 10);
-        int score = car.getScore() + service.compareRandom(randomNumber);
+        int score = car.getScore() + compareRandom(randomNumber);
         car.setScore(score);
     }
 }

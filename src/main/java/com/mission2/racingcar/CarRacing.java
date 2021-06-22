@@ -7,7 +7,7 @@ import java.util.List;
 public class CarRacing {
 
     public static void main(String[] args) {
-        CarRacingService service = CarRacingService.getInstance();
+        CarRacingService service = new CarRacingService();
 
         String[] carNames = service.getCarNames();
         int gameCount = service.getGameCount();
