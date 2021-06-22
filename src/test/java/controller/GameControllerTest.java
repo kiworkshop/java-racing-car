@@ -57,18 +57,6 @@ class GameControllerTest {
                 .hasMessage("이름은 5자 이하여야 합니다.");
     }
 
-    @Test
-    @DisplayName("0-9 중 하나의 숫자를 random하게 생성하여 반환한다.")
-    void generateRandomNumber() {
-        for (int i = 0; i < 100; i++) {
-            //when
-            int randomNumber = gameController.generateRandomNumber();
-
-            //then
-            assertThat(randomNumber).isGreaterThanOrEqualTo(0);
-            assertThat(randomNumber).isLessThanOrEqualTo(9);
-        }
-    }
 
     @Test
     @DisplayName("자동차에 이름과 위치정보를 부여한다.")
@@ -83,5 +71,30 @@ class GameControllerTest {
         cars.values()
                 .forEach(position -> assertThat(position).isEqualTo(0));
         assertThat(cars.size()).isEqualTo(carNames.size());
+    }
+
+    @Test
+    @DisplayName("0-9 중 하나의 숫자를 random하게 생성하여 반환한다.")
+    void generateRandomNumber() {
+        for (int i = 0; i < 100; i++) {
+            //when
+            int randomNumber = gameController.generateRandomNumber();
+
+            //then
+            assertThat(randomNumber).isGreaterThanOrEqualTo(0);
+            assertThat(randomNumber).isLessThanOrEqualTo(9);
+        }
+    }
+
+    @Test
+    @DisplayName("앞서 생성된 난수가 4 이상이면 참을 반환한다.")
+    void checkAdvanceCondition() {
+        //given
+        int advanceCondition = 4;
+        int stopCondition = 3;
+
+        //when //then
+        assertThat(gameController.checkAdvanceCondition(advanceCondition)).isTrue();
+        assertThat(gameController.checkAdvanceCondition(stopCondition)).isFalse();
     }
 }
