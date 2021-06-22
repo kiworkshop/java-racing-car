@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RaceTest {
@@ -72,4 +73,19 @@ public class RaceTest {
         assertThat(result.get(2).getPosition()).isLessThanOrEqualTo(1);
     }
 
+
+    @Test
+    void 차_한대로_1번_경주_하면_우승자는_본인() {
+        // given
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car("winner"));
+        Race race = new Race(cars);
+
+        // when
+        race.runOnce();
+
+        // then
+        assertThat(race.getWinners().size()).isEqualTo(1);
+        assertThat(race.getWinners().get(0).getName()).isEqualTo("winner");
+    }
 }
