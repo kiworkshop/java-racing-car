@@ -20,9 +20,20 @@ public class MoveCountParserTest {
     }
 
     @Test
-    void 이동횟수_문자_입력받기() {
+    void 이동횟수_문자_입력받기_런타임에러() {
         // given
         String inputLine = "가";
+
+        //when then
+        assertThatThrownBy(() ->
+                moveCountParser.parseCount(inputLine))
+                .isInstanceOf(RuntimeException.class);;
+    }
+
+    @Test
+    void 이동횟수_음수일때_런타임에러() {
+        // given
+        String inputLine = "-1";
 
         //when then
         assertThatThrownBy(() ->
