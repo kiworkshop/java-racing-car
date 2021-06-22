@@ -35,7 +35,7 @@ public class CarNameParserTest {
     }
 
     @Test
-    void 자동차_이름이_null_또는_빈문자() {
+    void 입력값이_null_또는_빈문자() {
         // given
         String inputLine = "";
         String inputLine2 = null;
@@ -47,4 +47,13 @@ public class CarNameParserTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void 자동차이름이_연속으로_쉼표가_있을_경우_런타임에러() {
+        // given
+        String inputLine = "name1,,name2,,";
+
+        // when, then
+        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
