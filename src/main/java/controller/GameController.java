@@ -10,6 +10,7 @@ public class GameController {
     private static final int MAX_NAME_LENGTH = 5;
     private static final Random random = new Random();
     private static final int START_POSITION = 0;
+    private static final int ADVANCE_CONDITION = 4;
 
     private final InputView inputView;
 
@@ -21,7 +22,7 @@ public class GameController {
         String names = inputView.inputNames();
         List<String> carNames = split(names);
         validateNameLength(carNames);
-        createCars(carNames);
+        Map<String, Integer> cars = createCars(carNames);
     }
 
     public List<String> split(String names) {
@@ -52,5 +53,9 @@ public class GameController {
 
     public int generateRandomNumber() {
         return random.nextInt(ADVANCE_DETERMINATION_RANGE);
+    }
+
+    public boolean checkAdvanceCondition(int randomNumber) {
+        return randomNumber >= ADVANCE_CONDITION;
     }
 }
