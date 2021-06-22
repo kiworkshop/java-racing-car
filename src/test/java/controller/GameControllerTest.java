@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import view.InputView;
 
+import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -96,5 +97,23 @@ class GameControllerTest {
         //when //then
         assertThat(gameController.checkAdvanceCondition(advanceCondition)).isTrue();
         assertThat(gameController.checkAdvanceCondition(stopCondition)).isFalse();
+    }
+
+    @Test
+    @DisplayName("자동차를 인자로 받아, 전진 조건을 만족할때 1을 더한다.")
+    void advance() {
+        //given
+        Map.Entry<String, Integer> advancedCar = new AbstractMap.SimpleEntry<>("name", 0);
+        Map.Entry<String, Integer> stoppedCar = new AbstractMap.SimpleEntry<>("name", 0);
+        int advanceCondition = 4;
+        int stopCondition = 3;
+
+        //when
+        gameController.advance(advancedCar, advanceCondition);
+        gameController.advance(stoppedCar, stopCondition);
+
+        //then
+        assertThat(advancedCar.getValue()).isEqualTo(1);
+        assertThat(stoppedCar.getValue()).isEqualTo(0);
     }
 }
