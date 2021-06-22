@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
@@ -50,7 +49,7 @@ public class CarTest {
         Car car = new Car("car");
 
         // when
-        car.move();
+        car.moveOnRandomPick();
 
         // then
         assertThat(car.getPosition()).isEqualTo(1);

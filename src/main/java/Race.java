@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaceResult {
+public class Race {
 
     private List<Car> cars;
     private List<Car> winners = new ArrayList<>();
     private int maxPosition = 0;
 
-    public RaceResult(List<Car> cars) {
+    public Race(List<Car> cars) {
         this.cars = cars;
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 
     public List<Car> getWinners() {
@@ -27,5 +31,10 @@ public class RaceResult {
             winners.add(car);
             maxPosition = car.getPosition();
         }
+    }
+
+    public void runOnce() {
+        for (Car car : cars)
+            car.moveOnRandomPick();
     }
 }
