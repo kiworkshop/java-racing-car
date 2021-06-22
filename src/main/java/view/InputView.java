@@ -13,8 +13,8 @@ public class InputView {
         return inputNames.trim();
     }
 
-    public int inputTries() {
-        int inputTries = scanner.nextInt();
-        return inputTries;
+    public int inputRounds() {
+        int inputRounds = scanner.nextInt();
+        return inputRounds;
     }
 }
