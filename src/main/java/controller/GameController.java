@@ -11,6 +11,7 @@ public class GameController {
     private static final Random random = new Random();
     private static final int START_POSITION = 0;
     private static final int ADVANCE_CONDITION = 4;
+    private static final int ADVANCE = 1;
 
     private final InputView inputView;
 
@@ -53,6 +54,12 @@ public class GameController {
 
     public int generateRandomNumber() {
         return random.nextInt(ADVANCE_DETERMINATION_RANGE);
+    }
+
+    public void advance(Map.Entry<String, Integer> car, int randomNumber) {
+        if (checkAdvanceCondition(randomNumber)) {
+            car.setValue(car.getValue() + ADVANCE);
+        }
     }
 
     public boolean checkAdvanceCondition(int randomNumber) {
