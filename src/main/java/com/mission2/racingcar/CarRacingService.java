@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
+import java.util.regex.Pattern;
 
 public class CarRacingService {
     public static final int MAX_NAME_COUNT = 5;
@@ -23,9 +23,9 @@ public class CarRacingService {
         return checker;
     }
 
-    public String[] getCarNames() {
+    public String[] getCarNames(String userInput) {
         String message = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)";
-        String[] carNames = getUserInput(message).split(DELIMITER);
+        String[] carNames = userInput.split(DELIMITER);
 
         while (!checkCarNames(carNames, MAX_NAME_COUNT)) {
             System.out.println("자동차 이름은 " + MAX_NAME_COUNT + "글자를 넘을 수 없습니다.");
@@ -34,25 +34,24 @@ public class CarRacingService {
         return carNames;
     }
 
-    /**
-     * TODO Integer Exception 추가 필요
-     *
-     * @return
-     */
-    public int getGameCount() {
+    public int getGameCount(String userInput) {
         String message = "시도할 회수는 몇회인가요?";
-        int count = Integer.parseInt(getUserInput(message));
+        if (!Pattern.matches("^[0-9]*$", userInput)) {
+            throw new RuntimeException("잘못된 입력입니다.");
+        }
+        int count = Integer.parseInt(userInput);
 
         while (count > MAX_GAME_COUNT) {
             System.out.println("게임 횟수는 " + MAX_GAME_COUNT + "회를 넘을 수 없습니다.");
-            count = Integer.parseInt(getUserInput(message));
+            getUserInput(message);
         }
         return count;
     }
 
-    private String getUserInput(String message) {
+    public String getUserInput(String message) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
+
         return scanner.nextLine();
     }
 
@@ -76,11 +75,13 @@ public class CarRacingService {
     }
 
     public void proceedGame(Race race) {
-        IntStream.range(0, race.getGameCount())
-                .forEach(i -> race.getCars()
-                        .forEach(this::randomScore));
-        
-        printRace(race);
+        for (int i = 0; i < race.getGameCount(); i++) {
+            System.out.println();
+            for (Car car : race.getCars()) {
+                randomScore(car);
+                System.out.println(car);
+            }
+        }
     }
 
     public void randomScore(Car car) {
@@ -99,13 +100,6 @@ public class CarRacingService {
 
         return cars.stream().filter(car -> car.getScore() == max)
                 .map(Car::getName).toArray(String[]::new);
-    }
-
-    public void printRace(Race race) {
-        List<Car> carList = race.getCars();
-        for (Car car : carList) {
-            System.out.println(car);
-        }
     }
 
     public void printWinner(String[] winners) {

@@ -8,6 +8,7 @@ import java.util.*;
 
 import static com.mission2.racingcar.CarRacingService.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CarRacingTests {
 
@@ -50,10 +51,25 @@ public class CarRacingTests {
         //given
 
         //when
-        int gameCount = 15;
+        int gameCount = 15;  // getUserInput()
 
         //then
         assertThat(gameCount <= MAX_GAME_COUNT).isFalse();
+    }
+
+    @Test
+    @DisplayName("시도 횟수 입력값이 정수가 아닌 경우 예외를 던진다")
+    void 시도_횟수_타입_체크() {
+        //given
+
+        //when
+        String gameCount = "error"; // getUserInput()
+
+        //then
+        assertThrows(RuntimeException.class, () -> {
+            service.getGameCount(gameCount);
+        });
+
     }
 
     @Test
@@ -101,6 +117,7 @@ public class CarRacingTests {
         //then
         service.printWinner(winners);
     }
+
 
 
 
