@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class CarRacingService {
     public static final int MAX_NAME_COUNT = 5;
@@ -75,17 +76,40 @@ public class CarRacingService {
     }
 
     public void proceedGame(Race race) {
-        for (int i = race.getGameCount(); i > 0; i--) {
-            for (Car car : race.getCars()) {
-                setScore(car);
-            }
-            race.setRestCount(i-1);
-        }
+        IntStream.range(0, race.getGameCount())
+                .forEach(i -> race.getCars()
+                        .forEach(this::randomScore));
+        
+        printRace(race);
     }
 
-    public void setScore(Car car) {
+    public void randomScore(Car car) {
         int randomNumber = (int) (Math.random() * 10);
         int score = car.getScore() + compareRandom(randomNumber);
         car.setScore(score);
+    }
+
+    public String[] getWinners(List<Car> cars) {
+        int[] result = new int[cars.size()];
+        for (int i = 0; i < cars.size(); i++) {
+            result[i] = cars.get(i).getScore();
+        }
+
+        int max = Arrays.stream(result).max().getAsInt();
+
+        return cars.stream().filter(car -> car.getScore() == max)
+                .map(Car::getName).toArray(String[]::new);
+    }
+
+    public void printRace(Race race) {
+        List<Car> carList = race.getCars();
+        for (Car car : carList) {
+            System.out.println(car);
+        }
+    }
+
+    public void printWinner(String[] winners) {
+        String winner = String.join(",", winners);
+        System.out.println(winner + "가 최종 우승했습니다.");
     }
 }

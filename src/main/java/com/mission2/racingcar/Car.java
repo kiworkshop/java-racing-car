@@ -5,6 +5,15 @@ public class Car {
     private String name;
     private int score;
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.score; i++) {
+            sb.append("-");
+        }
+        return this.name + " : " + sb.toString();
+    }
+
     public Car() {
 
     }
@@ -29,7 +38,5 @@ public class Car {
     public int getScore() {
         return this.score;
     }
-
-
 
 }
