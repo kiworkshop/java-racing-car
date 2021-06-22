@@ -4,9 +4,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.mission2.racingcar.CarRacingService.*;
+import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.*;
 
 public class CarRacingTests {
@@ -84,10 +87,39 @@ public class CarRacingTests {
 
         //then
         assertThat(race.getGameCount()).isEqualTo(gameCount);
-        assertThat(race.getRestCount()).isZero();
-        List<Car> carList = race.getCars();
-        carList.stream().forEach(car -> {
-            System.out.println("car: " + car.getName() + ", score: " + car.getScore());
+    }
+
+    @Test
+    @DisplayName("종료시 우승자를 출력한다")
+    void 종료시_우승자_출력() {
+        //given
+        String input = "abc,def,ghi,add,ierul";
+        String[] carNames = input.split(",");
+        int gameCount = 5;
+        Race race = service.initRace(carNames, gameCount);
+
+        //when
+        service.proceedGame(race);
+
+        //then
+        List<Car> cars = race.getCars();
+        int winningScore = 0;
+        List<Car> winnerList = new ArrayList<>();
+
+        for (Car element : cars) {
+            if (element.getScore() > winningScore) {
+                winningScore = element.getScore();
+            }
+        }
+
+        for (Car element : cars) {
+            if (element.getScore() == winningScore) {
+                winnerList.add(element);
+            }
+        }
+
+        winnerList.forEach(winner -> {
+            System.out.println("우승자는 : " + winner.getName() + " 점수는 : " +  winner.getScore());
         });
     }
 
