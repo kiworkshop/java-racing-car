@@ -3,12 +3,13 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
 
     @Test
-    void 차_객체_초기화() {
+    void 차_객체_초기화_이름만() {
         // given
         String car1Name = "car1";
         String car2Name = "car2";
@@ -27,6 +28,20 @@ public class CarTest {
         assertThat(cars.get(0).getPosition()).isEqualTo(0);
         assertThat(cars.get(1).getName()).isEqualTo(car2Name);
         assertThat(cars.get(1).getPosition()).isEqualTo(0);
+    }
+
+    @Test
+    void 차_객체_초기화_이름과_위치() {
+        // given
+        String name = "car1";
+        int position = 3;
+
+        // when
+        Car car = new Car(name, position);
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(position);
+        assertThat(car.getName()).isEqualTo(name);
     }
 
     @Test
