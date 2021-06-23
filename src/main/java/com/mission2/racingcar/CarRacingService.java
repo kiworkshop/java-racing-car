@@ -27,8 +27,7 @@ public class CarRacingService {
     /**
      * 자동차 이름 문자열 길이를 확인한다.
      */
-    public boolean checkCarNames(String input) {
-        String[] carNames = input.split(CAR_NAME_DELIMITER);
+    public boolean checkCarNames(String[] carNames) {
         long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
         return (count > 0) ? false : true;
     }
@@ -38,11 +37,12 @@ public class CarRacingService {
      */
     public String[] getCarNames(String input) {
         String message = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)";
-        while (!checkCarNames(input.trim())) {
+        String[] carNames = Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
+        while (!checkCarNames(carNames)) {
             System.out.println("자동차 이름은 " + MAX_CAR_COUNT + "글자를 넘을 수 없습니다.");
             input = getUserInput(message);
         }
-        return Arrays.stream(input.split(",")).map(name -> name.trim()).toArray(String[]::new);
+        return carNames;
     }
 
     /**
@@ -67,7 +67,7 @@ public class CarRacingService {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
 
-        return scanner.nextLine().trim();
+        return scanner.nextLine();
     }
 
     /**

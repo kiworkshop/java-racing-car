@@ -35,10 +35,10 @@ public class CarRacingTests {
     @DisplayName("자동차 이름은 문자열 5자 이하이다")
     void 자동차_이름_체크() {
         //given
-        String input = "AAA, BBBBBB, CCC, DDD, EEE"; // Scanner 입력
+        String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean checkCarNames = service.checkCarNames(input);
+        boolean checkCarNames = service.checkCarNames(input.split(","));
 
         //then
         assertThat(checkCarNames).isFalse();
