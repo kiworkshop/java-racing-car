@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static com.mission2.racingcar.CarRacingService.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +24,7 @@ public class CarRacingTests {
         //given
 
         //when
-        String input = "abc,def,ghi,add,ierul"; // 공백이 들어오는 경우 - 코딩 규약 보기
+        String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
         String[] carNames = input.split(",");
 
         //then
@@ -36,25 +35,13 @@ public class CarRacingTests {
     @DisplayName("자동차 이름은 문자열 5자 이하이다")
     void 자동차_이름_체크() {
         //given
+        String input = "AAA, BBBBBB, CCC, DDD, EEE"; // Scanner 입력
 
         //when
-        String input = "abc,defdddd,ghi,add,ierul";
-        String[] carNames = input.split(",");
+        boolean checkCarNames = service.checkCarNames(input);
 
         //then
-        assertThat(service.checkCarNames(carNames, MAX_NAME_COUNT)).isFalse();
-    }
-
-    @Test
-    @DisplayName("시도 횟수 입력값이 MAX값을 초과할 경우 다시 입력 받는다")
-    void 시도_횟수_체크() {
-        //given
-
-        //when
-        int gameCount = 15;  // getUserInput()
-
-        //then
-        assertThat(gameCount <= MAX_GAME_COUNT).isFalse();
+        assertThat(checkCarNames).isFalse();
     }
 
     @Test
@@ -63,7 +50,7 @@ public class CarRacingTests {
         //given
 
         //when
-        String gameCount = "error"; // getUserInput()
+        String gameCount = "error"; // Scanner 입력
 
         //then
         assertThrows(RuntimeException.class, () -> {
@@ -73,16 +60,28 @@ public class CarRacingTests {
     }
 
     @Test
-    @DisplayName("Random 숫자의 값을 기준 값과 비교한다")
-    void Random_값_비교() {
+    @DisplayName("Random 숫자의 값이 0~3 이면 멈춘다")
+    void Random_값_정지() {
         //given
+        int stopValues = 3;
 
         //when
-        int stop = service.compareRandom(1);
-        int forward = service.compareRandom(4);
+        int stop = service.compareRandom(stopValues);
 
         //then
-        assertThat(stop).isEqualTo(0);
+        assertThat(stop).isZero();
+    }
+
+    @Test
+    @DisplayName("Random 숫자의 값이 4~9 이면 전진한다")
+    void Random_값_전진() {
+        //given
+        int forwardValues = 4;
+
+        //when
+        int forward = service.compareRandom(forwardValues);
+
+        //then
         assertThat(forward).isEqualTo(1);
     }
 
@@ -90,7 +89,7 @@ public class CarRacingTests {
     @DisplayName("사용자가 입력한 시도 횟수만큼 반복한다")
     void 시도_횟수만큼_반복() {
         //given
-        String input = "abc,def,ghi,add,ierul";
+        String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
         String[] carNames = input.split(",");
 
         //when
@@ -106,19 +105,16 @@ public class CarRacingTests {
     @DisplayName("종료시 우승자를 출력한다")
     void 종료시_우승자_출력() {
         //given
-        Car[] temp = { new Car("aaa", 3), new Car("bbb", 3),
-            new Car("ccc", 4), new Car("ddd", 5),
-            new Car("eee", 5), new Car("fff", 2) };
+        Car[] temp = { new Car("AAA", 3), new Car("BBB", 3),
+                new Car("CCC", 4), new Car("DDD", 5) };
         Race race = new Race(5, Arrays.asList(temp));
 
         //when
+        service.proceedGame(race);
         String[] winners = service.getWinners(race.getCars());
 
         //then
         service.printWinner(winners);
     }
-
-
-
 
 }

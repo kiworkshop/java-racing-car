@@ -1,109 +1,130 @@
 package com.mission2.racingcar;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CarRacingService {
-    public static final int MAX_NAME_COUNT = 5;
-    public static final int MAX_GAME_COUNT = 10;
-    public static final int INIT_NUMBER = 1;
-    public static final int FORWARD = 4;
-    public static final String DELIMITER = ",";
+    public final int MAX_CAR_COUNT = 5;
+    public final int MAX_GAME_COUNT = 10;
+    public final int INIT_SCORE = 1;
+    public final int FORWARD = 4;
+    public final String CAR_NAME_DELIMITER = ",";
 
-    public boolean checkCarNames(String[] cars, int maxCount) {
-        boolean checker = true;
-        long count = Arrays.stream(cars).filter(car -> car.length() > maxCount).count();
-        if (count > 0) {
-            checker = false;
-        }
+    public void game() {
+        String step1 = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)";
+        String[] carNames = getCarNames(getUserInput(step1));
 
-        return checker;
+        String step2 = "시도할 회수는 몇회인가요?";
+        int gameCount = getGameCount(getUserInput(step2));
+
+        System.out.println("실행결과");
+        Race race = initRace(carNames, gameCount);
+        proceedGame(race);
+        printWinner(getWinners(race.getCars()));
     }
 
-    public String[] getCarNames(String userInput) {
+    /**
+     * 자동차 이름 문자열 길이를 확인한다.
+     */
+    public boolean checkCarNames(String input) {
+        String[] carNames = input.split(CAR_NAME_DELIMITER);
+        long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
+        return (count > 0) ? false : true;
+    }
+
+    /**
+     * 자동차 이름의 입력값을 확인하고 배열에 담는다.
+     */
+    public String[] getCarNames(String input) {
         String message = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)";
-        String[] carNames = userInput.split(DELIMITER);
-
-        while (!checkCarNames(carNames, MAX_NAME_COUNT)) {
-            System.out.println("자동차 이름은 " + MAX_NAME_COUNT + "글자를 넘을 수 없습니다.");
-            carNames = getUserInput(message).split(DELIMITER);
+        while (!checkCarNames(input.trim())) {
+            System.out.println("자동차 이름은 " + MAX_CAR_COUNT + "글자를 넘을 수 없습니다.");
+            input = getUserInput(message);
         }
-        return carNames;
+        return Arrays.stream(input.split(",")).map(name -> name.trim()).toArray(String[]::new);
     }
 
-    public int getGameCount(String userInput) {
+    /**
+     * 게임 횟수의 입력값을 확인한다.
+     */
+    public int getGameCount(String input) {
         String message = "시도할 회수는 몇회인가요?";
-        if (!Pattern.matches("^[0-9]*$", userInput)) {
+        if (!Pattern.matches("^[0-9]*$", input)) {
             throw new RuntimeException("잘못된 입력입니다.");
         }
-        int count = Integer.parseInt(userInput);
-
-        while (count > MAX_GAME_COUNT) {
+        while (Integer.parseInt(input) > MAX_GAME_COUNT) {
             System.out.println("게임 횟수는 " + MAX_GAME_COUNT + "회를 넘을 수 없습니다.");
-            getUserInput(message);
+            input = getUserInput(message);
         }
-        return count;
+        return Integer.parseInt(input);
     }
 
+    /**
+     * Scanner 통해 사용자에게 입력 받는다.
+     */
     public String getUserInput(String message) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
 
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
-    public int compareRandom(int randomNumber) {
-        if (randomNumber >= FORWARD) {
-            return 1;
-        }
-        return 0;
-    }
-
+    /**
+     * 사용자 입력 값(자동차 이름, 게임 횟수)을 초기화 한다.
+     */
     public Race initRace(String[] carNames, int gameCount) {
         Race race = new Race();
         race.setGameCount(gameCount);
-
-        List<Car> carList = new ArrayList<>();
-        for (String carName : carNames) {
-            carList.add(new Car(carName, INIT_NUMBER));
-        }
-        race.setCars(carList);
+        race.setCars(Arrays.stream(carNames)
+                .map(carName -> new Car(carName, INIT_SCORE))
+                .collect(Collectors.toList()));
         return race;
     }
 
+    /**
+     * 게임 횟수 만큼 레이스를 진행한다.
+     */
     public void proceedGame(Race race) {
         for (int i = 0; i < race.getGameCount(); i++) {
             System.out.println();
-            for (Car car : race.getCars()) {
-                randomScore(car);
-                System.out.println(car);
-            }
+            racing(race);
         }
     }
 
-    public void randomScore(Car car) {
-        int randomNumber = (int) (Math.random() * 10);
-        int score = car.getScore() + compareRandom(randomNumber);
-        car.setScore(score);
+    /**
+     * 랜덤 값으로 점수를 매기고, 결과를 출력한다.
+     */
+    private void racing(Race race) {
+        for (Car car : race.getCars()) {
+            int randomNumber = (int) (Math.random() * 10);
+            car.setScore(compareRandom(randomNumber));
+            System.out.println(car);
+        }
     }
 
+    /**
+     * Random 값을 비교한다.
+     * - (0,1,2,3) 이면 정지, (4,5,6,7,7,8,9) 이면 전진
+     */
+    public int compareRandom(int randomNumber) {
+        return (randomNumber < FORWARD) ? 0 : 1;
+    }
+
+    /**
+     * 우승한 자동차 이름을 조회한다.
+     */
     public String[] getWinners(List<Car> cars) {
-        int[] result = new int[cars.size()];
-        for (int i = 0; i < cars.size(); i++) {
-            result[i] = cars.get(i).getScore();
-        }
+        int max = cars.stream().max(Comparator.comparing(Car::getScore)).get().getScore();
 
-        int max = Arrays.stream(result).max().getAsInt();
-
-        return cars.stream().filter(car -> car.getScore() == max)
-                .map(Car::getName).toArray(String[]::new);
+        return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
 
+    /**
+     * 레이스 우승 자동차를 출력한다.
+     */
     public void printWinner(String[] winners) {
         String winner = String.join(",", winners);
-        System.out.println(winner + "가 최종 우승했습니다.");
+        System.out.println("\n" + winner + "가 최종 우승했습니다.");
     }
 }
