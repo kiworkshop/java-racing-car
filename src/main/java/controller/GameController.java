@@ -77,4 +77,14 @@ public class GameController {
     public boolean checkAdvanceCondition(int randomNumber) {
         return randomNumber >= ADVANCE_CONDITION;
     }
+
+    public int findWinningPosition(Collection<Integer> carPositions) {
+        int winningPosition = START_POSITION;
+
+        for (Integer carPosition : carPositions) {
+            winningPosition = Math.max(winningPosition, carPosition);
+        }
+
+        return winningPosition;
+    }
 }
