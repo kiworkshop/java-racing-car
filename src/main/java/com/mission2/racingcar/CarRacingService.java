@@ -5,19 +5,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
-    public final int MAX_CAR_COUNT = 5;
-    public final int MAX_GAME_COUNT = 10;
-    public final int INIT_SCORE = 1;
-    public final int FORWARD = 4;
-    public final String CAR_NAME_DELIMITER = ",";
+    public static final int MAX_CAR_COUNT = 5;
+    public static final int MAX_GAME_COUNT = 10;
+    public static final int INIT_SCORE = 1;
+    public static final int FORWARD = 4;
+    public static final String CAR_NAME_DELIMITER = ",";
 
-    public void game() {
-        String step1 = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)";
-        String[] carNames = getCarNames(getUserInput(step1));
-
-        String step2 = "시도할 회수는 몇회인가요?";
-        int gameCount = getGameCount(getUserInput(step2));
-
+    public void game(String[] carNames, int gameCount) {
         System.out.println("실행결과");
         Race race = initRace(carNames, gameCount);
         proceedGame(race);
@@ -29,45 +23,32 @@ public class CarRacingService {
      */
     public boolean checkCarNames(String[] carNames) {
         long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
+
         return (count > 0) ? false : true;
     }
 
     /**
-     * 자동차 이름의 입력값을 확인하고 배열에 담는다.
+     * 자동차 이름의 배열을 만든다.
      */
     public String[] getCarNames(String input) {
-        String message = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)";
-        String[] carNames = Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
-        while (!checkCarNames(carNames)) {
-            System.out.println("자동차 이름은 " + MAX_CAR_COUNT + "글자를 넘을 수 없습니다.");
-            input = getUserInput(message);
-        }
-        return carNames;
+        return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
+    }
+
+    /**
+     * 게임 횟수를 확인한다.
+     */
+    public boolean checkGameCount(int input) {
+        return (input > MAX_GAME_COUNT) ? false : true;
     }
 
     /**
      * 게임 횟수의 입력값을 확인한다.
      */
     public int getGameCount(String input) {
-        String message = "시도할 회수는 몇회인가요?";
         if (!Pattern.matches("^[0-9]*$", input)) {
             throw new RuntimeException("잘못된 입력입니다.");
         }
-        while (Integer.parseInt(input) > MAX_GAME_COUNT) {
-            System.out.println("게임 횟수는 " + MAX_GAME_COUNT + "회를 넘을 수 없습니다.");
-            input = getUserInput(message);
-        }
         return Integer.parseInt(input);
-    }
-
-    /**
-     * Scanner 통해 사용자에게 입력 받는다.
-     */
-    public String getUserInput(String message) {
-        System.out.println(message);
-        Scanner scanner = new Scanner(System.in);
-
-        return scanner.nextLine();
     }
 
     /**

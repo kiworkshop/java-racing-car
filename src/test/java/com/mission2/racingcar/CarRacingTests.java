@@ -25,7 +25,7 @@ public class CarRacingTests {
 
         //when
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        String[] carNames = input.split(",");
+        String[] carNames = service.getCarNames(input);
 
         //then
         assertThat(carNames.length).isEqualTo(5);
@@ -56,7 +56,6 @@ public class CarRacingTests {
         assertThrows(RuntimeException.class, () -> {
             service.getGameCount(gameCount);
         });
-
     }
 
     @Test
