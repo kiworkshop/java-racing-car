@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class MoveCountParserTest {
 
     @Test
-    void Given_InputLineWithPositiveInteger_When_parseCount_Then_ReturnPositiveInteger() {
+    void Given_InputLineWithSingleDigitPositiveInteger_When_parseCount_Then_ReturnPositiveInteger() {
         // given
         String inputLine = "1";
 
@@ -17,6 +17,18 @@ public class MoveCountParserTest {
 
         // then
         assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void Given_InputLineWithNoneSingleDigitPositiveInteger_When_parseCount_Then_ReturnPositiveInteger() {
+        // given
+        String inputLine = "111";
+
+        // when
+        int result = MoveCountParser.parseMoveCount(inputLine);
+
+        // then
+        assertThat(result).isEqualTo(111);
     }
 
     @Test
