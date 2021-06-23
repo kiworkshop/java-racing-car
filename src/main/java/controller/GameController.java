@@ -36,8 +36,9 @@ public class GameController {
         validateNameLength(carNames);
         Map<String, Integer> cars = createCars(carNames);
         outputView.printResult();
-        int race = race(rounds, cars);
-        int winningPosition = findWinningPosition(cars.values());
+        race(rounds, cars);
+        List<String> winners = announceWinners(cars);
+        outputView.printWinners(winners);
     }
 
     public List<String> split(String names) {
