@@ -7,10 +7,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoveCountParserTest {
 
-    static MoveCountParser moveCountParser = new MoveCountParser();
+    private final MoveCountParser moveCountParser = new MoveCountParser();
 
     @Test
-    void 레이스_할_횟수를_입력받는다() {
+    void Given_InputLineWithPositiveInteger_When_parseCount_Then_ReturnPositiveInteger() {
         // given
         String inputLine = "1";
 
@@ -22,7 +22,7 @@ public class MoveCountParserTest {
     }
 
     @Test
-    void 레이스할_횟수의_입력값이_문자이면_런타임에러() {
+    void Given_InputLineWithNoneInteger_When_parseCount_Then_RuntimeExceptionThrown() {
         // given
         String inputLine = "가";
 
@@ -34,7 +34,7 @@ public class MoveCountParserTest {
     }
 
     @Test
-    void 레이스할_횟수의_입력값이_음수이면_런타임에러() {
+    void Given_InputLineWithNegativeInteger_When_parseCount_Then_RuntimeExceptionThrown() {
         // given
         String inputLine = "-1";
 

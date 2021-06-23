@@ -8,10 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarNameParserTest {
-    static CarNameParser carNameParser = new CarNameParser();
+
+    private final CarNameParser carNameParser = new CarNameParser();
 
     @Test
-    void 자동차_이름을_쉼표로_구분해서_넣으면_리스트에_하나씩_분리된다() {
+    void Given_ValidInputLine_When_parseCarNames_Then_ReturnCarNameList() {
         // given
         String inputLine = "car1,car2,car3";
 
@@ -19,15 +20,16 @@ public class CarNameParserTest {
         List<String> carNames = carNameParser.splitCarNames(inputLine);
 
         // then
+        assertThat(carNames.size()).isEqualTo(3);
         assertThat(carNames.get(0)).isEqualTo("car1");
         assertThat(carNames.get(1)).isEqualTo("car2");
         assertThat(carNames.get(2)).isEqualTo("car3");
     }
 
     @Test
-    void 자동차_이름_길이가_5개가_초과시_런타임예외() {
+    void Given_CarNamesWithLengthLongerThanLimit_When_parseCarNames_Then_RuntimeExceptionThrown() {
         // given
-        String inputLine = "carrrrrrr1,carrrrrrr2";
+        String inputLine = "nameLongerThanFive";
 
         // when, then
         assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
@@ -35,22 +37,29 @@ public class CarNameParserTest {
     }
 
     @Test
-    void 입력값이_null_또는_빈문자이면_런타임에러() {
+    void Given_CarNamesWithLengthZero_When_parseCarNames_Then_RuntimeExceptionThrown() {
+        // given
+        String inputLine = "name,,name,";
+
+        // when, then
+        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void Given_NullInputLine_When_parseCarNames_Then_RuntimeExceptionThrown() {
+        // given
+        String inputLine = null;
+
+        // when, then
+        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void Given_EmptyInputLine_When_parseCarNames_Then_RuntimeExceptionThrown() {
         // given
         String inputLine = "";
-        String inputLine2 = null;
-
-        // when, then
-        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
-                .isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine2))
-                .isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
-    void 자동차이름이_연속으로_쉼표가_있을_경우_런타임에러() {
-        // given
-        String inputLine = "name1,,name2,,";
 
         // when, then
         assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
