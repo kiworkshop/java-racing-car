@@ -13,15 +13,20 @@ import java.util.List;
 public class Game {
 
     public static void main(String[] args) {
-        start();
+        try {
+            start();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static void start() {
+    public static void start() throws Exception {
         ViewDto viewDto = View.getCarNamesAndRaceCountInput();
         List<String> carNames = CarNameParser.parseCarNames(viewDto.getCarNamesInput());
         int raceCount = MoveCountParser.parseMoveCount(viewDto.getRaceCountInput());
 
         Race race = new Race(buildCarList(carNames));
+        View.printRaceStart();
         race.run(raceCount);
         View.printWinners(race.findWinners());
     }
@@ -33,5 +38,4 @@ public class Game {
         }
         return cars;
     }
-
 }

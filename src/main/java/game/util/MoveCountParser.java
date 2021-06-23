@@ -6,9 +6,10 @@ public class MoveCountParser {
 
     private static final String NUMBER_REGEX = "\\d";
 
-    public static int parseMoveCount(String inputLine) {
+    public static int parseMoveCount(String inputLine) throws RuntimeException {
         if (!Pattern.matches(NUMBER_REGEX, inputLine) || Integer.parseInt(inputLine) < 0)
-            throw new RuntimeException("이동횟수 음수, 글자");
+            throw new RuntimeException("[ERROR] 시도할 횟수는 양수로 입력하세요");
+
         return Integer.parseInt(inputLine);
     }
 }

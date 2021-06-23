@@ -7,15 +7,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoveCountParserTest {
 
-    private final MoveCountParser moveCountParser = new MoveCountParser();
-
     @Test
     void Given_InputLineWithPositiveInteger_When_parseCount_Then_ReturnPositiveInteger() {
         // given
         String inputLine = "1";
 
         // when
-        int result = moveCountParser.parseMoveCount(inputLine);
+        int result = MoveCountParser.parseMoveCount(inputLine);
 
         // then
         assertThat(result).isEqualTo(1);
@@ -28,7 +26,7 @@ public class MoveCountParserTest {
 
         //when then
         assertThatThrownBy(() ->
-                moveCountParser.parseMoveCount(inputLine))
+                MoveCountParser.parseMoveCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
         ;
     }
@@ -40,7 +38,7 @@ public class MoveCountParserTest {
 
         //when then
         assertThatThrownBy(() ->
-                moveCountParser.parseMoveCount(inputLine))
+                MoveCountParser.parseMoveCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
         ;
     }

@@ -11,9 +11,9 @@ public class CarNameParser {
     private static final int CAR_NAME_LENGTH_LOWER_BOUND = 1;
     private static final int CAR_NAME_LENGTH_UPPER_BOUND = 5;
 
-    public static List<String> parseCarNames(String inputLine) {
+    public static List<String> parseCarNames(String inputLine) throws RuntimeException {
         if (isNullOrEmpty(inputLine))
-            throw new RuntimeException("공백/null");
+            throw new RuntimeException("[ERROR] 이름을 입력하세요");
 
         return Arrays.stream(inputLine.split(CAR_NAME_DELIMITER))
                 .filter(CarNameParser::isNameValid)
@@ -21,9 +21,9 @@ public class CarNameParser {
                 .collect(Collectors.toList());
     }
 
-    private static boolean isNameValid(String name) {
+    private static boolean isNameValid(String name) throws RuntimeException {
         if (isLengthOutOfBound(name.length()))
-            throw new RuntimeException("길이");
+            throw new RuntimeException("[ERROR] 이름은 1글자 이상 5글자 이하로 입력하세요");
         return true;
     }
 

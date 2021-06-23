@@ -13,8 +13,6 @@ public class View {
     public static ViewDto getCarNamesAndRaceCountInput() {
         String carNamesInput = getCarNamesInput();
         String raceCountInput = getRaceCountInput();
-        outputView.printRaceStart();
-
         return new ViewDto(carNamesInput, raceCountInput);
     }
 
@@ -26,6 +24,11 @@ public class View {
     private static String getRaceCountInput() {
         outputView.askRaceCount();
         return inputView.getInput();
+    }
+
+
+    public static void printRaceStart() {
+        outputView.printRaceStart();
     }
 
     public static void printOneRoundResult(List<Car> cars) {
