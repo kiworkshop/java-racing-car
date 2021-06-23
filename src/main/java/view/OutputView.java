@@ -19,24 +19,20 @@ public class OutputView {
     }
 
     public void printOneRoundResult(List<Car> cars) {
-        for (int i = 0; i < cars.size(); i++) {
-            Car car = cars.get(i);
+        for (Car car : cars) {
             System.out.printf("%-5s : ", car.getName());
-
-            for (int j = 0; j < car.getPosition(); j++) {
-                System.out.printf("-");
-            }
-            System.out.println();
+            System.out.println(car.getPositionString());
         }
         System.out.println();
     }
 
     public void printWinners(List<Car> winners) {
-        StringBuilder resultNames = new StringBuilder();
-        for (int i = 0; i < winners.size(); i++) {
-            resultNames.append(winners.get(i).getName() + ", ");
+        StringBuilder winnerNames = new StringBuilder();
+        for (Car winner : winners) {
+            winnerNames.append(winner.getName()).append(", ");
         }
 
-        System.out.println(resultNames.substring(0, resultNames.length() - 2) + "(이)가 최종 우승했습니다.");
+        System.out.print(winnerNames.substring(0, winnerNames.length() - 2));
+        System.out.println("(이)가 최종 우승했습니다.");
     }
 }

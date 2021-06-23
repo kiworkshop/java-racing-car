@@ -29,4 +29,8 @@ public class Car {
         if (RandomPick.isMove())
             this.position++;
     }
+
+    public String getPositionString() {
+        return "-".repeat(Math.max(0, this.position));
+    }
 }
