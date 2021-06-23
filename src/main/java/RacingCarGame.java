@@ -1,11 +1,13 @@
 import controller.GameController;
 import view.InputView;
+import view.OutputView;
 
 public class RacingCarGame {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        GameController gameController = new GameController(inputView);
+        OutputView outputView = new OutputView();
+        GameController gameController = new GameController(inputView, outputView);
         gameController.start();
     }
 }

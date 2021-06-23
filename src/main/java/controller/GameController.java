@@ -1,10 +1,11 @@
 package controller;
 
 import view.InputView;
+import view.OutputView;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -21,9 +22,11 @@ public class GameController {
     private static final int GAME_OVER = 0;
 
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public GameController(final InputView inputView) {
+    public GameController(final InputView inputView, OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void start() {
@@ -32,13 +35,16 @@ public class GameController {
         List<String> carNames = split(names);
         validateNameLength(carNames);
         Map<String, Integer> cars = createCars(carNames);
+        outputView.printResult();
         int race = race(rounds, cars);
         int winningPosition = findWinningPosition(cars.values());
     }
 
     public List<String> split(String names) {
         validateDelimiter(names);
-        return Arrays.asList(names.split(DEFAULT_DELIMITER));
+        return Arrays.stream(names.split(DEFAULT_DELIMITER))
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     private void validateDelimiter(String names) {
@@ -57,7 +63,7 @@ public class GameController {
     }
 
     public Map<String, Integer> createCars(List<String> carNames) {
-        Map<String, Integer> cars = new HashMap<>();
+        Map<String, Integer> cars = new LinkedHashMap<>();
         carNames.forEach(carName -> cars.put(carName, START_POSITION));
         return cars;
     }
@@ -65,7 +71,11 @@ public class GameController {
     public int race(int rounds, Map<String, Integer> cars) {
         while (rounds > GAME_OVER) {
             cars.entrySet()
-                    .forEach(car -> advance(car, generateRandomNumber()));
+                    .forEach(car -> {
+                        advance(car, generateRandomNumber());
+                        outputView.printCurrentPosition(car);
+                    });
+            outputView.printNextRound();
             rounds--;
         }
 

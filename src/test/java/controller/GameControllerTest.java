@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import view.InputView;
+import view.OutputView;
 
 import java.util.AbstractMap;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ class GameControllerTest {
 
     @BeforeEach
     void setUp() {
-        gameController = new GameController(new InputView());
+        gameController = new GameController(new InputView(), new OutputView());
     }
 
     @Test
