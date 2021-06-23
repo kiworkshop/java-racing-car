@@ -89,34 +89,25 @@ class GameControllerTest {
         }
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"4, true", "3, false"})
     @DisplayName("앞서 생성된 난수가 4 이상이면 참을 반환한다.")
-    void checkAdvanceCondition() {
-        //given
-        int advanceCondition = 4;
-        int stopCondition = 3;
-
-        //when //then
-        assertThat(gameController.checkAdvanceCondition(advanceCondition)).isTrue();
-        assertThat(gameController.checkAdvanceCondition(stopCondition)).isFalse();
+    void checkAdvanceCondition(int randomNumber, boolean expected) {
+        assertThat(gameController.checkAdvanceCondition(randomNumber)).isEqualTo(expected);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"4, 1", "3, 0"})
     @DisplayName("자동차를 인자로 받아, 전진 조건을 만족할때 1을 더한다.")
-    void advance() {
+    void advance(int randomNumber, int expected) {
         //given
-        Map.Entry<String, Integer> advancedCar = new AbstractMap.SimpleEntry<>("name", 0);
-        Map.Entry<String, Integer> stoppedCar = new AbstractMap.SimpleEntry<>("name", 0);
-        int advanceCondition = 4;
-        int stopCondition = 3;
+        Map.Entry<String, Integer> car = new AbstractMap.SimpleEntry<>("name", 0);
 
         //when
-        gameController.advance(advancedCar, advanceCondition);
-        gameController.advance(stoppedCar, stopCondition);
+        gameController.advance(car, randomNumber);
 
         //then
-        assertThat(advancedCar.getValue()).isEqualTo(1);
-        assertThat(stoppedCar.getValue()).isEqualTo(0);
+        assertThat(car.getValue()).isEqualTo(expected);
     }
 
     @Test
@@ -144,13 +135,12 @@ class GameControllerTest {
         cars.put("win1", 3);
         cars.put("win2", 3);
 
-        //whe
+        //when
         int winningPosition = gameController.findWinningPosition(cars.values());
 
         //then
         assertThat(winningPosition).isEqualTo(3);
     }
-
 
     @Test
     @DisplayName("가장 멀리 이동한 자동차들의 이름을 반환한다.")
