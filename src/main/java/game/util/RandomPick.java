@@ -2,7 +2,9 @@ package game.util;
 
 public class RandomPick {
 
-    public static boolean isMoving() {
-        return (int) (Math.random() * 10) >= 4;
+    private static final int STANDARD_VALUE = 4;
+
+    public static boolean isMove() {
+        return (int) (Math.random() * 10) >= STANDARD_VALUE;
     }
 }

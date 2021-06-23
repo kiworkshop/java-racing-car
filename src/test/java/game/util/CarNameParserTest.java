@@ -1,4 +1,4 @@
-package game.parser;
+package game.util;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class CarNameParserTest {
         String inputLine = "car1,car2,car3";
 
         // when
-        List<String> carNames = carNameParser.splitCarNames(inputLine);
+        List<String> carNames = carNameParser.parseCarNames(inputLine);
 
         // then
         assertThat(carNames.size()).isEqualTo(3);
@@ -32,7 +32,7 @@ public class CarNameParserTest {
         String inputLine = "nameLongerThanFive";
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -42,7 +42,7 @@ public class CarNameParserTest {
         String inputLine = "name,,name,";
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -52,7 +52,7 @@ public class CarNameParserTest {
         String inputLine = null;
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -62,7 +62,7 @@ public class CarNameParserTest {
         String inputLine = "";
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.splitCarNames(inputLine))
+        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 }

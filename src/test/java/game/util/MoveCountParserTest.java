@@ -1,4 +1,4 @@
-package game.parser;
+package game.util;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class MoveCountParserTest {
         String inputLine = "1";
 
         // when
-        int result = moveCountParser.parseCount(inputLine);
+        int result = moveCountParser.parseMoveCount(inputLine);
 
         // then
         assertThat(result).isEqualTo(1);
@@ -28,7 +28,7 @@ public class MoveCountParserTest {
 
         //when then
         assertThatThrownBy(() ->
-                moveCountParser.parseCount(inputLine))
+                moveCountParser.parseMoveCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
         ;
     }
@@ -40,7 +40,7 @@ public class MoveCountParserTest {
 
         //when then
         assertThatThrownBy(() ->
-                moveCountParser.parseCount(inputLine))
+                moveCountParser.parseMoveCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
         ;
     }

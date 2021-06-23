@@ -1,5 +1,7 @@
 package game.domain;
 
+import view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class Race {
         return cars;
     }
 
-    public List<Car> getWinners() {
+    public List<Car> findWinners() {
         for (Car car : cars) {
             updateWinner(car);
         }
@@ -27,7 +29,9 @@ public class Race {
     private void updateWinner(Car car) {
         if (car.getPosition() == maxPosition) {
             winners.add(car);
+            return;
         }
+
         if (car.getPosition() > maxPosition) {
             winners.clear();
             winners.add(car);
@@ -35,14 +39,16 @@ public class Race {
         }
     }
 
-    public void runOnce() {
-        for (Car car : cars)
-            car.moveOnRandomPick();
+    public void run(int raceCount) {
+        for (int i = 0; i < raceCount; i++) {
+            runOneRound();
+            View.printOneRoundResult(this.cars);
+        }
     }
 
-    public void runRounds(int repeatCount) {
-        for(int i = 0 ; i < repeatCount; i++){
-            runOnce();
+    private void runOneRound() {
+        for (Car car : cars) {
+            car.moveOnRandomPick();
         }
     }
 }

@@ -26,7 +26,7 @@ public class Car {
     }
 
     public void moveOnRandomPick() {
-        if (RandomPick.isMoving())
+        if (RandomPick.isMove())
             this.position++;
     }
 }

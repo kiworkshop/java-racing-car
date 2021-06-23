@@ -23,7 +23,7 @@ public class RaceTest {
         Race race = new Race(cars);
 
         // when
-        race.runOnce();
+        race.run(1);
 
         // then
         List<Car> result = race.getCars();
@@ -39,7 +39,7 @@ public class RaceTest {
         Race race = new Race(cars);
 
         // when
-        List<Car> winners = race.getWinners();
+        List<Car> winners = race.findWinners();
 
         // then
         assertThat(winners.size()).isEqualTo(1);
@@ -59,7 +59,7 @@ public class RaceTest {
         Race race = new Race(cars);
 
         // when
-        List<Car> winners = race.getWinners();
+        List<Car> winners = race.findWinners();
 
         // then
         assertThat(winners.size()).isEqualTo(1);
@@ -80,7 +80,7 @@ public class RaceTest {
         Race race = new Race(cars);
 
         // when
-        List<Car> winners = race.getWinners();
+        List<Car> winners = race.findWinners();
 
         // then
         assertThat(winners.size()).isEqualTo(2);
