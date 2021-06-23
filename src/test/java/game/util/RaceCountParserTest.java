@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class MoveCountParserTest {
+public class RaceCountParserTest {
 
     @Test
     void Given_InputLineWithSingleDigitPositiveInteger_When_parseCount_Then_ReturnPositiveInteger() {
@@ -13,7 +13,7 @@ public class MoveCountParserTest {
         String inputLine = "1";
 
         // when
-        int result = MoveCountParser.parseMoveCount(inputLine);
+        int result = RaceCountParser.parseRaceCount(inputLine);
 
         // then
         assertThat(result).isEqualTo(1);
@@ -25,7 +25,7 @@ public class MoveCountParserTest {
         String inputLine = "111";
 
         // when
-        int result = MoveCountParser.parseMoveCount(inputLine);
+        int result = RaceCountParser.parseRaceCount(inputLine);
 
         // then
         assertThat(result).isEqualTo(111);
@@ -38,7 +38,7 @@ public class MoveCountParserTest {
 
         //when then
         assertThatThrownBy(() ->
-                MoveCountParser.parseMoveCount(inputLine))
+                RaceCountParser.parseRaceCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
         ;
     }
@@ -50,7 +50,7 @@ public class MoveCountParserTest {
 
         //when then
         assertThatThrownBy(() ->
-                MoveCountParser.parseMoveCount(inputLine))
+                RaceCountParser.parseRaceCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
         ;
     }
