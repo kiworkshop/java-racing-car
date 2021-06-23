@@ -22,10 +22,12 @@ public class GameController {
 
     public void start() {
         String names = inputView.inputNames();
+        int rounds = inputView.inputRounds();
         List<String> carNames = split(names);
         validateNameLength(carNames);
         Map<String, Integer> cars = createCars(carNames);
         int race = race(rounds, cars);
+        int winningPosition = findWinningPosition(cars.values());
     }
 
     public List<String> split(String names) {
