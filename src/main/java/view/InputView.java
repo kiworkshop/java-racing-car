@@ -12,4 +12,9 @@ public class InputView {
         StringUtils.isBlank(inputNames);
         return inputNames.trim();
     }
+
+    public int inputRounds() {
+        int inputRounds = scanner.nextInt();
+        return inputRounds;
+    }
 }
