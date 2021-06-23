@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CarTest {
 
     @Test
-    void 차_객체_초기화_이름만() {
+    void 차_객체_초기화_이름만_넣을경우_넣은이름_포지션은_0으로_초기화된다() {
         // given
         String car1Name = "car1";
         String car2Name = "car2";
@@ -30,7 +30,7 @@ public class CarTest {
     }
 
     @Test
-    void 차_객체_초기화_이름과_위치() {
+    void 차_객체_초기화_이름과_위치를_넣으면_자동차_이름과_포지션값으로_초기화된다() {
         // given
         String name = "car1";
         int position = 3;
@@ -44,7 +44,7 @@ public class CarTest {
     }
 
     @Test
-    void 차_이동시키기() {
+    void 자동차가_랜덤하게_1_또는0번_움직인다() {
         // given
         Car car = new Car("car");
 
@@ -52,7 +52,7 @@ public class CarTest {
         car.moveOnRandomPick();
 
         // then
-        assertThat(car.getPosition()).isEqualTo(1);
+        assertThat(car.getPosition()).isLessThanOrEqualTo(1);
     }
 
 }

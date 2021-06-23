@@ -52,7 +52,7 @@ public class RaceTest {
         assertThat(winners.get(1).getPosition()).isEqualTo(5);
     }
     @Test
-    void 차_전진하기() {
+    void 레이스_한라운드_실행하면_차가_랜덤하게_전진한다() {
         // given
         Car car1 = new Car("car1", 0);
         Car car2 = new Car("car2", 0);

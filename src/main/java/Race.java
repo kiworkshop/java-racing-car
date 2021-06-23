@@ -37,4 +37,10 @@ public class Race {
         for (Car car : cars)
             car.moveOnRandomPick();
     }
+
+    public void runRounds(int repeatCount) {
+        for(int i = 0 ; i < repeatCount; i++){
+            runOnce();
+        }
+    }
 }

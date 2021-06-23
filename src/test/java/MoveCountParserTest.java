@@ -8,7 +8,7 @@ public class MoveCountParserTest {
     static MoveCountParser moveCountParser = new MoveCountParser();
 
     @Test
-    void 이동횟수_숫자_입력받기() {
+    void 레이스_할_횟수를_입력받는다() {
         // given
         String inputLine = "1";
 
@@ -20,7 +20,7 @@ public class MoveCountParserTest {
     }
 
     @Test
-    void 이동횟수_문자_입력받기_런타임에러() {
+    void 레이스할_횟수의_입력값이_문자이면_런타임에러() {
         // given
         String inputLine = "가";
 
@@ -31,7 +31,7 @@ public class MoveCountParserTest {
     }
 
     @Test
-    void 이동횟수_음수일때_런타임에러() {
+    void 레이스할_횟수의_입력값이_음수이면_런타임에러() {
         // given
         String inputLine = "-1";
 

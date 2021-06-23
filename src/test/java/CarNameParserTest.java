@@ -11,7 +11,7 @@ public class CarNameParserTest {
     static CarNameParser carNameParser = new CarNameParser();
 
     @Test
-    void 자동차_이름을_리스트에_넣기() {
+    void 자동차_이름을_쉼표로_구분해서_넣으면_리스트에_하나씩_분리된다() {
         // given
         String inputLine = "car1,car2,car3";
 
@@ -25,7 +25,7 @@ public class CarNameParserTest {
     }
 
     @Test
-    void 자동차_이름_길이_초과시_런타임예외() {
+    void 자동차_이름_길이가_5개가_초과시_런타임예외() {
         // given
         String inputLine = "carrrrrrr1,carrrrrrr2";
 
@@ -35,7 +35,7 @@ public class CarNameParserTest {
     }
 
     @Test
-    void 입력값이_null_또는_빈문자() {
+    void 입력값이_null_또는_빈문자이면_런타임에러() {
         // given
         String inputLine = "";
         String inputLine2 = null;
