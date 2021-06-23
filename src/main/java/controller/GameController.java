@@ -78,6 +78,16 @@ public class GameController {
         return randomNumber >= ADVANCE_CONDITION;
     }
 
+    public List<String> announceWinners(Map<String, Integer> cars) {
+        int winningPosition = findWinningPosition(cars.values());
+
+        return cars.entrySet()
+                .stream()
+                .filter(car -> car.getValue() == winningPosition)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
     public int findWinningPosition(Collection<Integer> carPositions) {
         int winningPosition = START_POSITION;
 
