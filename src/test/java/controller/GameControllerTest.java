@@ -131,4 +131,21 @@ class GameControllerTest {
         //then
         assertThat(leftRounds).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("모든 자동차들의 위치를 비교하여 가장 멀리 위치해있는 값을 반환한다.")
+    void findWinningPosition() {
+        //given
+        Map<String, Integer> cars = new HashMap<>();
+        cars.put("lose1", 1);
+        cars.put("lose2", 2);
+        cars.put("win1", 3);
+        cars.put("win2", 3);
+
+        //whe
+        int winningPosition = gameController.findWinningPosition(cars.values());
+
+        //then
+        assertThat(winningPosition).isEqualTo(3);
+    }
 }
