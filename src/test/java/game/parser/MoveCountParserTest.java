@@ -1,3 +1,5 @@
+package game.parser;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +29,8 @@ public class MoveCountParserTest {
         //when then
         assertThatThrownBy(() ->
                 moveCountParser.parseCount(inputLine))
-                .isInstanceOf(RuntimeException.class);;
+                .isInstanceOf(RuntimeException.class);
+        ;
     }
 
     @Test
@@ -38,6 +41,7 @@ public class MoveCountParserTest {
         //when then
         assertThatThrownBy(() ->
                 moveCountParser.parseCount(inputLine))
-                .isInstanceOf(RuntimeException.class);;
+                .isInstanceOf(RuntimeException.class);
+        ;
     }
 }

@@ -1,3 +1,5 @@
+package game.util;
+
 public class RandomPick {
 
     public static boolean isMoving() {

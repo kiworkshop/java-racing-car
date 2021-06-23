@@ -1,3 +1,5 @@
+package game.domain;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

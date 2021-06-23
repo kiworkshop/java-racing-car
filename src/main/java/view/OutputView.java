@@ -1,3 +1,9 @@
+package view;
+
+import game.domain.Car;
+import game.parser.CarNameParser;
+import game.parser.MoveCountParser;
+
 import java.util.List;
 
 public class OutputView {

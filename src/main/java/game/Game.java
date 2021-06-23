@@ -1,3 +1,9 @@
+package game;
+
+import game.domain.Car;
+import game.domain.Race;
+import view.OutputView;
+
 import java.util.ArrayList;
 import java.util.List;
 

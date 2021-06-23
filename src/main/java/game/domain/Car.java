@@ -1,3 +1,7 @@
+package game.domain;
+
+import game.util.RandomPick;
+
 public class Car {
 
     private String name;

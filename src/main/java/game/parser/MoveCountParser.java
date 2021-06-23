@@ -1,3 +1,5 @@
+package game.parser;
+
 import java.util.regex.Pattern;
 
 public class MoveCountParser {
