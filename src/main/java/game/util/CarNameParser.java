@@ -17,6 +17,7 @@ public class CarNameParser {
 
         return Arrays.stream(inputLine.split(CAR_NAME_DELIMITER))
                 .filter(CarNameParser::isNameValid)
+                .map(String::trim)
                 .collect(Collectors.toList());
     }
 

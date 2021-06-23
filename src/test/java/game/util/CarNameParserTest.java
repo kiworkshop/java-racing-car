@@ -9,15 +9,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarNameParserTest {
 
-    private final CarNameParser carNameParser = new CarNameParser();
-
     @Test
     void Given_ValidInputLine_When_parseCarNames_Then_ReturnCarNameList() {
         // given
         String inputLine = "car1,car2,car3";
 
         // when
-        List<String> carNames = carNameParser.parseCarNames(inputLine);
+        List<String> carNames = CarNameParser.parseCarNames(inputLine);
 
         // then
         assertThat(carNames.size()).isEqualTo(3);
@@ -32,7 +30,7 @@ public class CarNameParserTest {
         String inputLine = "nameLongerThanFive";
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
+        assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -42,7 +40,7 @@ public class CarNameParserTest {
         String inputLine = "name,,name,";
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
+        assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -52,7 +50,7 @@ public class CarNameParserTest {
         String inputLine = null;
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
+        assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -62,7 +60,21 @@ public class CarNameParserTest {
         String inputLine = "";
 
         // when, then
-        assertThatThrownBy(() -> carNameParser.parseCarNames(inputLine))
+        assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void Given_ValidInputLineWithBlankInName_When_parseCarNames_Then_ReturnTrimmedCarNameList() {
+        // given
+        String inputLine = "1 , 2 3 ";
+
+        // when
+        List<String> carNames = CarNameParser.parseCarNames(inputLine);
+
+        // then
+        assertThat(carNames.size()).isEqualTo(2);
+        assertThat(carNames.get(0)).isEqualTo("1");
+        assertThat(carNames.get(1)).isEqualTo("2 3");
     }
 }
