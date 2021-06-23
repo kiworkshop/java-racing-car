@@ -148,4 +148,22 @@ class GameControllerTest {
         //then
         assertThat(winningPosition).isEqualTo(3);
     }
+
+
+    @Test
+    @DisplayName("가장 멀리 이동한 자동차들의 이름을 반환한다.")
+    void announceWinners() {
+        //given
+        Map<String, Integer> cars = new HashMap<>();
+        cars.put("lose1", 1);
+        cars.put("lose2", 2);
+        cars.put("win1", 3);
+        cars.put("win2", 3);
+
+        //when
+        List<String> winners = gameController.announceWinners(cars);
+
+        //then
+        assertThat(winners).contains("win1", "win2");
+    }
 }
