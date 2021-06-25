@@ -18,7 +18,7 @@ public class Car {
         return this.score;
     }
 
-    public void addScore(int step) {
-        this.score += step;
+    public void addScore(int score) {
+        this.score += score;
     }
 }

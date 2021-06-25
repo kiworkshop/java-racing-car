@@ -1,15 +1,14 @@
 package game.racingcar;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
     public static final int MAX_CAR_NAME_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
     public static final int INIT_SCORE = 1;
-    public static final int FORWARD_POINT = 4;
-    public static final int FORWARD_STEP = 1;
+    public static final int FORWARD_SCORE = 1;
+    public static final int STOP_POINT = 3;
     public static final String CAR_NAME_DELIMITER = ",";
     public static final String RACE_RESULT_DELIMITER = "-";
 
@@ -57,14 +56,14 @@ public class CarRacingService {
     }
 
     public boolean isForward(int randomNumber) {
-        return randomNumber >= FORWARD_POINT;
+        return randomNumber > STOP_POINT;
     }
 
     private void raceScore(Car car) {
         printScore(car);
         int randomNumber = (int) (Math.random() * 10);
         if (isForward(randomNumber)) {
-            car.addScore(FORWARD_STEP);
+            car.addScore(FORWARD_SCORE);
         }
     }
 
