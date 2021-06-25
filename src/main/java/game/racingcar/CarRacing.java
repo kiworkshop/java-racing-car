@@ -21,7 +21,7 @@ public class CarRacing {
             gameCount = service.getGameCount(getUserInput(message));
         }
 
-        service.game(carNames, gameCount);
+        service.racingGame(carNames, gameCount);
     }
 
     /**

@@ -8,20 +8,22 @@ public class CarRacingService {
     public static final int MAX_CAR_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
     public static final int INIT_SCORE = 1;
-    public static final int FORWARD = 4;
+    public static final int FORWARD_POINT = 4;
+    public static final int FORWARD_STEP = 1;
     public static final String CAR_NAME_DELIMITER = ",";
+    public static final String RACE_RESULT_DELIMITER = "-";
 
-    public void game(String[] carNames, int gameCount) {
+    public void racingGame(String[] carNames, int gameCount) {
         System.out.println("실행결과");
         Race race = initRace(carNames, gameCount);
-        proceedGame(race);
-        printWinner(getWinners(race.getCars()));
+        racing(race);
+        printWinners(getWinners(race.getCars()));
     }
 
     public boolean checkCarNames(String[] carNames) {
         long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
 
-        return (count > 0) ? false : true;
+        return count <= 0;
     }
 
     public String[] getCarNames(String input) {
@@ -29,12 +31,12 @@ public class CarRacingService {
     }
 
     public boolean checkGameCount(int input) {
-        return (input > MAX_GAME_COUNT) ? false : true;
+        return input <= MAX_GAME_COUNT;
     }
 
     public int getGameCount(String input) {
         if (!Pattern.matches("^[0-9]*$", input)) {
-            throw new RuntimeException("잘못된 입력입니다.");
+            throw new NumberFormatException("잘못된 입력입니다. 정수를 입력해주세요.");
         }
         return Integer.parseInt(input);
     }
@@ -46,29 +48,29 @@ public class CarRacingService {
         return new Race(gameCount, carList);
     }
 
-    public void proceedGame(Race race) {
+    public void racing(Race race) {
         for (int i = 0; i < race.getGameCount(); i++) {
+            race.getCars().forEach(this::raceScore);
             System.out.println();
-            racing(race);
         }
     }
 
-    private void racing(Race race) {
-        for (Car car : race.getCars()) {
-            raceScore(car);
-            System.out.println(car);
-        }
+    public boolean isForward(int randomNumber) {
+        return randomNumber >= FORWARD_POINT;
     }
 
-    private int raceScore(Car car) {
-        int score = car.getScore();
+    private void raceScore(Car car) {
+        printScore(car);
         int randomNumber = (int) (Math.random() * 10);
-        int result = compareRandom(randomNumber);
-        return score + result;
+        if (isForward(randomNumber)) {
+            car.addScore(FORWARD_STEP);
+        }
     }
 
-    public int compareRandom(int randomNumber) {
-        return (randomNumber < FORWARD) ? 0 : 1;
+    public void printScore(Car car) {
+        String raceResult = String.join("", Collections.nCopies(car.getScore(), RACE_RESULT_DELIMITER));
+        String printFormat = String.format("%s : %s", car.getName(), raceResult);
+        System.out.println(printFormat);
     }
 
     public String[] getWinners(List<Car> cars) {
@@ -77,8 +79,8 @@ public class CarRacingService {
         return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
 
-    public void printWinner(String[] winners) {
+    public void printWinners(String[] winners) {
         String winner = String.join(",", winners);
-        System.out.println("\n" + winner + "가 최종 우승했습니다.");
+        System.out.println(winner + "가 최종 우승했습니다.");
     }
 }

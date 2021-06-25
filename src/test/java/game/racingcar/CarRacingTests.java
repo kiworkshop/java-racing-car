@@ -62,26 +62,26 @@ public class CarRacingTests {
     @DisplayName("Random 숫자의 값이 0~3 이면 멈춘다")
     void compare_random_value_stop() {
         //given
-        int stopValues = 3;
+        int randomNumber = 3;
 
         //when
-        int stop = service.compareRandom(stopValues);
+        boolean stop = service.isForward(randomNumber);
 
         //then
-        assertThat(stop).isZero();
+        assertThat(stop).isFalse();
     }
 
     @Test
     @DisplayName("Random 숫자의 값이 4~9 이면 전진한다")
     void compare_random_value_forward() {
         //given
-        int forwardValues = 4;
+        int randomNumber = 4;
 
         //when
-        int forward = service.compareRandom(forwardValues);
+        boolean forward = service.isForward(randomNumber);
 
         //then
-        assertThat(forward).isEqualTo(1);
+        assertThat(forward).isTrue();
     }
 
     @Test
@@ -95,7 +95,7 @@ public class CarRacingTests {
         Race race = service.initRace(carNames, gameCount);
 
         //when
-        service.proceedGame(race);
+        service.racing(race);
 
         //then
         assertThat(race.getGameCount()).isEqualTo(gameCount);
@@ -110,11 +110,10 @@ public class CarRacingTests {
         Race race = new Race(5, Arrays.asList(temp));
 
         //when
-        service.proceedGame(race);
         String[] winners = service.getWinners(race.getCars());
 
         //then
-        service.printWinner(winners);
+        assertThat(winners).isEqualTo(new String[]{"DDD"});
     }
 
 }
