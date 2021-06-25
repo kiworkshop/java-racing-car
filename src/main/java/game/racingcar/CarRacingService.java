@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
-    public static final int MAX_CAR_COUNT = 5;
+    public static final int MAX_CAR_NAME_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
     public static final int INIT_SCORE = 1;
     public static final int FORWARD_POINT = 4;
@@ -20,25 +20,26 @@ public class CarRacingService {
         printWinners(getWinners(race.getCars()));
     }
 
-    public boolean checkCarNames(String[] carNames) {
-        long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
+    public boolean isValidCarNames(String[] carNames) {
+        return Arrays.stream(carNames).noneMatch(this::isNotValidCarName);
+    }
 
-        return count <= 0;
+    private boolean isNotValidCarName(String carName) {
+        return carName.length() == 0 || carName.length() > MAX_CAR_NAME_COUNT;
     }
 
     public String[] getCarNames(String input) {
         return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
     }
 
-    public boolean checkGameCount(int input) {
-        return input <= MAX_GAME_COUNT;
-    }
+    public boolean isValidGameCount(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
 
-    public int getGameCount(String input) {
-        if (!Pattern.matches("^[0-9]*$", input)) {
-            throw new NumberFormatException("잘못된 입력입니다. 정수를 입력해주세요.");
+        } catch (IllegalArgumentException e) {
+            return false;
         }
-        return Integer.parseInt(input);
     }
 
     public Race initRace(String[] carNames, int gameCount) {

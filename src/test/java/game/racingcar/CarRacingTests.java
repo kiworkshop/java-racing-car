@@ -33,29 +33,41 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("자동차 이름은 문자열 5자 이하이다")
-    void input_car_names_validation() {
+    void input_car_name_length_validation() {
         //given
         String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean checkCarNames = service.checkCarNames(input.split(","));
+        boolean isValid = service.isValidCarNames(input.split(","));
 
         //then
-        assertThat(checkCarNames).isFalse();
+        assertThat(isValid).isFalse();
     }
 
     @Test
-    @DisplayName("시도 횟수 입력값이 정수가 아닌 경우 예외를 던진다")
-    void input_game_count_validation() {
+    @DisplayName("자동차 이름은 공백이 아니다")
+    void input_car_name_empty_validation() {
         //given
+        String input = "AAA,,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        String gameCount = "error"; // Scanner 입력
+        boolean isValid = service.isValidCarNames(input.split(","));
 
         //then
-        assertThrows(RuntimeException.class, () -> {
-            service.getGameCount(gameCount);
-        });
+        assertThat(isValid).isFalse();
+    }
+
+    @Test
+    @DisplayName("게임 횟수 입력값에 문자열이 들어올 수 없다")
+    void input_game_count_validation() {
+        //given
+        String gameCount = "error"; // Scanner 입력
+
+        //when
+        boolean isValid = service.isValidGameCount(gameCount);
+
+        //then
+        assertThat(isValid).isFalse();
     }
 
     @Test
