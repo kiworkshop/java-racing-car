@@ -1,4 +1,4 @@
-package com.mission2.racingcar;
+package game.racingcar;
 
 public class Car {
 
