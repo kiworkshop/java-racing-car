@@ -90,9 +90,11 @@ public class CarRacingTests {
         //given
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
         String[] carNames = input.split(",");
-        //when
+
         int gameCount = 5;
         Race race = service.initRace(carNames, gameCount);
+
+        //when
         service.proceedGame(race);
 
         //then

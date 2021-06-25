@@ -40,12 +40,10 @@ public class CarRacingService {
     }
 
     public Race initRace(String[] carNames, int gameCount) {
-        Race race = new Race();
-        race.setGameCount(gameCount);
-        race.setCars(Arrays.stream(carNames)
+        List<Car> carList = Arrays.stream(carNames)
                 .map(carName -> new Car(carName, INIT_SCORE))
-                .collect(Collectors.toList()));
-        return race;
+                .collect(Collectors.toList());
+        return new Race(gameCount, carList);
     }
 
     public void proceedGame(Race race) {
@@ -57,10 +55,16 @@ public class CarRacingService {
 
     private void racing(Race race) {
         for (Car car : race.getCars()) {
-            int randomNumber = (int) (Math.random() * 10);
-            car.setScore(compareRandom(randomNumber));
+            raceScore(car);
             System.out.println(car);
         }
+    }
+
+    private int raceScore(Car car) {
+        int score = car.getScore();
+        int randomNumber = (int) (Math.random() * 10);
+        int result = compareRandom(randomNumber);
+        return score + result;
     }
 
     public int compareRandom(int randomNumber) {

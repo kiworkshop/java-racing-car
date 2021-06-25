@@ -15,14 +15,6 @@ public class Race {
         this.cars = cars;
     }
 
-    public void setGameCount(int gameCount) {
-        this.gameCount = gameCount;
-    }
-
-    public void setCars(List<Car> carList) {
-        this.cars = carList;
-    }
-
     public int getGameCount() {
         return this.gameCount;
     }
