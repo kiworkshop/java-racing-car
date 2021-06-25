@@ -20,7 +20,7 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("자동차 이름을 입력을 받는다")
-    void 자동차_이름_입력() {
+    void input_car_names() {
         //given
 
         //when
@@ -33,7 +33,7 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("자동차 이름은 문자열 5자 이하이다")
-    void 자동차_이름_체크() {
+    void input_car_names_validation() {
         //given
         String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
@@ -46,7 +46,7 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("시도 횟수 입력값이 정수가 아닌 경우 예외를 던진다")
-    void 시도_횟수_타입_체크() {
+    void input_game_count_validation() {
         //given
 
         //when
@@ -60,7 +60,7 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("Random 숫자의 값이 0~3 이면 멈춘다")
-    void Random_값_정지() {
+    void compare_random_value_stop() {
         //given
         int stopValues = 3;
 
@@ -73,7 +73,7 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("Random 숫자의 값이 4~9 이면 전진한다")
-    void Random_값_전진() {
+    void compare_random_value_forward() {
         //given
         int forwardValues = 4;
 
@@ -86,11 +86,10 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("사용자가 입력한 시도 횟수만큼 반복한다")
-    void 시도_횟수만큼_반복() {
+    void game_count_iterate() {
         //given
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
         String[] carNames = input.split(",");
-
         //when
         int gameCount = 5;
         Race race = service.initRace(carNames, gameCount);
@@ -102,7 +101,7 @@ public class CarRacingTests {
 
     @Test
     @DisplayName("종료시 우승자를 출력한다")
-    void 종료시_우승자_출력() {
+    void print_winners() {
         //given
         Car[] temp = { new Car("AAA", 3), new Car("BBB", 3),
                 new Car("CCC", 4), new Car("DDD", 5) };
