@@ -1,7 +1,6 @@
 package game.racingcar.domain;
 
 import java.util.Collections;
-import java.util.Random;
 
 public class RacingCar {
 
@@ -13,11 +12,9 @@ public class RacingCar {
         this.position = 0;
     }
 
-    public void move() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(10);
-
-        if (randomNumber >= 4) {
+    // 메서드 시그니처
+    public void moveBy(MoveStrategy moveStrategy) {
+        if (moveStrategy.canMove()) {
             position++;
         }
     }

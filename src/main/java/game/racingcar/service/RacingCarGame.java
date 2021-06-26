@@ -1,6 +1,7 @@
 package game.racingcar.service;
 
 import game.racingcar.domain.RacingCar;
+import game.racingcar.domain.RandomMoveStrategy;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,9 @@ public class RacingCarGame {
 
     private void raceOneRound() {
         for (RacingCar racingCar : racingCars) {
-            racingCar.move();
+            RandomMoveStrategy randomMoveStrategy = new RandomMoveStrategy();
+            racingCar.moveBy(randomMoveStrategy);
+
             System.out.println(racingCar);
         }
         System.out.println();
