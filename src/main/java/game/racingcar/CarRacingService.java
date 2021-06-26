@@ -12,15 +12,15 @@ public class CarRacingService {
     public static final String CAR_NAME_DELIMITER = ",";
     public static final String RACE_RESULT_DELIMITER = "-";
 
-    public void racingGame(String[] carNames, int gameCount) {
+    public void racingGame(List<String> carNames, int gameCount) {
         System.out.println("실행결과");
         Race race = initRace(carNames, gameCount);
         racing(race);
         printWinners(getWinners(race.getCars()));
     }
 
-    public boolean isValidCarNames(String[] carNames) {
-        return Arrays.stream(carNames)
+    public boolean isValidCarNames(List<String> carNames) {
+        return carNames.stream()
                 .noneMatch(this::isNotValidCarName);
     }
 
@@ -28,10 +28,8 @@ public class CarRacingService {
         return carName.length() == 0 || carName.length() > MAX_CAR_NAME_COUNT;
     }
 
-    public String[] getCarNames(String input) {
-        return Arrays.stream(input.split(CAR_NAME_DELIMITER))
-                .map(String::trim)
-                .toArray(String[]::new);
+    public List<String> getCarNames(String input) {
+        return Arrays.asList(input.split(CAR_NAME_DELIMITER));
     }
 
     public boolean isValidGameCount(String input) {
@@ -44,8 +42,8 @@ public class CarRacingService {
         }
     }
 
-    public Race initRace(String[] carNames, int gameCount) {
-        List<Car> carList = Arrays.stream(carNames)
+    public Race initRace(List<String> carNames, int gameCount) {
+        List<Car> carList = carNames.stream()
                 .map(carName -> new Car(carName, INIT_SCORE))
                 .collect(Collectors.toList());
 
@@ -77,19 +75,19 @@ public class CarRacingService {
         System.out.println(printFormat);
     }
 
-    public String[] getWinners(List<Car> cars) {
+    public List<String> getWinners(List<Car> cars) {
         int max = cars.stream()
-                .max(Comparator.comparing(Car::getScore))
-                .get()
-                .getScore();
+                .mapToInt(Car::getScore)
+                .max()
+                .getAsInt();
 
         return cars.stream()
                 .filter(car -> car.getScore() == max)
                 .map(Car::getName)
-                .toArray(String[]::new);
+                .collect(Collectors.toList());
     }
 
-    public void printWinners(String[] winners) {
+    public void printWinners(List<String> winners) {
         String winner = String.join(",", winners);
         System.out.println(winner + "가 최종 우승했습니다.");
     }

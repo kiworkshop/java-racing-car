@@ -1,5 +1,6 @@
 package game.racingcar;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CarRacing {
@@ -8,7 +9,7 @@ public class CarRacing {
         CarRacingService service = new CarRacingService();
 
         String inputCarName = getUserInput("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)");
-        String[] carNames = service.getCarNames(inputCarName);
+        List<String> carNames = service.getCarNames(inputCarName);
         while (!service.isValidCarNames(carNames)) {
             String message = "자동차 이름을 다시 입력해 주세요. (공백 또는 " + CarRacingService.MAX_CAR_NAME_COUNT + "자 초과)";
             carNames = service.getCarNames(getUserInput(message));

@@ -24,10 +24,10 @@ public class CarRacingTests {
 
         //when
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        String[] carNames = service.getCarNames(input);
+        List<String> carNames = service.getCarNames(input);
 
         //then
-        assertThat(carNames.length).isEqualTo(5);
+        assertThat(carNames.size()).isEqualTo(5);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class CarRacingTests {
         String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean isValid = service.isValidCarNames(input.split(","));
+        boolean isValid = service.isValidCarNames(Arrays.asList(input.split(",")));
 
         //then
         assertThat(isValid).isFalse();
@@ -50,7 +50,7 @@ public class CarRacingTests {
         String input = "AAA,,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean isValid = service.isValidCarNames(input.split(","));
+        boolean isValid = service.isValidCarNames(Arrays.asList(input.split(",")));
 
         //then
         assertThat(isValid).isFalse();
@@ -100,7 +100,7 @@ public class CarRacingTests {
     void game_count_iterate() {
         //given
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        String[] carNames = input.split(",");
+        List<String> carNames = Arrays.asList(input.split(","));
 
         int gameCount = 5;
         Race race = service.initRace(carNames, gameCount);
@@ -117,14 +117,14 @@ public class CarRacingTests {
     void print_winners() {
         //given
         Car[] temp = { new Car("AAA", 3), new Car("BBB", 3),
-                new Car("CCC", 4), new Car("DDD", 5) };
+                new Car("CCC", 4), new Car("DDD", 4), };
         Race race = new Race(5, Arrays.asList(temp));
 
         //when
-        String[] winners = service.getWinners(race.getCars());
+        List<String> winners = service.getWinners(race.getCars());
 
         //then
-        assertThat(winners).isEqualTo(new String[]{"DDD"});
+        assertThat(winners).isEqualTo(Arrays.asList("CCC", "DDD"));
     }
 
 }
