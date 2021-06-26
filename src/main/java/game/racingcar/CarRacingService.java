@@ -20,7 +20,8 @@ public class CarRacingService {
     }
 
     public boolean isValidCarNames(String[] carNames) {
-        return Arrays.stream(carNames).noneMatch(this::isNotValidCarName);
+        return Arrays.stream(carNames)
+                .noneMatch(this::isNotValidCarName);
     }
 
     private boolean isNotValidCarName(String carName) {
@@ -28,7 +29,9 @@ public class CarRacingService {
     }
 
     public String[] getCarNames(String input) {
-        return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
+        return Arrays.stream(input.split(CAR_NAME_DELIMITER))
+                .map(String::trim)
+                .toArray(String[]::new);
     }
 
     public boolean isValidGameCount(String input) {
@@ -45,6 +48,7 @@ public class CarRacingService {
         List<Car> carList = Arrays.stream(carNames)
                 .map(carName -> new Car(carName, INIT_SCORE))
                 .collect(Collectors.toList());
+
         return new Race(gameCount, carList);
     }
 
@@ -74,9 +78,15 @@ public class CarRacingService {
     }
 
     public String[] getWinners(List<Car> cars) {
-        int max = cars.stream().max(Comparator.comparing(Car::getScore)).get().getScore();
+        int max = cars.stream()
+                .max(Comparator.comparing(Car::getScore))
+                .get()
+                .getScore();
 
-        return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
+        return cars.stream()
+                .filter(car -> car.getScore() == max)
+                .map(Car::getName)
+                .toArray(String[]::new);
     }
 
     public void printWinners(String[] winners) {
