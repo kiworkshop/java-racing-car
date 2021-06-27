@@ -21,11 +21,11 @@ public class Car {
         this.position = INITIAL_POSITION;
     }
 
-    public boolean isNewWinner(int maxPosition) {
+    public boolean isPositionGreaterThan(int maxPosition) {
         return this.position > maxPosition;
     }
 
-    public boolean isAdditionalWinner(int maxPosition) {
+    public boolean isPositionSameWith(int maxPosition) {
         return this.position == maxPosition;
     }
 

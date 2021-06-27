@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RaceCountValidatorTest {
 
     @Test
-    void Given_RaceCountLargerThanZero_When_validate_ReturnTrue() {
+    void Given_RaceCountGreaterThanZero_When_validate_ReturnTrue() {
         // given
         int raceCount1 = 1;
         int raceCount2 = 2;

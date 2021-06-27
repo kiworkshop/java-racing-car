@@ -28,12 +28,12 @@ public class Winner {
     }
 
     private void updateWinner(Car car) {
-        if (car.isAdditionalWinner(maxPosition)) {
+        if (car.isPositionSameWith(maxPosition)) {
             winners.add(car);
             return;
         }
 
-        if (car.isNewWinner(maxPosition)) {
+        if (car.isPositionGreaterThan(maxPosition)) {
             winners.clear();
             winners.add(car);
             maxPosition = car.getPosition();
