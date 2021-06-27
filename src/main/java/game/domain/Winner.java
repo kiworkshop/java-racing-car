@@ -28,7 +28,7 @@ public class Winner {
     }
 
     private void updateWinner(Car car) {
-        if (car.isPositionSameWith(maxPosition)) {
+        if (car.isPositionEqualTo(maxPosition)) {
             winners.add(car);
             return;
         }
