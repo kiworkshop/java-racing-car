@@ -21,7 +21,9 @@ public class Candidate {
     private List<Car> generateCarList(List<String> carNames) {
         List<Car> cars = new ArrayList<>();
         for (String carName : carNames) {
-            cars.add(new Car(carName));
+            cars.add(Car.builder()
+                    .name(carName)
+                    .build());
         }
         return cars;
     }

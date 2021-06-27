@@ -1,6 +1,7 @@
 package game.domain;
 
 import game.util.StringUtil;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -14,6 +15,7 @@ public class Car {
     private final String name;
     private int position;
 
+    @Builder
     public Car(String name) {
         this.name = name;
         this.position = INITIAL_POSITION;

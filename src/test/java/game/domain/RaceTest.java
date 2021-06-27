@@ -23,7 +23,10 @@ public class RaceTest {
     void Given_CandidateAndRaceCount_When_runWithAlwaysMoveStrategy_Then_PositionOfEveryWinnerIsRaceCount() {
         // given
         int raceCount = 3;
-        Race race = new Race(carNames, raceCount);
+        Race race = Race.builder()
+                .carNames(carNames)
+                .raceCount(raceCount)
+                .build();
 
         // when
         race.runWith(() -> true);

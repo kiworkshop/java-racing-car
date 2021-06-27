@@ -26,7 +26,9 @@ public class CandidateTest {
     @Test
     void Given_CarNameList_When_newCandidate_Then_GenerateUnmodifiableCarList() throws Exception {
         // given, when
-        Candidate candidate = new Candidate(carNames);
+        Candidate candidate = Candidate.builder()
+                .carNames(carNames)
+                .build();
 
         // then
         List<Car> cars = candidate.getCars();
@@ -39,7 +41,9 @@ public class CandidateTest {
     @Test
     void Given_AlwaysMoveStrategy_When_runOneRound_Then_PositionOfEveryCarIsOne() throws Exception {
         // given
-        Candidate candidate = new Candidate(carNames);
+        Candidate candidate = Candidate.builder()
+                .carNames(carNames)
+                .build();
 
         // when
         candidate.runOneRoundWith(() -> true);
@@ -53,7 +57,9 @@ public class CandidateTest {
     @Test
     void Given_AlwaysNotMoveStrategy_When_runOneRound_Then_PositionOfEveryCarIsZero() throws Exception {
         // given
-        Candidate candidate = new Candidate(carNames);
+        Candidate candidate = Candidate.builder()
+                .carNames(carNames)
+                .build();
 
         // when
         candidate.runOneRoundWith(() -> false);

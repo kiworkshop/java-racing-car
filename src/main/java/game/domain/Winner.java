@@ -1,5 +1,6 @@
 package game.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Winner {
     private final List<Car> winners = new ArrayList<>();
     private int maxPosition;
 
+    @Builder
     public Winner(Candidate candidate) {
         this.maxPosition = INITIAL_MAX_POSITION;
         findWinners(candidate);

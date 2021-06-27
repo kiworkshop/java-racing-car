@@ -27,6 +27,8 @@ public class Race {
     }
 
     public Winner findWinners() {
-        return new Winner(candidate);
+        return Winner.builder()
+                .candidate(candidate)
+                .build();
     }
 }

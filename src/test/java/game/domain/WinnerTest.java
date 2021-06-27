@@ -22,7 +22,9 @@ class WinnerTest {
         Candidate candidate = generateCandidateWithOneWinnerAndOneLoser();
 
         // when
-        Winner winner = new Winner(candidate);
+        Winner winner = Winner.builder()
+                .candidate(candidate)
+                .build();
 
         // then
         assertThat(winner.getWinners().size()).isOne();
@@ -36,7 +38,9 @@ class WinnerTest {
         Candidate candidate = generateCandidateWithMultipleWinners();
 
         // when
-        Winner winner = new Winner(candidate);
+        Winner winner = Winner.builder()
+                .candidate(candidate)
+                .build();
 
         // then
         assertThat(winner.getWinners().size()).isEqualTo(2);
@@ -52,7 +56,9 @@ class WinnerTest {
         Candidate candidate = generateCandidateWithOneWinner();
 
         // when
-        Winner winner = new Winner(candidate);
+        Winner winner = Winner.builder()
+                .candidate(candidate)
+                .build();
 
         // then
         assertThat(winner.getWinners().size()).isOne();
@@ -64,7 +70,8 @@ class WinnerTest {
         List<String> carNames = new ArrayList<>();
         carNames.add(WINNER_NAME);
         carNames.add(LOSER_NAME);
-        Candidate candidate = new Candidate(carNames);
+        Candidate candidate = Candidate.builder()
+                .carNames(carNames).build();
         moveCarToPosition(candidate.getCars().get(LOSER_INDEX), LOSER_POSITION);
         moveCarToPosition(candidate.getCars().get(WINNER_INDEX), WINNER_POSITION);
         return candidate;
@@ -74,7 +81,8 @@ class WinnerTest {
         List<String> carNames = new ArrayList<>();
         carNames.add(WINNER_NAME);
         carNames.add(WINNER_NAME);
-        Candidate candidate = new Candidate(carNames);
+        Candidate candidate = Candidate.builder()
+                .carNames(carNames).build();
         for (int i = 0; i < candidate.getCars().size(); i++) {
             moveCarToPosition(candidate.getCars().get(i), WINNER_POSITION);
         }
@@ -84,7 +92,8 @@ class WinnerTest {
     private Candidate generateCandidateWithOneWinner() {
         List<String> carNames = new ArrayList<>();
         carNames.add(WINNER_NAME);
-        Candidate candidate = new Candidate(carNames);
+        Candidate candidate = Candidate.builder()
+                .carNames(carNames).build();
         moveCarToPosition(candidate.getCars().get(WINNER_INDEX), WINNER_POSITION);
         return candidate;
     }

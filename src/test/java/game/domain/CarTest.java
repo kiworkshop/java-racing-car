@@ -12,7 +12,9 @@ public class CarTest {
         String name = "car";
 
         // when
-        Car car = new Car(name);
+        Car car = Car.builder()
+                .name(name)
+                .build();
 
         // then
         assertThat(car.getName()).isEqualTo(name);
@@ -22,7 +24,9 @@ public class CarTest {
     @Test
     void Given_NewCar_When_moveForward_Then_PositionIsOne() {
         // given
-        Car car = new Car("car");
+        Car car = Car.builder()
+                .name("car")
+                .build();
 
         // when
         car.moveForward();
@@ -34,7 +38,9 @@ public class CarTest {
     @Test
     void Given_NewCar_When_Move_Then_PositionOfCarIsOne() {
         // given
-        Car car = new Car("car");
+        Car car = Car.builder()
+                .name("car")
+                .build();
 
         // when
         car.moveByFlag(true);
@@ -46,7 +52,9 @@ public class CarTest {
     @Test
     void Given_NewCar_When_NotMove_Then_PositionOfCarIsZero() {
         // given
-        Car car = new Car("car");
+        Car car = Car.builder()
+                .name("car")
+                .build();
 
         // when
         car.moveByFlag(false);
