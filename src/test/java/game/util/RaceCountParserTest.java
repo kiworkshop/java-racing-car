@@ -32,6 +32,18 @@ public class RaceCountParserTest {
     }
 
     @Test
+    void Given_InputLineWithZero_When_parseCount_Then_ReturnZero() {
+        // given
+        String inputLine = "0";
+
+        // when
+        int result = RaceCountParser.parseRaceCount(inputLine);
+
+        // then
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
     void Given_InputLineWithNoneInteger_When_parseCount_Then_RuntimeExceptionThrown() {
         // given
         String inputLine = "가";
@@ -40,7 +52,6 @@ public class RaceCountParserTest {
         assertThatThrownBy(() ->
                 RaceCountParser.parseRaceCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
-        ;
     }
 
     @Test
@@ -52,6 +63,5 @@ public class RaceCountParserTest {
         assertThatThrownBy(() ->
                 RaceCountParser.parseRaceCount(inputLine))
                 .isInstanceOf(RuntimeException.class);
-        ;
     }
 }

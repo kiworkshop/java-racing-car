@@ -25,23 +25,16 @@ public class CarNameParserTest {
     }
 
     @Test
-    void Given_CarNamesWithLengthLongerThanLimit_When_parseCarNames_Then_RuntimeExceptionThrown() {
+    void Given_InputLineWithBlanks_When_parseCarNames_Then_ReturnCarNameList() {
         // given
-        String inputLine = "nameLongerThanFive";
+        String inputLine = "  ";
 
-        // when, then
-        assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
-                .isInstanceOf(RuntimeException.class);
-    }
+        // when
+        List<String> carNames = CarNameParser.parseCarNames(inputLine);
 
-    @Test
-    void Given_CarNamesWithLengthZero_When_parseCarNames_Then_RuntimeExceptionThrown() {
-        // given
-        String inputLine = "name,,name,";
-
-        // when, then
-        assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
-                .isInstanceOf(RuntimeException.class);
+        // then
+        assertThat(carNames.size()).isEqualTo(1);
+        assertThat(carNames.get(0)).isEqualTo("");
     }
 
     @Test
@@ -65,16 +58,28 @@ public class CarNameParserTest {
     }
 
     @Test
-    void Given_ValidInputLineWithBlankInName_When_parseCarNames_Then_ReturnTrimmedCarNameList() {
+    void Given_ValidLengthNameWithSingleBlankAroundName_When_parseCarNames_Then_ReturnTrimmedCarNameList() {
         // given
-        String inputLine = "1 , 2 3 ";
+        String inputLine = "name ";
 
         // when
         List<String> carNames = CarNameParser.parseCarNames(inputLine);
 
         // then
-        assertThat(carNames.size()).isEqualTo(2);
-        assertThat(carNames.get(0)).isEqualTo("1");
-        assertThat(carNames.get(1)).isEqualTo("2 3");
+        assertThat(carNames.size()).isEqualTo(1);
+        assertThat(carNames.get(0)).isEqualTo("name");
+    }
+
+    @Test
+    void Given_ValidLengthNameWithMultipleBlanksAroundName_When_parseCarNames_Then_ReturnTrimmedCarNameList() {
+        // given
+        String inputLine = "    name   ";
+
+        // when
+        List<String> carNames = CarNameParser.parseCarNames(inputLine);
+
+        // then
+        assertThat(carNames.size()).isEqualTo(1);
+        assertThat(carNames.get(0)).isEqualTo("name");
     }
 }

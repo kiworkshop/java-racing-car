@@ -4,23 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Builder
 @Getter
 public class ViewDto {
-    private String carNamesInput;
-    private String raceCountInput;
-
-//    public ViewDto(String carNamesInput, String raceCountInput) {
-//        this.carNamesInput = carNamesInput;
-//        this.raceCountInput = raceCountInput;
-//    }
-//
-//    public String getCarNamesInput() {
-//        return carNamesInput;
-//    }
-//
-//    public String getRaceCountInput() {
-//        return raceCountInput;
-//    }
+    private final List<String> carNames;
+    private final int raceCount;
 }

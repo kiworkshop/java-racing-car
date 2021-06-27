@@ -20,28 +20,38 @@ public class CarTest {
     }
 
     @Test
-    void Given_NameAndPosition_When_newCar_Then_CarInstanceCreated() {
-        // given
-        String name = "car";
-        int position = 3;
-
-        // when
-        Car car = new Car(name, position);
-
-        // then
-        assertThat(car.getName()).isEqualTo(name);
-        assertThat(car.getPosition()).isEqualTo(position);
-    }
-
-    @Test
-    void Given_NewCar_When_moveOnRandomPick_Then_PositionIsOneOrZero() {
+    void Given_NewCar_When_moveForward_Then_PositionIsOne() {
         // given
         Car car = new Car("car");
 
         // when
-        car.moveOnRandomPick();
+        car.moveForward();
 
         // then
-        assertThat(car.getPosition()).isLessThanOrEqualTo(1);
+        assertThat(car.getPosition()).isEqualTo(1);
+    }
+
+    @Test
+    void Given_NewCar_When_Move_Then_PositionOfCarIsOne() {
+        // given
+        Car car = new Car("car");
+
+        // when
+        car.moveByFlag(true);
+
+        // then
+        assertThat(car.getPosition()).isOne();
+    }
+
+    @Test
+    void Given_NewCar_When_NotMove_Then_PositionOfCarIsZero() {
+        // given
+        Car car = new Car("car");
+
+        // when
+        car.moveByFlag(false);
+
+        // then
+        assertThat(car.getPosition()).isZero();
     }
 }

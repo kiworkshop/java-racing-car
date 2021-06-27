@@ -1,8 +1,7 @@
 package view;
 
-import game.domain.Car;
-
-import java.util.List;
+import game.domain.Candidate;
+import game.domain.Winner;
 
 public class OutputView {
 
@@ -18,21 +17,14 @@ public class OutputView {
         System.out.println("\n실행 결과");
     }
 
-    public void printOneRoundResult(List<Car> cars) {
-        for (Car car : cars) {
-            System.out.printf("%-5s : ", car.getName());
-            System.out.println(car.getPositionString());
-        }
+    public void printOneRoundResult(Candidate candidate) {
+        System.out.println(candidate);
         System.out.println();
     }
 
-    public void printWinners(List<Car> winners) {
-        StringBuilder winnerNames = new StringBuilder();
-        for (Car winner : winners) {
-            winnerNames.append(winner.getName()).append(", ");
-        }
-
-        System.out.print(winnerNames.substring(0, winnerNames.length() - 2));
+    public void printWinners(Winner winner) {
+        System.out.print(winner);
         System.out.println("(이)가 최종 우승했습니다.");
     }
+
 }

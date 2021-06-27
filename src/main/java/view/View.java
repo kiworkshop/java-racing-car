@@ -1,6 +1,9 @@
 package view;
 
-import game.domain.Car;
+import game.domain.Candidate;
+import game.domain.Winner;
+import game.util.CarNameParser;
+import game.util.RaceCountParser;
 import view.dto.ViewDto;
 
 import java.util.List;
@@ -11,9 +14,13 @@ public class View {
     private static final OutputView outputView = new OutputView();
 
     public static ViewDto getCarNamesAndRaceCountInput() {
-        String carNamesInput = getCarNamesInput();
-        String raceCountInput = getRaceCountInput();
-        return new ViewDto(carNamesInput, raceCountInput);
+        List<String> carNames = CarNameParser.parseCarNames(getCarNamesInput());
+        int raceCount = RaceCountParser.parseRaceCount(getRaceCountInput());
+
+        return ViewDto.builder()
+                .carNames(carNames)
+                .raceCount(raceCount)
+                .build();
     }
 
     private static String getCarNamesInput() {
@@ -31,11 +38,11 @@ public class View {
         outputView.printRaceStart();
     }
 
-    public static void printOneRoundResult(List<Car> cars) {
-        outputView.printOneRoundResult(cars);
+    public static void printOneRoundResult(Candidate candidate) {
+        outputView.printOneRoundResult(candidate);
     }
 
-    public static void printWinners(List<Car> winners) {
-        outputView.printWinners(winners);
+    public static void printWinners(Winner winner) {
+        outputView.printWinners(winner);
     }
 }

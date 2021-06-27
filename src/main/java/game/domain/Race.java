@@ -1,54 +1,32 @@
 package game.domain;
 
+import game.RandomStrategy;
+import lombok.Builder;
 import view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Race {
 
-    private List<Car> cars;
-    private List<Car> winners = new ArrayList<>();
-    private int maxPosition = 0;
+    private final Candidate candidate;
+    private final int raceCount;
 
-    public Race(List<Car> cars) {
-        this.cars = cars;
+    @Builder
+    public Race(List<String> carNames, int raceCount) {
+        candidate = Candidate.builder()
+                .carNames(carNames)
+                .build();
+        this.raceCount = raceCount;
     }
 
-    public List<Car> getCars() {
-        return cars;
-    }
-
-    public List<Car> findWinners() {
-        for (Car car : cars) {
-            updateWinner(car);
-        }
-        return winners;
-    }
-
-    private void updateWinner(Car car) {
-        if (car.getPosition() == maxPosition) {
-            winners.add(car);
-            return;
-        }
-
-        if (car.getPosition() > maxPosition) {
-            winners.clear();
-            winners.add(car);
-            maxPosition = car.getPosition();
-        }
-    }
-
-    public void run(int raceCount) {
+    public void runWith(RandomStrategy randomStrategy) {
         for (int i = 0; i < raceCount; i++) {
-            runOneRound();
-            View.printOneRoundResult(this.cars);
+            candidate.runOneRoundWith(randomStrategy);
+            View.printOneRoundResult(candidate);
         }
     }
 
-    private void runOneRound() {
-        for (Car car : cars) {
-            car.moveOnRandomPick();
-        }
+    public Winner findWinners() {
+        return new Winner(candidate);
     }
 }
