@@ -21,8 +21,8 @@ public class Car {
         return position;
     }
 
-    public void moveOnRandomPick() {
-        if (RandomPick.isMoving())
+    public void moveByStrategy(MovingStrategy strategy) {
+        if (strategy.strategy())
             this.position++;
     }
 }

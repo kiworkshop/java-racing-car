@@ -43,16 +43,4 @@ public class CarTest {
         assertThat(car.getName()).isEqualTo(name);
     }
 
-    @Test
-    void 자동차가_랜덤하게_1_또는0번_움직인다() {
-        // given
-        Car car = new Car("car");
-
-        // when
-        car.moveOnRandomPick();
-
-        // then
-        assertThat(car.getPosition()).isLessThanOrEqualTo(1);
-    }
-
 }

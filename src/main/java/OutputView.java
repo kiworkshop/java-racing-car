@@ -1,16 +1,12 @@
 import java.util.List;
 
 public class OutputView {
-    CarNameParser carnameParser = new CarNameParser();
-    InputView inputView = new InputView();
-    MoveCountParser moveCountParser = new MoveCountParser();
-
-    public List<String> askCarNames() {
+    public List<String> askCarNameAndGetCarNames(CarNameParser carnameParser, InputView inputView) {
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)");
         return carnameParser.splitCarNames(inputView.getInput());
     }
 
-    public int askRepeatCount() {
+    public int askRepeatCountandGetCounts(MoveCountParser moveCountParser, InputView inputView) {
         System.out.println("시도할 횟수는 몇 회인가요?");
         return moveCountParser.parseCount(inputView.getInput());
     }
@@ -22,12 +18,8 @@ public class OutputView {
     public void printOneRoundResult(List<Car> cars) {
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
-            System.out.printf("%-5s : ", car.getName());
-
-            for (int j = 0; j < car.getPosition(); j++) {
-                System.out.printf("-");
-            }
-            System.out.println();
+            String totalGo = new String(new char[car.getPosition()]).replace("\0", "-");
+            System.out.printf("%-7s : %s\n", car.getName(), totalGo);
         }
         System.out.println();
     }

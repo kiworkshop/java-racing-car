@@ -4,6 +4,10 @@ import java.util.List;
 public class Game {
 
     static OutputView outputView = new OutputView();
+    static InputView inputView = new InputView();
+    static CarNameParser carNameParser = new CarNameParser();
+    static MoveCountParser moveCountParser = new MoveCountParser();
+    static MovingStrategy strategy = new RandomMovingStrategy();
 
     public static void main(String[] args) {
         start();
@@ -11,8 +15,8 @@ public class Game {
 
     public static void start() {
 
-        List<String> carNames = outputView.askCarNames();
-        int repeatCount = outputView.askRepeatCount();
+        List<String> carNames = outputView.askCarNameAndGetCarNames(carNameParser, inputView);
+        int repeatCount = outputView.askRepeatCountandGetCounts(moveCountParser,inputView);
         outputView.printRaceStart();
 
         List<Car> cars = new ArrayList<>();
@@ -20,13 +24,13 @@ public class Game {
             cars.add(new Car(carname));
         }
 
-        Race race = new Race(cars);
+        Race race = new Race();
         for (int i = 0; i < repeatCount; i++) {
-            race.runOnce();
-            outputView.printOneRoundResult(race.getCars());
+            cars = race.runOnce(cars,strategy);
+            outputView.printOneRoundResult(cars);
         }
 
-        List<Car> winners = race.getWinners();
+        List<Car> winners = race.getWinners(cars);
         outputView.printWinners(winners);
     }
 
