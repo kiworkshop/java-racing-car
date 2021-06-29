@@ -67,10 +67,11 @@ public class CarRacingService {
      * 우승한 자동차 이름을 조회한다.
      */
     public String[] getWinners(List<Car> cars) {
+
         int max = cars.stream()
-                .max(Comparator.comparing(Car::getScore))
-                .get()
-                .getScore();
+                .mapToInt(Car::getScore)
+                .max()
+                .orElseThrow(NoSuchElementException::new);
 
         return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
