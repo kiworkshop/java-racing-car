@@ -20,7 +20,7 @@ public class CarRacingTests {
     }
 
     @Test
-    @DisplayName("자동차 이름을 입력을 받는다")
+    @DisplayName("입력받은 자동차 이름의 개수를 확인한다")
     void 자동차_이름_입력() {
         //given
 

@@ -55,9 +55,6 @@ public class CarRacingService {
         }
     }
 
-    /**
-     * 랜덤 값으로 점수를 매기고, 결과를 출력한다.
-     */
     private void racing(Race race) {
         for (Car car : race.getCars()) {
             Random random = new Random();
@@ -65,8 +62,6 @@ public class CarRacingService {
             System.out.println(car);
         }
     }
-
-
 
     /**
      * 우승한 자동차 이름을 조회한다.
