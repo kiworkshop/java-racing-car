@@ -25,7 +25,7 @@ public class CarRacingTests {
 
         //when
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        List<String> carNames = service.splitCarNamesByComma(input);
+        List<String> carNames = service.splitCarNamesByCommaToArrayList(input);
 
         //then
         assertThat(carNames.size()).isEqualTo(5);
@@ -38,7 +38,7 @@ public class CarRacingTests {
         String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean checkCarNames = service.checkCarNames(Arrays.asList(input.split(",")));
+        boolean checkCarNames = service.checkCarNamesNotOverMaxCarCount(Arrays.asList(input.split(",")));
 
         //then
         assertThat(checkCarNames).isFalse();

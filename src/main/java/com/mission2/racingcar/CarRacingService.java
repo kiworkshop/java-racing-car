@@ -18,32 +18,20 @@ public class CarRacingService {
         printWinner(getWinners(race.getCars()));
     }
 
-    /**
-     * 자동차 이름 문자열 길이를 확인한다.
-     */
-    public boolean checkCarNames(List<String> carNames) {
+    public boolean checkCarNamesNotOverMaxCarCount(List<String> carNames) {
         long count = carNames.stream().filter(car -> car.length() > MAX_CAR_COUNT).count();
 
         return count <= 0;
     }
 
-    /**
-     * 자동차 이름의 배열을 만든다.
-     */
-    public List<String> splitCarNamesByComma(String input) {
+    public List<String> splitCarNamesByCommaToArrayList(String input) {
         return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /**
-     * 게임 횟수를 확인한다.
-     */
-    public boolean checkGameCount(int input) {
+    public boolean checkGameCountNotOverMaxGameCount(int input) {
         return input <= MAX_GAME_COUNT;
     }
 
-    /**
-     * 게임 횟수의 입력값을 확인한다.
-     */
     public int getGameCount(String input) {
         if (!Pattern.matches("^[0-9]*$", input)) {
             throw new RuntimeException("잘못된 입력입니다.");
@@ -51,9 +39,6 @@ public class CarRacingService {
         return Integer.parseInt(input);
     }
 
-    /**
-     * 사용자 입력 값(자동차 이름, 게임 횟수)을 초기화 한다.
-     */
     public Race initRace(List<String> carNames, int gameCount) {
         Race race = new Race();
         race.setGameCount(gameCount);
@@ -63,9 +48,6 @@ public class CarRacingService {
         return race;
     }
 
-    /**
-     * 게임 횟수 만큼 레이스를 진행한다.
-     */
     public void proceedGame(Race race) {
         for (int i = 0; i < race.getGameCount(); i++) {
             System.out.println();
@@ -104,9 +86,6 @@ public class CarRacingService {
         return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
 
-    /**
-     * 레이스 우승 자동차를 출력한다.
-     */
     public void printWinner(String[] winners) {
         String winner = String.join(",", winners);
         System.out.println("\n" + winner + "가 최종 우승했습니다.");
