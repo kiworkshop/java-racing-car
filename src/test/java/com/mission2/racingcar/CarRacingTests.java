@@ -108,11 +108,11 @@ public class CarRacingTests {
         Car[] carList = { new Car("AAA", 3), new Car("BBB", 3),
                 new Car("CCC", 4), new Car("DDD", 5) };
         Race race = new Race(5, Arrays.asList(carList));
+        String[] result = race.getWinners();
 
         //when
 
         //then
-        String[] result = race.getWinners();
         assertThat(result).hasSize(1);
         assertThat(result[0]).isEqualTo("DDD");
     }

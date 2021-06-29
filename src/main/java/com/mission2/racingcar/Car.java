@@ -27,10 +27,6 @@ public class Car {
         return this.score;
     }
 
-    /**
-     * Random 값을 비교한다.
-     * - (0,1,2,3) 이면 정지, (4,5,6,7,7,8,9) 이면 전진
-     */
     public int stopOrGoByRandomNumber(int randomNumber) {
         return (randomNumber < FORWARD_STANDARD) ? 0 : 1;
     }
