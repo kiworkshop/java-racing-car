@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class SplitUtilsTest {
 
@@ -25,5 +27,18 @@ public class SplitUtilsTest {
         for (int i = 0; i < tokens.size(); i++) {
             assertThat(tokens.get(i)).isEqualTo(expectedResult.get(i));
         }
+    }
+
+    @Test
+    @DisplayName("인자로 넣어준 구분자가 문자열에 존재하지 않을 경우, 예외가 발생한다.")
+    void validateDelimiter() {
+        //given
+        String delimiter = ",";
+        String input = "name. sean. bean";
+
+        //when //then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> SplitUtils.split(input, delimiter))
+                .withMessage(format("\"%s\" 구분자가 존재하는 지 확인해주세요.", delimiter));
     }
 }
