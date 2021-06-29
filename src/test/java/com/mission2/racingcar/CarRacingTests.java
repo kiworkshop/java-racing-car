@@ -25,7 +25,7 @@ public class CarRacingTests {
 
         //when
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        String[] carNames = service.getCarNames(input);
+        String[] carNames = service.splitCarNamesByComma(input);
 
         //then
         assertThat(carNames.length).isEqualTo(5);

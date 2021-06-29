@@ -30,7 +30,7 @@ public class CarRacingService {
     /**
      * 자동차 이름의 배열을 만든다.
      */
-    public String[] getCarNames(String input) {
+    public String[] splitCarNamesByComma(String input) {
         return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
     }
 

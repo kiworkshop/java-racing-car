@@ -7,11 +7,11 @@ public class CarRacing {
     public static void main(String[] args) {
         CarRacingService service = new CarRacingService();
 
-        String inputCarName = getUserInput("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분");
-        String[] carNames = service.getCarNames(inputCarName);
+        String inputCarNames = getUserInput("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분");
+        String[] carNames = service.splitCarNamesByComma(inputCarNames);
         while (!service.checkCarNames(carNames)) {
             String message = "자동차 이름은 " + CarRacingService.MAX_CAR_COUNT + "글자를 넘을 수 없습니다.";
-            carNames = service.getCarNames(getUserInput(message));
+            carNames = service.splitCarNamesByComma(getUserInput(message));
         }
 
         String inputGameCount = getUserInput("시도할 회수는 몇회인가요?");
