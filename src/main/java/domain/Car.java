@@ -48,4 +48,8 @@ public class Car {
             position += PER_MOVEMENT_RANGE;
         }
     }
+
+    public boolean isSamePosition(int anotherCarPosition) {
+        return this.position == anotherCarPosition;
+    }
 }

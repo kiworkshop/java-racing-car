@@ -58,4 +58,15 @@ public class CarTest {
         //then
         assertThat(car.position()).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, true", "1, false"})
+    @DisplayName("위치 값을 인자로 받아 자신의 위치와 값이 같을 경우, 참을 반환한다.")
+    void isSamePosition(int anotherCarPosition, boolean expected) {
+        //given
+        Car car = new Car("name");
+
+        //when //then
+        assertThat(car.isSamePosition(anotherCarPosition)).isEqualTo(expected);
+    }
 }
