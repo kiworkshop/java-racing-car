@@ -4,6 +4,8 @@ import java.util.stream.Collectors;
 
 public class CarNameParser {
 
+    public static final String SPACE = " ";
+    public static final String REPLACEMENT = "";
     private static final String DELIMITER = ",";
     public static final int CAR_NAME_LENGTH_MIN_LIMIT = 0;
     private static final int CAR_NAME_LENGTH_NAX_LIMIT = 5;
@@ -11,8 +13,7 @@ public class CarNameParser {
     public List<String> splitCarNames(String inputLine) {
         if (isNullEmpty(inputLine))
             throw new RuntimeException("자동차이름에 공백이나 null이 올 수 없습니다.");
-
-        return Arrays.stream(inputLine.split(DELIMITER))
+        return Arrays.stream(inputLine.replace(SPACE, REPLACEMENT).split(DELIMITER))
                 .filter(this::isNameValid)
                 .collect(Collectors.toList());
     }
