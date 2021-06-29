@@ -12,6 +12,11 @@ public class CarRacingService {
 
     public void game(List<String> carNames, int gameCount) {
         System.out.println("실행결과");
+
+        carNames.stream()
+                .map(name -> new Car(name, INIT_SCORE))
+                .forEach(System.out::println);
+
         Race race = initRace(gameCount, carNames);
         proceedGame(race);
         printWinner(getWinners(race.getCars()));
