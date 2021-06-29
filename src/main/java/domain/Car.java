@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 public class Car {
     private static final int START_POSITION = 0;
     private static final int MAX_NAME_LENGTH = 5;
+    private static final int MOVE_NUMBER = 4;
+    private static final int PER_MOVEMENT_RANGE = 1;
 
     private final String name;
     private int position;
@@ -39,5 +41,11 @@ public class Car {
 
     public String name() {
         return name;
+    }
+
+    public void move(int randomNumber) {
+        if (randomNumber >= MOVE_NUMBER) {
+            position += PER_MOVEMENT_RANGE;
+        }
     }
 }
