@@ -105,16 +105,16 @@ public class CarRacingTests {
     @DisplayName("종료시 우승자를 출력한다")
     void 종료시_우승자_출력() {
         //given
-        Car[] temp = { new Car("AAA", 3), new Car("BBB", 3),
+        Car[] carList = { new Car("AAA", 3), new Car("BBB", 3),
                 new Car("CCC", 4), new Car("DDD", 5) };
-        Race race = new Race(5, Arrays.asList(temp));
+        Race race = new Race(5, Arrays.asList(carList));
 
         //when
-        service.proceedGame(race);
-        String[] winners = service.getWinners(race.getCars());
 
         //then
-        service.printWinner(winners);
+        String[] result = race.getWinners();
+        assertThat(result).hasSize(1);
+        assertThat(result[0]).isEqualTo("DDD");
     }
 
 }

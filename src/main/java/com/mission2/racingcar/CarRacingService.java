@@ -19,7 +19,7 @@ public class CarRacingService {
 
         Race race = initRace(gameCount, carNames);
         proceedGame(race);
-        printWinner(getWinners(race.getCars()));
+        printWinner(race.getWinners());
     }
 
     public boolean checkCarNamesNotOverMaxCarCount(List<String> carNames) {
@@ -66,19 +66,6 @@ public class CarRacingService {
             car.addScore(car.stopOrGoByRandomNumber(random.nextInt(10)));
             System.out.println(car);
         }
-    }
-
-    /**
-     * 우승한 자동차 이름을 조회한다.
-     */
-    public String[] getWinners(List<Car> cars) {
-
-        int max = cars.stream()
-                .mapToInt(Car::getScore)
-                .max()
-                .orElseThrow(NoSuchElementException::new);
-
-        return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
 
     public void printWinner(String[] winners) {

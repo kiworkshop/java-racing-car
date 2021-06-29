@@ -1,6 +1,7 @@
 package com.mission2.racingcar;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Race {
     private int gameCount;
@@ -17,6 +18,16 @@ public class Race {
 
     public List<Car> getCars() {
         return this.cars;
+    }
+
+    public String[] getWinners() {
+
+        int max = cars.stream()
+                .mapToInt(Car::getScore)
+                .max()
+                .orElseThrow(NoSuchElementException::new);
+
+        return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
 
     public static class Builder {
