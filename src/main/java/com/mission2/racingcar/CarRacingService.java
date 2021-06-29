@@ -13,7 +13,7 @@ public class CarRacingService {
 
     public void game(List<String> carNames, int gameCount) {
         System.out.println("실행결과");
-        Race race = initRace(carNames, gameCount);
+        Race race = initRace(gameCount, carNames);
         proceedGame(race);
         printWinner(getWinners(race.getCars()));
     }
@@ -41,13 +41,12 @@ public class CarRacingService {
         return Integer.parseInt(input);
     }
 
-    public Race initRace(List<String> carNames, int gameCount) {
-        Race race = new Race();
-        race.setGameCount(gameCount);
-        race.setCars(carNames.stream()
-                .map(carName -> new Car(carName, INIT_SCORE))
-                .collect(Collectors.toList()));
-        return race;
+    public Race initRace(int gameCount, List<String> carNames) {
+        return new Race
+                .Builder(gameCount, carNames.stream()
+                                    .map(carName -> new Car(carName, INIT_SCORE))
+                                    .collect(Collectors.toList()))
+                .build();
     }
 
     public void proceedGame(Race race) {

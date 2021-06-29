@@ -91,7 +91,7 @@ public class CarRacingTests {
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
         List<String> carNames = Arrays.asList(input.split(","));
         int gameCount = 5;
-        Race race = service.initRace(carNames, gameCount);
+        Race race = service.initRace(gameCount, carNames);
         service.proceedGame(race);
 
         //when
