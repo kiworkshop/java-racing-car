@@ -5,10 +5,6 @@ public class Car {
     private String name;
     private int score;
 
-    public Car() {
-
-    }
-
     public Car(String name, int score) {
         this.name = name;
         this.score = score;
@@ -18,7 +14,7 @@ public class Car {
         this.name = name;
     }
 
-    public void setScore(int score) {
+    public void addScore(int score) {
         this.score += score;
     }
 

@@ -24,7 +24,7 @@ public class CarRacingService {
     public boolean checkCarNames(String[] carNames) {
         long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
 
-        return (count > 0) ? false : true;
+        return count <= 0;
     }
 
     /**
@@ -38,7 +38,7 @@ public class CarRacingService {
      * 게임 횟수를 확인한다.
      */
     public boolean checkGameCount(int input) {
-        return (input > MAX_GAME_COUNT) ? false : true;
+        return input <= MAX_GAME_COUNT;
     }
 
     /**
@@ -79,7 +79,7 @@ public class CarRacingService {
     private void racing(Race race) {
         for (Car car : race.getCars()) {
             int randomNumber = (int) (Math.random() * 10);
-            car.setScore(compareRandom(randomNumber));
+            car.addScore(compareRandom(randomNumber));
             System.out.println(car);
         }
     }
@@ -96,7 +96,10 @@ public class CarRacingService {
      * 우승한 자동차 이름을 조회한다.
      */
     public String[] getWinners(List<Car> cars) {
-        int max = cars.stream().max(Comparator.comparing(Car::getScore)).get().getScore();
+        int max = cars.stream()
+                .max(Comparator.comparing(Car::getScore))
+                .get()
+                .getScore();
 
         return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
     }
