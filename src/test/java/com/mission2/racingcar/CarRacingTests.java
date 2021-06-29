@@ -90,11 +90,11 @@ public class CarRacingTests {
         //given
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
         List<String> carNames = Arrays.asList(input.split(","));
-
-        //when
         int gameCount = 5;
         Race race = service.initRace(carNames, gameCount);
         service.proceedGame(race);
+
+        //when
 
         //then
         assertThat(race.getGameCount()).isEqualTo(gameCount);

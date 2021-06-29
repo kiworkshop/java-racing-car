@@ -25,7 +25,9 @@ public class CarRacingService {
     }
 
     public List<String> splitCarNamesByCommaToArrayList(String input) {
-        return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).collect(Collectors.toCollection(ArrayList::new));
+        return Arrays.stream(input.split(CAR_NAME_DELIMITER))
+                .map(String::trim)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public boolean checkGameCountNotOverMaxGameCount(int input) {
