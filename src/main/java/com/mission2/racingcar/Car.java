@@ -1,6 +1,7 @@
 package com.mission2.racingcar;
 
 public class Car {
+    public static final int FORWARD_STANDARD = 4;
 
     private String name;
     private int score;
@@ -24,6 +25,14 @@ public class Car {
 
     public int getScore() {
         return this.score;
+    }
+
+    /**
+     * Random 값을 비교한다.
+     * - (0,1,2,3) 이면 정지, (4,5,6,7,7,8,9) 이면 전진
+     */
+    public int stopOrGoByRandomNumber(int randomNumber) {
+        return (randomNumber < FORWARD_STANDARD) ? 0 : 1;
     }
 
     @Override

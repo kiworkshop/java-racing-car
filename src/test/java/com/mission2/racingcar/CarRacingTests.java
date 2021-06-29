@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CarRacingTests {
 
     static CarRacingService service;
+    static Car car = new Car("TestCar", 0);
 
     @BeforeAll
     public static void beforeAll() {
@@ -65,7 +66,7 @@ public class CarRacingTests {
         int stopValues = 3;
 
         //when
-        int stop = service.compareRandom(stopValues);
+        int stop = car.stopOrGoByRandomNumber(stopValues);
 
         //then
         assertThat(stop).isZero();
@@ -78,7 +79,7 @@ public class CarRacingTests {
         int forwardValues = 4;
 
         //when
-        int forward = service.compareRandom(forwardValues);
+        int forward = car.stopOrGoByRandomNumber(forwardValues);
 
         //then
         assertThat(forward).isEqualTo(1);

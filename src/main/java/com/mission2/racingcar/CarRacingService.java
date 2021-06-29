@@ -8,7 +8,6 @@ public class CarRacingService {
     public static final int MAX_CAR_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
     public static final int INIT_SCORE = 1;
-    public static final int FORWARD = 4;
     public static final String CAR_NAME_DELIMITER = ",";
 
     public void game(List<String> carNames, int gameCount) {
@@ -62,18 +61,12 @@ public class CarRacingService {
     private void racing(Race race) {
         for (Car car : race.getCars()) {
             Random random = new Random();
-            car.addScore(compareRandom(random.nextInt(10)));
+            car.addScore(car.stopOrGoByRandomNumber(random.nextInt(10)));
             System.out.println(car);
         }
     }
 
-    /**
-     * Random 값을 비교한다.
-     * - (0,1,2,3) 이면 정지, (4,5,6,7,7,8,9) 이면 전진
-     */
-    public int compareRandom(int randomNumber) {
-        return (randomNumber < FORWARD) ? 0 : 1;
-    }
+
 
     /**
      * 우승한 자동차 이름을 조회한다.
