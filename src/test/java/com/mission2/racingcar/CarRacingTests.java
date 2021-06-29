@@ -25,10 +25,10 @@ public class CarRacingTests {
 
         //when
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        String[] carNames = service.splitCarNamesByComma(input);
+        List<String> carNames = service.splitCarNamesByComma(input);
 
         //then
-        assertThat(carNames.length).isEqualTo(5);
+        assertThat(carNames.size()).isEqualTo(5);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class CarRacingTests {
         String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean checkCarNames = service.checkCarNames(input.split(","));
+        boolean checkCarNames = service.checkCarNames(Arrays.asList(input.split(",")));
 
         //then
         assertThat(checkCarNames).isFalse();
@@ -89,7 +89,7 @@ public class CarRacingTests {
     void 시도_횟수만큼_반복() {
         //given
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        String[] carNames = input.split(",");
+        List<String> carNames = Arrays.asList(input.split(","));
 
         //when
         int gameCount = 5;

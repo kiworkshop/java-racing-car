@@ -1,5 +1,7 @@
 package com.mission2.racingcar;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CarRacing {
@@ -8,7 +10,7 @@ public class CarRacing {
         CarRacingService service = new CarRacingService();
 
         String inputCarNames = getUserInput("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분");
-        String[] carNames = service.splitCarNamesByComma(inputCarNames);
+        List<String> carNames = service.splitCarNamesByComma(inputCarNames);
         while (!service.checkCarNames(carNames)) {
             String message = "자동차 이름은 " + CarRacingService.MAX_CAR_COUNT + "글자를 넘을 수 없습니다.";
             carNames = service.splitCarNamesByComma(getUserInput(message));

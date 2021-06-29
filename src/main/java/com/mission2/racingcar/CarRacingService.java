@@ -11,7 +11,7 @@ public class CarRacingService {
     public static final int FORWARD = 4;
     public static final String CAR_NAME_DELIMITER = ",";
 
-    public void game(String[] carNames, int gameCount) {
+    public void game(List<String> carNames, int gameCount) {
         System.out.println("실행결과");
         Race race = initRace(carNames, gameCount);
         proceedGame(race);
@@ -21,8 +21,8 @@ public class CarRacingService {
     /**
      * 자동차 이름 문자열 길이를 확인한다.
      */
-    public boolean checkCarNames(String[] carNames) {
-        long count = Arrays.stream(carNames).filter(car -> car.length() > MAX_CAR_COUNT).count();
+    public boolean checkCarNames(List<String> carNames) {
+        long count = carNames.stream().filter(car -> car.length() > MAX_CAR_COUNT).count();
 
         return count <= 0;
     }
@@ -30,8 +30,8 @@ public class CarRacingService {
     /**
      * 자동차 이름의 배열을 만든다.
      */
-    public String[] splitCarNamesByComma(String input) {
-        return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).toArray(String[]::new);
+    public List<String> splitCarNamesByComma(String input) {
+        return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -54,10 +54,10 @@ public class CarRacingService {
     /**
      * 사용자 입력 값(자동차 이름, 게임 횟수)을 초기화 한다.
      */
-    public Race initRace(String[] carNames, int gameCount) {
+    public Race initRace(List<String> carNames, int gameCount) {
         Race race = new Race();
         race.setGameCount(gameCount);
-        race.setCars(Arrays.stream(carNames)
+        race.setCars(carNames.stream()
                 .map(carName -> new Car(carName, INIT_SCORE))
                 .collect(Collectors.toList()));
         return race;
