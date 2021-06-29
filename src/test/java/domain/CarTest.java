@@ -32,4 +32,15 @@ public class CarTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Car(nullOrEmpty))
                 .withMessage("한 자리 이상의 이름을 입력해주세요.");
     }
+
+    @Test
+    @DisplayName("이름이 5자 초과일 경우, 예외가 발생한다.")
+    void validateNameLength() {
+        //given
+        String overLengthName = "abcdef";
+
+        //when //then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Car(overLengthName))
+                .withMessage("이름은 5자 이하여야 합니다.");
+    }
 }
