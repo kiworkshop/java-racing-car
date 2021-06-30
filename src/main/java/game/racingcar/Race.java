@@ -3,6 +3,9 @@ package game.racingcar;
 import java.util.List;
 
 public class Race {
+
+    public static final int MAX_GAME_COUNT = 10;
+
     private int gameCount;
     private List<Car> cars;
 

@@ -4,9 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
-    public static final int MAX_CAR_NAME_COUNT = 5;
-    public static final int MAX_GAME_COUNT = 10;
-    public static final int INIT_SCORE = 1;
+
     public static final int FORWARD_SCORE = 1;
     public static final int STOP_POINT = 3;
     public static final String CAR_NAME_DELIMITER = ",";
@@ -17,15 +15,6 @@ public class CarRacingService {
         Race race = initRace(carNames, gameCount);
         racing(race);
         printWinners(getWinners(race.getCars()));
-    }
-
-    public boolean isValidCarNames(List<String> carNames) {
-        return carNames.stream()
-                .noneMatch(this::isNotValidCarName);
-    }
-
-    private boolean isNotValidCarName(String carName) {
-        return carName.length() == 0 || carName.length() > MAX_CAR_NAME_COUNT;
     }
 
     public List<String> getCarNames(String input) {
@@ -44,7 +33,7 @@ public class CarRacingService {
 
     public Race initRace(List<String> carNames, int gameCount) {
         List<Car> carList = carNames.stream()
-                .map(carName -> new Car(carName, INIT_SCORE))
+                .map(carName -> new Car(carName, Car.INIT_SCORE))
                 .collect(Collectors.toList());
 
         return new Race(gameCount, carList);

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CarRacingTests {
 
@@ -34,26 +35,24 @@ public class CarRacingTests {
     @DisplayName("자동차 이름은 문자열 5자 이하이다")
     void input_car_name_length_validation() {
         //given
-        String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
+        String input = "MAX_CAR_NAME";
 
         //when
-        boolean isValid = service.isValidCarNames(Arrays.asList(input.split(",")));
 
         //then
-        assertThat(isValid).isFalse();
+        assertThrows(IllegalArgumentException.class, () -> new Car(input, Car.INIT_SCORE));
     }
 
     @Test
     @DisplayName("자동차 이름은 공백이 아니다")
     void input_car_name_empty_validation() {
         //given
-        String input = "AAA,,CCC,DDD,EEE"; // Scanner 입력
+        String input = "";
 
         //when
-        boolean isValid = service.isValidCarNames(Arrays.asList(input.split(",")));
 
         //then
-        assertThat(isValid).isFalse();
+        assertThrows(IllegalArgumentException.class, () -> new Car(input, Car.INIT_SCORE));
     }
 
     @Test
