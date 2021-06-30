@@ -14,7 +14,7 @@ public class CarRacingService {
     }
 
     public List<String> getCarNames(String input) {
-        return Arrays.asList(input.split(CAR_NAME_DELIMITER));
+        return Arrays.stream(input.split(CAR_NAME_DELIMITER)).map(String::trim).collect(Collectors.toList());
     }
 
     public boolean isValidGameCount(String input) {
@@ -43,15 +43,19 @@ public class CarRacingService {
     }
 
     public List<String> getWinners(List<Car> cars) {
-        int max = cars.stream()
+        int topScore = getTopScore(cars);
+
+        return cars.stream()
+                .filter(car -> car.getScore() == topScore)
+                .map(Car::getName)
+                .collect(Collectors.toList());
+    }
+
+    private int getTopScore(List<Car> cars) {
+        return cars.stream()
                 .mapToInt(Car::getScore)
                 .max()
                 .getAsInt();
-
-        return cars.stream()
-                .filter(car -> car.getScore() == max)
-                .map(Car::getName)
-                .collect(Collectors.toList());
     }
 
     public void printWinners(List<String> winners) {
