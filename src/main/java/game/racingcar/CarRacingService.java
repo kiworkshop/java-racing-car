@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
-    public static final String CAR_NAME_DELIMITER = ",";
+    private static final String CAR_NAME_DELIMITER = ",";
 
     public void racingGame(List<String> carNames, int gameCount) {
         System.out.println("실행결과");

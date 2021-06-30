@@ -4,14 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class Race {
-
     public static final int MAX_GAME_COUNT = 10;
-    public static final int FORWARD_SCORE = 1;
-    public static final int STOP_POINT = 3;
-    public static final String RACE_RESULT_DELIMITER = "-";
+    private static final int FORWARD_SCORE = 1;
+    private static final int STOP_POINT = 3;
+    private static final String RACE_RESULT_DELIMITER = "-";
 
-    private int gameCount;
-    private List<Car> cars;
+    private final int gameCount;
+    private final List<Car> cars;
 
     public Race(int gameCount, List<Car> cars) {
         this.gameCount = gameCount;

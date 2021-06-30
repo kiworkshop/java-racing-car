@@ -4,7 +4,7 @@ public class Car {
     public static final int MAX_CAR_NAME_COUNT = 5;
     public static final int INIT_SCORE = 1;
 
-    private String name;
+    private final String name;
     private int score;
 
     public Car(String name, int score) {
