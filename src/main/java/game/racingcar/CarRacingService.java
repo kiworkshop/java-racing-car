@@ -4,11 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
-
-    public static final int FORWARD_SCORE = 1;
-    public static final int STOP_POINT = 3;
     public static final String CAR_NAME_DELIMITER = ",";
-    public static final String RACE_RESULT_DELIMITER = "-";
 
     public void racingGame(List<String> carNames, int gameCount) {
         System.out.println("실행결과");
@@ -41,27 +37,9 @@ public class CarRacingService {
 
     public void racing(Race race) {
         for (int i = 0; i < race.getGameCount(); i++) {
-            race.getCars().forEach(this::raceScore);
+            race.proceed();
             System.out.println();
         }
-    }
-
-    public boolean isForward(int randomNumber) {
-        return randomNumber > STOP_POINT;
-    }
-
-    private void raceScore(Car car) {
-        printScore(car);
-        int randomNumber = (int) (Math.random() * 10);
-        if (isForward(randomNumber)) {
-            car.addScore(FORWARD_SCORE);
-        }
-    }
-
-    public void printScore(Car car) {
-        String raceResult = String.join("", Collections.nCopies(car.getScore(), RACE_RESULT_DELIMITER));
-        String printFormat = String.format("%s : %s", car.getName(), raceResult);
-        System.out.println(printFormat);
     }
 
     public List<String> getWinners(List<Car> cars) {

@@ -75,7 +75,7 @@ public class CarRacingTests {
         int randomNumber = 3;
 
         //when
-        boolean stop = service.isForward(randomNumber);
+        boolean stop = Race.isForward(randomNumber);
 
         //then
         assertThat(stop).isFalse();
@@ -88,7 +88,7 @@ public class CarRacingTests {
         int randomNumber = 4;
 
         //when
-        boolean forward = service.isForward(randomNumber);
+        boolean forward = Race.isForward(randomNumber);
 
         //then
         assertThat(forward).isTrue();
