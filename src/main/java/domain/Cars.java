@@ -39,4 +39,11 @@ public class Cars {
                 .max()
                 .orElse(START_POSITION);
     }
+
+    public List<String> winnerNames(final int maxPosition) {
+        return cars.stream()
+                .filter(car -> car.isSamePosition(maxPosition))
+                .map(Car::name)
+                .collect(Collectors.toList());
+    }
 }
