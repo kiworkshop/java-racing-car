@@ -17,7 +17,7 @@ public class CarsTest {
         Cars cars = new Cars("pobi", "nana", "ppo");
 
         //then
-        assertThat(cars.size()).isEqualTo(3);
+        assertThat(cars.list().size()).isEqualTo(3);
     }
 
     @Test
@@ -55,5 +55,18 @@ public class CarsTest {
 
         //when //then
         assertThat(cars.winnerNames(maxPosition)).contains("pobi", "dobi");
+    }
+
+    @Test
+    @DisplayName("자동차의 리스트를 반환한다.")
+    void list() {
+        //given
+        Car firstCar = new Car("pobi");
+        Car secondCar = new Car("dobi");
+        Car thirdCar = new Car("kobi");
+        Cars cars = new Cars(Arrays.asList(firstCar, secondCar, thirdCar));
+
+        //when //then
+        assertThat(cars.list()).contains(firstCar, secondCar, thirdCar);
     }
 }

@@ -36,8 +36,8 @@ public class Cars {
         }
     }
 
-    public int size() {
-        return cars.size();
+    public List<Car> list() {
+        return cars;
     }
 
     public Position maxPosition() {
