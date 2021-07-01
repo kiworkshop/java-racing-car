@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -76,5 +77,22 @@ public class GameSystemTest {
             assertThat(gameSystem.generateRandomNumber()).isLessThanOrEqualTo(9);
             assertThat(gameSystem.generateRandomNumber()).isGreaterThanOrEqualTo(0);
         }
+    }
+
+    @Test
+    @DisplayName("최종 우슴자들의 이름을 반환한다.")
+    void winners() {
+        //given
+        Car firstCar = new Car("pobi", 5);
+        Car secondCar = new Car("dobi", 5);
+        Car thirdCar = new Car("kobi", 3);
+        Cars cars = new Cars(Arrays.asList(firstCar, secondCar, thirdCar));
+        GameSystem gameSystem = new GameSystem(cars, 0);
+
+        //when
+        List<String> winners = gameSystem.winners();
+
+        //then
+        assertThat(winners).contains(firstCar.name(), secondCar.name());
     }
 }

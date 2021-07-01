@@ -18,6 +18,10 @@ public class GameSystem {
         this(new Cars(carNames), tryNumber);
     }
 
+    public GameSystem(final Cars cars, final int tryNumber) {
+        this(cars, new TryNumber(tryNumber));
+    }
+
     public GameSystem(final Cars cars, final TryNumber tryNumber) {
         this.cars = cars;
         this.tryNumber = tryNumber;
@@ -40,5 +44,9 @@ public class GameSystem {
 
     public List<Car> cars() {
         return cars.list();
+    }
+
+    public List<String> winners() {
+        return cars.winnerNames(cars.maxPosition());
     }
 }
