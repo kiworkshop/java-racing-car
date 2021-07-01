@@ -40,7 +40,7 @@ public class CarsTest {
         Cars cars = new Cars(Arrays.asList(firstCar, secondCar, thirdCar));
 
         //when //then
-        assertThat(cars.maxPosition()).isEqualTo(maxPosition);
+        assertThat(cars.maxPosition()).isEqualTo(new Position(maxPosition));
     }
 
     @Test
