@@ -1,7 +1,8 @@
 package domain;
 
+import strategy.MoveStrategy;
+
 public class Car {
-    private static final int MOVE_NUMBER = 4;
     private static final int PER_MOVEMENT_RANGE = 1;
 
     private final Name name;
@@ -36,8 +37,8 @@ public class Car {
         return name.value();
     }
 
-    public void move(final int randomNumber) {
-        if (randomNumber >= MOVE_NUMBER) {
+    public void move(final MoveStrategy moveStrategy) {
+        if (moveStrategy.movable()) {
             position = position.plus(PER_MOVEMENT_RANGE);
         }
     }

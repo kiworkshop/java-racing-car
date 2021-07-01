@@ -45,7 +45,7 @@ public class GameSystemTest {
         GameSystem gameSystem = new GameSystem(carNames, tryNumber);
 
         //when
-        gameSystem.playEachRound();
+        gameSystem.playEachRound(() -> true);
 
         //then
         assertThat(gameSystem.on()).isFalse();
@@ -63,20 +63,6 @@ public class GameSystemTest {
 
         //then
         assertThat(cars.size()).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("0 ~ 9 사이의 난수를 반환한다.")
-    void generateRandomNumber() {
-        //given
-        int tryNumber = 1;
-        GameSystem gameSystem = new GameSystem(carNames, tryNumber);
-
-        //when //then
-        for (int i = 0; i < 100; i++) {
-            assertThat(gameSystem.generateRandomNumber()).isLessThanOrEqualTo(9);
-            assertThat(gameSystem.generateRandomNumber()).isGreaterThanOrEqualTo(0);
-        }
     }
 
     @Test

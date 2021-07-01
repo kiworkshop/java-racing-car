@@ -3,10 +3,16 @@ package controller;
 import domain.GameSystem;
 import domain.Names;
 import domain.TryNumber;
+import strategy.MoveStrategy;
 import view.InputView;
 import view.OutputView;
 
 public class GameController {
+    private final MoveStrategy moveStrategy;
+
+    public GameController(MoveStrategy moveStrategy) {
+        this.moveStrategy = moveStrategy;
+    }
 
     public void run() {
         GameSystem gameSystem = setUp();
@@ -16,15 +22,14 @@ public class GameController {
     private GameSystem setUp() {
         Names carNames = new Names(InputView.inputCarNames());
         TryNumber tryNumber = new TryNumber(InputView.inputTryNumber());
-        GameSystem gameSystem = new GameSystem(carNames, tryNumber);
-        return gameSystem;
+        return new GameSystem(carNames, tryNumber);
     }
 
     private void playGame(GameSystem gameSystem) {
         OutputView.printGameFlow();
 
         while (gameSystem.on()) {
-            gameSystem.playEachRound();
+            gameSystem.playEachRound(moveStrategy);
             OutputView.printEachRound(gameSystem.cars());
         }
 

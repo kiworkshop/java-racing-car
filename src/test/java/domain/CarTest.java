@@ -24,14 +24,14 @@ public class CarTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"4,1", "3, 0"})
-    @DisplayName("4 이상의 값을 인자로 받을 경우, 전진한다.")
-    void move(int randomNumber, int expected) {
+    @CsvSource(value = {"true, 1", "false, 0"})
+    @DisplayName("전진 전략을 인자로 받고 참일 경우, 전진한다.")
+    void move(boolean movable, int expected) {
         //given
         Car car = new Car("name");
 
         //when
-        car.move(randomNumber);
+        car.move(() -> movable);
 
         //then
         assertThat(car.position()).isEqualTo(expected);
