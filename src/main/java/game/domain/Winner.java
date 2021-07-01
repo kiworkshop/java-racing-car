@@ -9,7 +9,6 @@ import java.util.List;
 public class Winner {
 
     private static final int INITIAL_MAX_POSITION = 0;
-    private static final String COMMA = ", ";
 
     @Getter
     private final List<Car> winners = new ArrayList<>();
@@ -37,18 +36,5 @@ public class Winner {
             winners.add(candidate);
             maxPosition = candidate.getPosition();
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder winnerNames = new StringBuilder();
-        for (Car winner : winners) {
-            winnerNames.append(winner.getName()).append(COMMA);
-        }
-        return removeCommaAtTheEnd(winnerNames);
-    }
-
-    private String removeCommaAtTheEnd(StringBuilder winnerNames) {
-        return winnerNames.substring(0, winnerNames.length() - COMMA.length());
     }
 }

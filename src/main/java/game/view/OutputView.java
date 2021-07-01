@@ -10,6 +10,7 @@ public class OutputView {
     private static final int NAME_ALIGN_STANDARD = 5;
     private static final String POSITION_MARK = "-";
     private static final String COLON = ": ";
+    private static final String COMMA = ", ";
     private static final String INLINE = "\n";
 
     public void askCarNames() {
@@ -36,8 +37,15 @@ public class OutputView {
     }
 
     public void printWinners(WinnerDto winnerDto) {
-        System.out.print(winnerDto);    // TODO
+        StringBuilder winnerNames = new StringBuilder();
+        for (Car winner : winnerDto.getWinners()) {
+            winnerNames.append(winner.getName()).append(COMMA);
+        }
+        System.out.print(removeCommaAtTheEnd(winnerNames));
         System.out.println("(이)가 최종 우승했습니다.");
     }
 
+    private String removeCommaAtTheEnd(StringBuilder winnerNames) {
+        return winnerNames.substring(0, winnerNames.length() - COMMA.length());
+    }
 }
