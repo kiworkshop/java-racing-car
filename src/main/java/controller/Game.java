@@ -1,3 +1,14 @@
+package controller;
+
+import domain.Car;
+import domain.MovingStrategy;
+import domain.Race;
+import domain.RandomMovingStrategy;
+import utils.CarNameParser;
+import utils.MoveCountParser;
+import view.InputView;
+import view.OutputView;
+
 import java.util.ArrayList;
 import java.util.List;
 
