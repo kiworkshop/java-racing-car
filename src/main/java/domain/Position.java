@@ -1,5 +1,7 @@
 package domain;
 
+import exception.position.InvalidPositionException;
+
 import java.util.Objects;
 
 public class Position {
@@ -18,7 +20,7 @@ public class Position {
 
     private void validate(final int position) {
         if (position < START_POSITION) {
-            throw new IllegalArgumentException("위치 값은 0 이상이여야 합니다.");
+            throw new InvalidPositionException("위치 값은 0 이상이여야 합니다.");
         }
     }
 

@@ -1,10 +1,11 @@
 package domain;
 
+import exception.position.InvalidPositionException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PositionTest {
 
@@ -15,8 +16,8 @@ public class PositionTest {
         int negativePosition = -1;
 
         //when //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Position(negativePosition))
-                .withMessage("위치 값은 0 이상이여야 합니다.");
+        assertThatThrownBy(() -> new Position(negativePosition)).isInstanceOf(InvalidPositionException.class)
+                .hasMessage("위치 값은 0 이상이여야 합니다.");
     }
 
     @Test

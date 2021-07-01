@@ -1,12 +1,13 @@
 package domain;
 
+import exception.trynumber.InvalidTryNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TryNumberTest {
 
@@ -17,8 +18,8 @@ public class TryNumberTest {
         int tryNumber = -1;
 
         //when //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new TryNumber(tryNumber))
-                .withMessage("시도 횟수 값은 0 이상이여야 합니다.");
+        assertThatThrownBy(() -> new TryNumber(tryNumber)).isInstanceOf(InvalidTryNumberException.class)
+                .hasMessage("시도 횟수 값은 0 이상이여야 합니다.");
     }
 
     @ParameterizedTest

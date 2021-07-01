@@ -1,11 +1,12 @@
 package domain;
 
+import exception.name.InvalidNameException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NameTest {
 
@@ -14,8 +15,8 @@ public class NameTest {
     @DisplayName("null 또는 공백일 경우, 예외가 발생한다,")
     void validateNullOrEmpty(String nullOrEmpty) {
         //given //when //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Name(nullOrEmpty))
-                .withMessage("한 자리 이상의 이름을 입력해주세요.");
+        assertThatThrownBy(() -> new Name(nullOrEmpty)).isInstanceOf(InvalidNameException.class)
+                .hasMessage("한 자리 이상의 이름을 입력해주세요.");
     }
 
     @Test
@@ -25,7 +26,7 @@ public class NameTest {
         String overLengthName = "abcdef";
 
         //when //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Name(overLengthName))
-                .withMessage("이름은 5자 이하여야 합니다.");
+        assertThatThrownBy(() -> new Name(overLengthName)).isInstanceOf(InvalidNameException.class)
+                .hasMessage("이름은 5자 이하여야 합니다.");
     }
 }

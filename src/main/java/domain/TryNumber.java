@@ -1,5 +1,7 @@
 package domain;
 
+import exception.trynumber.InvalidTryNumberException;
+
 import java.util.Objects;
 
 public class TryNumber {
@@ -19,7 +21,7 @@ public class TryNumber {
 
     private void validate(int tryNumber) {
         if (tryNumber < MIN_TRY_NUMBER) {
-            throw new IllegalArgumentException("시도 횟수 값은 0 이상이여야 합니다.");
+            throw new InvalidTryNumberException("시도 횟수 값은 0 이상이여야 합니다.");
         }
     }
 
