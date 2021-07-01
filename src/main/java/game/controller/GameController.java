@@ -1,12 +1,14 @@
-package game;
+package game.controller;
 
+import game.MoveStrategy;
+import game.RandomMoveStrategy;
 import game.domain.Race;
 import game.view.View;
 import game.view.dto.OneRoundResultDto;
 import game.view.dto.UserInputDto;
 import game.view.dto.WinnerDto;
 
-public class Game {
+public class GameController {
 
     private static final MoveStrategy strategy = new RandomMoveStrategy();
 
