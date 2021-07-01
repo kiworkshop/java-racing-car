@@ -12,8 +12,15 @@ public class Cars {
 
     private final List<Car> cars;
 
-    public Cars(final String... carNames) {
-        this(Arrays.stream(carNames)
+    public Cars(final String... names) {
+        this(Arrays.stream(names)
+                .map(Car::new)
+                .collect(Collectors.toList()));
+    }
+
+    public Cars(final Names names) {
+        this(names.list()
+                .stream()
                 .map(Car::new)
                 .collect(Collectors.toList()));
     }
