@@ -1,7 +1,5 @@
 package domain;
 
-import static domain.Position.START_POSITION;
-
 public class Car {
     private static final int MOVE_NUMBER = 4;
     private static final int PER_MOVEMENT_RANGE = 1;
@@ -10,11 +8,11 @@ public class Car {
     private Position position;
 
     public Car(final String name) {
-        this(new Name(name), new Position(START_POSITION));
+        this(new Name(name), new Position());
     }
 
     public Car(final Name name) {
-        this(name, new Position(START_POSITION));
+        this(name, new Position());
     }
 
     public Car(final String name, final int position) {
@@ -40,7 +38,7 @@ public class Car {
 
     public void move(final int randomNumber) {
         if (randomNumber >= MOVE_NUMBER) {
-            this.position = new Position(position.value() + PER_MOVEMENT_RANGE);
+            position = position.plus(PER_MOVEMENT_RANGE);
         }
     }
 

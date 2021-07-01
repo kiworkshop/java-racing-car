@@ -7,6 +7,10 @@ public class Position {
 
     private final int position;
 
+    public Position() {
+        this(START_POSITION);
+    }
+
     public Position(final int position) {
         validate(position);
         this.position = position;
@@ -20,6 +24,10 @@ public class Position {
 
     public int value() {
         return position;
+    }
+
+    public Position plus(int movementRange) {
+        return new Position(position + movementRange);
     }
 
     @Override
