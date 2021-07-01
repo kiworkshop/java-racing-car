@@ -17,6 +17,7 @@ public class Car {
 
     public Car(final String name, final int position) {
         validateName(name);
+        validatePosition(position);
         this.name = name;
         this.position = position;
     }
@@ -24,6 +25,12 @@ public class Car {
     private void validateName(final String name) {
         validarteNullOrEmpty(name);
         validateNameLength(name);
+    }
+
+    private void validatePosition(int position) {
+        if (position < START_POSITION) {
+            throw new IllegalArgumentException("위치 값은 0 이상이여야 합니다.");
+        }
     }
 
     private void validateNameLength(final String name) {

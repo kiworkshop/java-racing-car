@@ -25,6 +25,18 @@ public class CarTest {
         assertThat(car.name()).isEqualTo(name);
     }
 
+    @Test
+    @DisplayName("자동차 객체 생서 시 중 위치 값이 음수일 경우, 예외가 발생한다.")
+    void validatePosition() {
+        //given
+        String carName = "name";
+        int negativePosition = -1;
+
+        //when //then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Car(carName, negativePosition))
+                .withMessage("위치 값은 0 이상이여야 합니다.");
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("null 또는 공백일 경우, 예외가 발생한다,")
