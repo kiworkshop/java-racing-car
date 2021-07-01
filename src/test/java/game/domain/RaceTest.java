@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RaceTest {
 
@@ -20,9 +21,22 @@ public class RaceTest {
     }
 
     @Test
-    void Given_CandidateAndRaceCount_When_runWithAlwaysMoveStrategy_Then_PositionOfEveryWinnerIsRaceCount() {
+    void Given_RaceCountSmallerThanOne_When_newRace_ThrowRuntimeException() {
         // given
-        int raceCount = 3;
+        int raceCount = 0;
+
+        // when, then
+        assertThatThrownBy(() -> Race.builder()
+                .carNames(carNames)
+                .raceCount(raceCount)
+                .build())
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void Given_CandidateAndRaceCount_When_runWithAlwaysMoveStrategy_Then_PositionOfEveryWinnerIsRaceCount() throws Exception {
+        // given
+        int raceCount = 5;
         Race race = Race.builder()
                 .carNames(carNames)
                 .raceCount(raceCount)

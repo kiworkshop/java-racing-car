@@ -66,7 +66,7 @@ class WinnerTest {
         assertThat(winner.getWinners().get(0).getPosition()).isEqualTo(WINNER_POSITION);
     }
 
-    private Candidate generateCandidateWithOneWinnerAndOneLoser() {
+    private Candidate generateCandidateWithOneWinnerAndOneLoser() throws Exception {
         List<String> carNames = new ArrayList<>();
         carNames.add(WINNER_NAME);
         carNames.add(LOSER_NAME);
@@ -77,7 +77,7 @@ class WinnerTest {
         return candidate;
     }
 
-    private Candidate generateCandidateWithMultipleWinners() {
+    private Candidate generateCandidateWithMultipleWinners() throws Exception {
         List<String> carNames = new ArrayList<>();
         carNames.add(WINNER_NAME);
         carNames.add(WINNER_NAME);
@@ -89,7 +89,7 @@ class WinnerTest {
         return candidate;
     }
 
-    private Candidate generateCandidateWithOneWinner() {
+    private Candidate generateCandidateWithOneWinner() throws Exception {
         List<String> carNames = new ArrayList<>();
         carNames.add(WINNER_NAME);
         Candidate candidate = Candidate.builder()

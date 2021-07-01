@@ -2,6 +2,7 @@ package game.domain;
 
 import game.AlwaysMoveStrategy;
 import game.AlwaysNotMoveStrategy;
+import game.RandomStrategy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +47,7 @@ public class CandidateTest {
         Candidate candidate = Candidate.builder()
                 .carNames(carNames)
                 .build();
-        AlwaysMoveStrategy strategy = new AlwaysMoveStrategy();
+        RandomStrategy strategy = new AlwaysMoveStrategy();
 
         // when
         candidate.runOneRoundWith(strategy);
@@ -63,7 +64,7 @@ public class CandidateTest {
         Candidate candidate = Candidate.builder()
                 .carNames(carNames)
                 .build();
-        AlwaysNotMoveStrategy strategy = new AlwaysNotMoveStrategy();
+        RandomStrategy strategy = new AlwaysNotMoveStrategy();
 
         // when
         candidate.runOneRoundWith(strategy);

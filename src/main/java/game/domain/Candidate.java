@@ -14,11 +14,11 @@ public class Candidate {
     private final List<Car> cars;
 
     @Builder
-    public Candidate(List<String> carNames) {
+    public Candidate(List<String> carNames) throws Exception {
         this.cars = Collections.unmodifiableList(generateCarList(carNames));
     }
 
-    private List<Car> generateCarList(List<String> carNames) {
+    private List<Car> generateCarList(List<String> carNames) throws Exception {
         List<Car> cars = new ArrayList<>();
         for (String carName : carNames) {
             cars.add(Car.builder()
