@@ -1,7 +1,7 @@
 package game.view;
 
-import game.domain.Candidate;
-import game.domain.Winner;
+import game.view.dto.OneRoundResultDto;
+import game.view.dto.WinnerDto;
 
 public class OutputView {
 
@@ -17,13 +17,12 @@ public class OutputView {
         System.out.println("\n실행 결과");
     }
 
-    public void printOneRoundResult(Candidate candidate) {
-        System.out.println(candidate);
-        System.out.println();
+    public void printOneRoundResult(OneRoundResultDto oneRoundResultDto) {
+        System.out.println();   // TODO
     }
 
-    public void printWinners(Winner winner) {
-        System.out.print(winner);
+    public void printWinners(WinnerDto winnerDto) {
+        System.out.print(winnerDto);    // TODO
         System.out.println("(이)가 최종 우승했습니다.");
     }
 

@@ -13,30 +13,29 @@ public class Winner {
 
     @Getter
     private final List<Car> winners = new ArrayList<>();
-    private int maxPosition;
+    private int maxPosition = INITIAL_MAX_POSITION;
 
     @Builder
-    public Winner(Candidate candidate) {
-        this.maxPosition = INITIAL_MAX_POSITION;
-        findWinners(candidate);
+    public Winner(List<Car> candidates) {
+        findWinners(candidates);
     }
 
-    private void findWinners(Candidate candidate) {
-        for (Car car : candidate.getCars()) {
-            updateWinner(car);
+    private void findWinners(List<Car> candidates) {
+        for (Car candidate : candidates) {
+            updateWinner(candidate);
         }
     }
 
-    private void updateWinner(Car car) {
-        if (car.isPositionEqualTo(maxPosition)) {
-            winners.add(car);
+    private void updateWinner(Car candidate) {
+        if (candidate.isPositionEqualTo(maxPosition)) {
+            winners.add(candidate);
             return;
         }
 
-        if (car.isPositionGreaterThan(maxPosition)) {
+        if (candidate.isPositionGreaterThan(maxPosition)) {
             winners.clear();
-            winners.add(car);
-            maxPosition = car.getPosition();
+            winners.add(candidate);
+            maxPosition = candidate.getPosition();
         }
     }
 

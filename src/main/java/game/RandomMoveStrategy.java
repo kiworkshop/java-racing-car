@@ -2,7 +2,7 @@ package game;
 
 import util.RandomUtil;
 
-public class RandomStrategyImpl implements RandomStrategy {
+public class RandomMoveStrategy implements MoveStrategy {
 
     private static final int STANDARD_VALUE = 4;
 

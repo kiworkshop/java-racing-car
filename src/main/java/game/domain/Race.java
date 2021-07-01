@@ -1,30 +1,44 @@
 package game.domain;
 
-import game.RandomStrategy;
+import game.MoveStrategy;
 import lombok.Builder;
-import game.view.View;
+import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Race {
 
+    private static final int INITIAL_ROUND_COUNT = 0;
     private static final int RACE_COUNT_LOWER_BOUND = 1;
 
-    private final Candidate candidate;
-    private final int raceCount;
+    @Getter
+    private final List<Car> cars;
+    private final int targetRoundCount;
+
+    private int currentRoundCount = INITIAL_ROUND_COUNT;
 
     @Builder
-    public Race(List<String> carNames, int raceCount) throws Exception {
-        validate(raceCount);
+    public Race(List<String> carNames, int targetRoundCount) throws Exception {
+        validate(targetRoundCount);
 
-        candidate = Candidate.builder()
-                .carNames(carNames)
-                .build();
-        this.raceCount = raceCount;
+        cars = Collections.unmodifiableList(generateCarList(carNames));
+        this.targetRoundCount = targetRoundCount;
     }
 
-    private void validate(int raceCount) throws Exception {
-        if (isRaceCountOutOfBound(raceCount)) {
+    private List<Car> generateCarList(List<String> carNames) throws Exception {
+        List<Car> cars = new ArrayList<>();
+        for (String carName : carNames) {
+            cars.add(Car.builder()
+                    .name(carName)
+                    .build());
+        }
+        return cars;
+    }
+
+    private void validate(int targetRaceCount) throws Exception {
+        if (isRaceCountOutOfBound(targetRaceCount)) {
             throw new RuntimeException("[ERROR] 시도할 횟수는 1회 이상으로 입력하세요");
         }
     }
@@ -33,16 +47,24 @@ public class Race {
         return raceCount < RACE_COUNT_LOWER_BOUND;
     }
 
-    public void runWith(RandomStrategy randomStrategy) {
-        for (int i = 0; i < raceCount; i++) {
-            candidate.runOneRoundWith(randomStrategy);
-            View.printOneRoundResult(candidate);
+    public boolean isRunning() {
+        return currentRoundCount < targetRoundCount;
+    }
+
+    public void runWith(MoveStrategy strategy) {
+        currentRoundCount++;
+        runOneRoundWith(strategy);
+    }
+
+    private void runOneRoundWith(MoveStrategy strategy) {
+        for (Car car : cars) {
+            car.moveByFlag(strategy.isMove());
         }
     }
 
     public Winner findWinners() {
         return Winner.builder()
-                .candidate(candidate)
+                .candidates(cars)
                 .build();
     }
 }

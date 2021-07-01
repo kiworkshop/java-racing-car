@@ -1,6 +1,6 @@
 package game;
 
-public class AlwaysMoveStrategy implements RandomStrategy {
+public class AlwaysMoveStrategy implements MoveStrategy {
     @Override
     public boolean isMove() {
         return true;

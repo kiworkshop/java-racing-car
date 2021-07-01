@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
-public class ViewDto {
+public class UserInputDto {
     private final List<String> carNames;
-    private final int raceCount;
+    private final int roundCount;
 }
