@@ -16,4 +16,8 @@ public class GameSystem {
         this.cars = cars;
         this.tryNumber = tryNumber;
     }
+
+    public boolean on() {
+        return tryNumber.isLeft();
+    }
 }
