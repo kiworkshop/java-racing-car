@@ -1,8 +1,12 @@
 package domain;
 
 import java.util.List;
+import java.util.Random;
 
 public class GameSystem {
+    private static final Random random = new Random();
+    private static final int MAX_RANDOM_BOUND = 10;
+
     private final Cars cars;
     private TryNumber tryNumber;
 
@@ -23,11 +27,15 @@ public class GameSystem {
         return tryNumber.isLeft();
     }
 
-    public void playEachRound(int randomNumber) {
+    public void playEachRound() {
         cars.list()
-                .forEach(car -> car.move(randomNumber));
+                .forEach(car -> car.move(generateRandomNumber()));
 
         tryNumber = tryNumber.reduce();
+    }
+
+    public int generateRandomNumber() {
+        return random.nextInt(MAX_RANDOM_BOUND);
     }
 
     public List<Car> cars() {

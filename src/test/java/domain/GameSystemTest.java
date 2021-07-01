@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,12 +40,11 @@ public class GameSystemTest {
     @DisplayName("남은 시도 횟수를 차감하여 경주를 한다.")
     void playEachRound() {
         //given
-        int randomNumber = new Random().nextInt(10);
         int tryNumber = 1;
         GameSystem gameSystem = new GameSystem(carNames, tryNumber);
 
         //when
-        gameSystem.playEachRound(randomNumber);
+        gameSystem.playEachRound();
 
         //then
         assertThat(gameSystem.on()).isFalse();
@@ -64,5 +62,19 @@ public class GameSystemTest {
 
         //then
         assertThat(cars.size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("0 ~ 9 사이의 난수를 반환한다.")
+    void generateRandomNumber() {
+        //given
+        int tryNumber = 1;
+        GameSystem gameSystem = new GameSystem(carNames, tryNumber);
+
+        //when //then
+        for (int i = 0; i < 100; i++) {
+            assertThat(gameSystem.generateRandomNumber()).isLessThanOrEqualTo(9);
+            assertThat(gameSystem.generateRandomNumber()).isGreaterThanOrEqualTo(0);
+        }
     }
 }
