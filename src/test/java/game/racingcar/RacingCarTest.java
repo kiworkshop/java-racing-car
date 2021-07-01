@@ -31,10 +31,10 @@ public class RacingCarTest {
     @DisplayName("입력받은 자동차 이름은 문자열 5자 이하이다")
     void input_car_name_length_validation() {
         //given
-        String input = "자동차1, 자동차2 자동차3, 잘못된_자동차_이름";
+        String input = "잘못된_자동차_이름";
 
         //when
-        boolean isValid = Car.isValidCarName(Arrays.asList(input.split(",")));
+        boolean isValid = Car.isValidCarName(input);
 
         //then
         assertThat(isValid).isFalse();
@@ -48,7 +48,7 @@ public class RacingCarTest {
         String input = "";
 
         //when
-        boolean isValid = Car.isValidCarName(Arrays.asList(input.split(",")));
+        boolean isValid = Car.isValidCarName(input);
 
         //then
         assertThat(isValid).isFalse();

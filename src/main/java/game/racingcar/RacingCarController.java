@@ -20,11 +20,9 @@ public class RacingCarController {
 
         Race race = new Race(gameCount, Car.initCarNames(carNames));
 
-        int tryCount = 0;
-        while(race.isRunning(tryCount)) {
+        while(race.isRunning()) {
             OutputView.printCars(race.getCars());
             race.racing();
-            tryCount++;
         }
         OutputView.printWinners(race.getWinners());
     }

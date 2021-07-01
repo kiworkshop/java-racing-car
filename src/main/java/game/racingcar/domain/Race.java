@@ -10,9 +10,11 @@ public class Race {
 
     private final int gameCount;
     private final List<Car> cars;
+    private int tryCount;
 
     public Race(int gameCount, List<Car> cars) {
         this.gameCount = gameCount;
+        this.tryCount = gameCount;
         this.cars = cars;
     }
 
@@ -20,13 +22,15 @@ public class Race {
         try {
             int gameCount = Integer.parseInt(inputCount);
             return gameCount <= MAX_GAME_COUNT;
+
         } catch (IllegalArgumentException e) {
             return false;
         }
     }
 
-    public boolean isRunning(int tryCount) {
-        return gameCount > tryCount;
+    public boolean isRunning() {
+        this.tryCount--;
+        return tryCount >= 0;
     }
 
     public void racing() {
