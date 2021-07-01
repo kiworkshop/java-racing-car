@@ -4,6 +4,7 @@ import game.racingcar.domain.Car;
 import game.racingcar.domain.CarRacingService;
 import game.racingcar.domain.Race;
 import game.racingcar.view.InputView;
+import game.racingcar.view.OutputView;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -130,6 +131,7 @@ public class CarRacingTests {
 
         //then
         assertThat(winners).isEqualTo(Arrays.asList("CCC", "DDD"));
+        OutputView.printWinners(winners);
     }
 
 }
