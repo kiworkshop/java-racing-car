@@ -33,25 +33,27 @@ public class CarsTest {
     @DisplayName("자동차의 최대 위치 값을 반환한다.")
     void maxPosition() {
         //given
-        Car firstCar = new Car("pobi", 4);
+        int maxPosition = 4;
+        Car firstCar = new Car("pobi", maxPosition);
         Car secondCar = new Car("dobi", 3);
         Car thirdCar = new Car("kobi", 2);
         Cars cars = new Cars(Arrays.asList(firstCar, secondCar, thirdCar));
 
         //when //then
-        assertThat(cars.maxPosition()).isEqualTo(4);
+        assertThat(cars.maxPosition()).isEqualTo(maxPosition);
     }
 
     @Test
     @DisplayName("최대 위치값을 인자로 받아 가지는 자동차들의 이름을 반환한다.")
     void winnerNames() {
         //given
-        Car firstCar = new Car("pobi", 4);
-        Car secondCar = new Car("dobi", 4);
-        Car thirdCar = new Car("kobi", 2);
+        Position maxPosition = new Position(4);
+        Car firstCar = new Car("pobi", maxPosition);
+        Car secondCar = new Car("dobi", maxPosition);
+        Car thirdCar = new Car("kobi", 3);
         Cars cars = new Cars(Arrays.asList(firstCar, secondCar, thirdCar));
 
         //when //then
-        assertThat(cars.winnerNames(4)).contains("pobi", "dobi");
+        assertThat(cars.winnerNames(maxPosition)).contains("pobi", "dobi");
     }
 }

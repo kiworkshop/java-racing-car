@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static domain.Car.START_POSITION;
+import static domain.Position.START_POSITION;
 
 public class Cars {
     private static final int MIN_CARS_SIZE = 2;
@@ -33,14 +33,14 @@ public class Cars {
         return cars.size();
     }
 
-    public int maxPosition() {
-        return cars.stream()
+    public Position maxPosition() {
+        return new Position(cars.stream()
                 .mapToInt(Car::position)
                 .max()
-                .orElse(START_POSITION);
+                .orElse(START_POSITION));
     }
 
-    public List<String> winnerNames(final int maxPosition) {
+    public List<String> winnerNames(final Position maxPosition) {
         return cars.stream()
                 .filter(car -> car.isSamePosition(maxPosition))
                 .map(Car::name)
