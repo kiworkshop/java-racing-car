@@ -2,6 +2,8 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -68,5 +70,21 @@ public class CarsTest {
 
         //when //then
         assertThat(cars.list()).contains(firstCar, secondCar, thirdCar);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"true, 1", "false, 0"})
+    @DisplayName("모든 자동차들이 전진을 시도한다.")
+    void move(boolean movable, int expected) {
+        //given
+        Cars cars = new Cars("pobi", "nana", "ppo");
+
+        //when
+        cars.move(() -> movable);
+
+        //then
+        for (Car car : cars.list()) {
+            assertThat(car.position()).isEqualTo(expected);
+        }
     }
 }

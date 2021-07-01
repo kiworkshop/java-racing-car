@@ -30,9 +30,7 @@ public class GameSystem {
     }
 
     public void playEachRound(MoveStrategy moveStrategy) {
-        cars.list()
-                .forEach(car -> car.move(moveStrategy));
-
+        cars.move(moveStrategy);
         tryNumber = tryNumber.reduce();
     }
 

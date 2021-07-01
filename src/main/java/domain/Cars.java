@@ -1,5 +1,7 @@
 package domain;
 
+import strategy.MoveStrategy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,5 +54,9 @@ public class Cars {
                 .filter(car -> car.isSamePosition(maxPosition))
                 .map(Car::name)
                 .collect(Collectors.toList());
+    }
+
+    public void move(MoveStrategy moveStrategy) {
+        cars.forEach(car -> car.move(moveStrategy));
     }
 }
