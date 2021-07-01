@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,5 +50,19 @@ public class GameSystemTest {
 
         //then
         assertThat(gameSystem.on()).isFalse();
+    }
+
+    @Test
+    @DisplayName("모든 자동차 리스트를 반환한다.")
+    void cars() {
+        //given
+        int tryNumber = 1;
+        GameSystem gameSystem = new GameSystem(carNames, tryNumber);
+
+        //when
+        List<Car> cars = gameSystem.cars();
+
+        //then
+        assertThat(cars.size()).isEqualTo(3);
     }
 }

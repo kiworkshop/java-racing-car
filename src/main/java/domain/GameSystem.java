@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class GameSystem {
     private final Cars cars;
     private TryNumber tryNumber;
@@ -26,5 +28,9 @@ public class GameSystem {
                 .forEach(car -> car.move(randomNumber));
 
         tryNumber = tryNumber.reduce();
+    }
+
+    public List<Car> cars() {
+        return cars.list();
     }
 }
