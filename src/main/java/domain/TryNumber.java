@@ -19,4 +19,8 @@ public class TryNumber {
             throw new IllegalArgumentException("시도 횟수 값은 0 이상이여야 합니다.");
         }
     }
+
+    public boolean isLeft() {
+        return tryNumber > MIN_TRY_NUMBER;
+    }
 }
