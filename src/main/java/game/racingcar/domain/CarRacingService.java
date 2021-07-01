@@ -1,4 +1,7 @@
-package game.racingcar;
+package game.racingcar.domain;
+
+import game.racingcar.domain.Car;
+import game.racingcar.domain.Race;
 
 import java.util.*;
 import java.util.stream.Collectors;

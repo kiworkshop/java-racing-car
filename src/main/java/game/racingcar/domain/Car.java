@@ -1,4 +1,4 @@
-package game.racingcar;
+package game.racingcar.domain;
 
 public class Car {
     public static final int MAX_CAR_NAME_COUNT = 5;

@@ -1,5 +1,8 @@
 package game.racingcar;
 
+import game.racingcar.domain.Car;
+import game.racingcar.domain.CarRacingService;
+import game.racingcar.domain.Race;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
