@@ -31,4 +31,17 @@ public class TryNumberTest {
         //when //then
         assertThat(tryNumber.isLeft()).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("현재 시도 횟수를 차감한 후 남은 시도 횟수를 반환한다.")
+    void reduce() {
+        //given
+        TryNumber tryNumber = new TryNumber(2);
+
+        //when
+        TryNumber reducedTryNumber = tryNumber.reduce();
+
+        //then
+        assertThat(reducedTryNumber).isEqualTo(new TryNumber(1));
+    }
 }
