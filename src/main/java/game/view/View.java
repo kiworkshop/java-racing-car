@@ -44,4 +44,8 @@ public class View {
     public static void printWinners(WinnerDto winnerDto) {
         outputView.printWinners(winnerDto);
     }
+
+    public static void printError(Exception e) {
+        outputView.printError(e.getMessage());
+    }
 }

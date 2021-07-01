@@ -21,4 +21,4 @@
 - [x] rename `RandomStrategy` → `MoveStrategy`
 - [x] `race`와 `round` 명칭 혼용 이슈 해결
 - [x] 도메인의 `toString()`에 담긴 로직을 View로 이동하기
-- [ ] Exception 메세지를 View와 분리하기
+- [x] Exception 메세지를 View와 분리하기

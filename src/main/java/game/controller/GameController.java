@@ -16,7 +16,7 @@ public class GameController {
         try {
             start();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            View.printError(e);
         }
     }
 

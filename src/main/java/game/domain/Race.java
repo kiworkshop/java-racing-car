@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static game.exception.ExceptionMessage.ROUND_COUNT_OUT_OF_BOUND;
+
 public class Race {
 
     private static final int INITIAL_ROUND_COUNT = 0;
@@ -37,13 +39,13 @@ public class Race {
         return cars;
     }
 
-    private void validate(int targetRaceCount) throws Exception {
+    private void validate(int targetRaceCount) {
         if (isRaceCountOutOfBound(targetRaceCount)) {
-            throw new RuntimeException("[ERROR] 시도할 횟수는 1회 이상으로 입력하세요");
+            throw new RuntimeException(ROUND_COUNT_OUT_OF_BOUND.getMessage());
         }
     }
 
-    private boolean isRaceCountOutOfBound(int raceCount) throws RuntimeException {
+    private boolean isRaceCountOutOfBound(int raceCount) {
         return raceCount < RACE_COUNT_LOWER_BOUND;
     }
 

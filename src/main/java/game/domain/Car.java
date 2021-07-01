@@ -3,6 +3,8 @@ package game.domain;
 import lombok.Builder;
 import lombok.Getter;
 
+import static game.exception.ExceptionMessage.CAR_NAME_LENGTH_OUT_OF_BOUND;
+
 @Getter
 public class Car {
 
@@ -23,7 +25,7 @@ public class Car {
 
     private void validate(String name) throws Exception {
         if (isLengthOutOfBound(name.length())) {
-            throw new RuntimeException("[ERROR] 이름은 1글자 이상 5글자 이하로 입력하세요");
+            throw new RuntimeException(CAR_NAME_LENGTH_OUT_OF_BOUND.getMessage());
         }
     }
 

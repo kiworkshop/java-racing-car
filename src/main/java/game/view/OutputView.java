@@ -12,6 +12,7 @@ public class OutputView {
     private static final String COLON = ": ";
     private static final String COMMA = ", ";
     private static final String INLINE = "\n";
+    private static final String ERROR_HEADER = "[ERROR] ";
 
     public void askCarNames() {
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)");
@@ -47,5 +48,9 @@ public class OutputView {
 
     private String removeCommaAtTheEnd(StringBuilder winnerNames) {
         return winnerNames.substring(0, winnerNames.length() - COMMA.length());
+    }
+
+    public void printError(String message) {
+        System.out.println(ERROR_HEADER + message);
     }
 }

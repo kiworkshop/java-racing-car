@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static game.exception.ExceptionMessage.EMPTY_INPUT_FOR_CAR_NAME;
+
 public class CarNameParser {
 
     private static final String CAR_NAME_DELIMITER = ",";
 
     public static List<String> parseCarNames(String inputLine) throws RuntimeException {
         if (isNullOrEmpty(inputLine)) {
-            throw new RuntimeException("[ERROR] 이름을 입력하세요");
+            throw new RuntimeException(EMPTY_INPUT_FOR_CAR_NAME.getMessage());
         }
 
         return Arrays.stream(inputLine.split(CAR_NAME_DELIMITER))
