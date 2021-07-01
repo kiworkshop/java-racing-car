@@ -8,10 +8,14 @@ import java.util.List;
 public class OutputView {
     private static final String RACE_RESULT_DELIMITER = "-";
 
-    public static void printRace(Car car) {
-        String raceResult = String.join("", Collections.nCopies(car.getScore(), RACE_RESULT_DELIMITER));
-        String printFormat = String.format("%s : %s", car.getName(), raceResult);
-        System.out.println(printFormat);
+    public static void printCars(List<Car> cars) {
+        for (Car car : cars) {
+            String raceResult = String.join("", Collections.nCopies(car.getScore(), RACE_RESULT_DELIMITER));
+            String printFormat = String.format("%s : %s", car.getName(), raceResult);
+            System.out.println(printFormat);
+        }
+        System.out.println();
+
     }
 
     public static void printWinners(List<String> winners) {

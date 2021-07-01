@@ -1,7 +1,5 @@
 package game.racingcar.domain;
 
-import game.racingcar.view.OutputView;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,18 +16,25 @@ public class Race {
         this.cars = cars;
     }
 
-    public void racing(Race race) {
-        for (int i = 0; i < gameCount; i++) {
-            race.proceed();
-            System.out.println();
+    public static boolean isValidGameCount(String inputCount) {
+        try {
+            int gameCount = Integer.parseInt(inputCount);
+            return gameCount <= MAX_GAME_COUNT;
+        } catch (IllegalArgumentException e) {
+            return false;
         }
     }
 
-    public void proceed() {
-        for (Car car : this.cars) {
-            OutputView.printRace(car);
-            raceOnce(car);
-        }
+    public boolean isRunning(int tryCount) {
+        return gameCount > tryCount;
+    }
+
+    public void racing() {
+        this.cars.forEach(this::raceOnce);
+    }
+
+    public static boolean isForward(int randomNumber) {
+        return randomNumber > STOP_POINT;
     }
 
     private void raceOnce(Car car) {
@@ -39,8 +44,11 @@ public class Race {
         }
     }
 
-    public static boolean isForward(int randomNumber) {
-        return randomNumber > STOP_POINT;
+    private int getTopScore(List<Car> cars) {
+        return cars.stream()
+                .mapToInt(Car::getScore)
+                .max()
+                .getAsInt();
     }
 
     public List<String> getWinners() {
@@ -52,14 +60,11 @@ public class Race {
                 .collect(Collectors.toList());
     }
 
-    private int getTopScore(List<Car> cars) {
-        return cars.stream()
-                .mapToInt(Car::getScore)
-                .max()
-                .getAsInt();
-    }
-
     public int getGameCount() {
         return gameCount;
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 }
