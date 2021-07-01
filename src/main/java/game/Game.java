@@ -1,8 +1,8 @@
 package game;
 
 import game.domain.Race;
-import view.View;
-import view.dto.ViewDto;
+import game.view.View;
+import game.view.dto.ViewDto;
 
 public class Game {
 

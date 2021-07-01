@@ -2,7 +2,7 @@ package game.domain;
 
 import game.RandomStrategy;
 import lombok.Builder;
-import view.View;
+import game.view.View;
 
 import java.util.List;
 

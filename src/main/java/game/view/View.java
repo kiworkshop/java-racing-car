@@ -1,10 +1,10 @@
-package view;
+package game.view;
 
 import game.domain.Candidate;
 import game.domain.Winner;
-import game.util.CarNameParser;
-import game.util.RaceCountParser;
-import view.dto.ViewDto;
+import util.CarNameParser;
+import util.RaceCountParser;
+import game.view.dto.ViewDto;
 
 import java.util.List;
 

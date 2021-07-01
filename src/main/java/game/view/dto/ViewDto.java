@@ -1,4 +1,4 @@
-package view.dto;
+package game.view.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

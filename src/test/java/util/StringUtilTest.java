@@ -1,6 +1,7 @@
-package game.util;
+package util;
 
 import org.junit.jupiter.api.Test;
+import util.StringUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

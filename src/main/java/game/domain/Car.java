@@ -1,6 +1,6 @@
 package game.domain;
 
-import game.util.StringUtil;
+import util.StringUtil;
 import lombok.Builder;
 import lombok.Getter;
 

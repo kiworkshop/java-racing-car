@@ -1,4 +1,4 @@
-package view;
+package game.view;
 
 import game.domain.Candidate;
 import game.domain.Winner;

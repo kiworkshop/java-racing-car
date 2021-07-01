@@ -1,6 +1,6 @@
 package game;
 
-import game.util.RandomUtil;
+import util.RandomUtil;
 
 public class RandomStrategyImpl implements RandomStrategy {
 
