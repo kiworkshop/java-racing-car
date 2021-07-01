@@ -19,17 +19,15 @@ public class Car {
         return carName.length() == 0 || carName.length() > MAX_CAR_NAME_COUNT;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
-
     public void addScore(int score) {
         this.score += score;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public int getScore() {
+        return score;
+    }
 }

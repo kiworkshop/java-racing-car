@@ -1,26 +1,18 @@
 package game.racingcar;
 
 import game.racingcar.domain.Car;
-import game.racingcar.domain.CarRacingService;
 import game.racingcar.domain.Race;
 import game.racingcar.view.InputView;
 import game.racingcar.view.OutputView;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CarRacingTests {
-
-    static CarRacingService service;
-
-    @BeforeAll
-    public static void beforeAll() {
-        service = new CarRacingService();
-    }
 
     @Test
     @DisplayName("자동차 이름을 입력받아 자동차 이름 목록을 만든다")
@@ -106,13 +98,16 @@ public class CarRacingTests {
     void game_count_iterate() {
         //given
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        List<String> carNames = Arrays.asList(input.split(","));
+        List<String> carNames = InputView.getCarNames(input);
+        List<Car> carList = carNames.stream()
+                                    .map(name -> new Car(name, Car.INIT_SCORE))
+                                    .collect(Collectors.toList());
 
         int gameCount = 5;
-        Race race = service.initRace(carNames, gameCount);
+        Race race = new Race(gameCount, carList);
 
         //when
-        service.racing(race);
+        race.racing(race);
 
         //then
         assertThat(race.getGameCount()).isEqualTo(gameCount);
@@ -127,7 +122,7 @@ public class CarRacingTests {
         Race race = new Race(5, Arrays.asList(temp));
 
         //when
-        List<String> winners = service.getWinners(race.getCars());
+        List<String> winners = race.getWinners();
 
         //then
         assertThat(winners).isEqualTo(Arrays.asList("CCC", "DDD"));
