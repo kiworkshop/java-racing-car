@@ -2,7 +2,7 @@ package controller;
 
 import domain.Car;
 import domain.MovingStrategy;
-import domain.Race;
+import domain.RacingGame;
 import domain.RandomMovingStrategy;
 import utils.CarNameParser;
 import utils.MoveCountParser;
@@ -26,23 +26,23 @@ public class Game {
 
     public static void start() {
 
-        List<String> carNames = outputView.askCarNameAndGetCarNames(carNameParser, inputView);
-        int repeatCount = outputView.askRepeatCountandGetCounts(moveCountParser,inputView);
-        outputView.printRaceStart();
-
-        List<Car> cars = new ArrayList<>();
-        for (String carname : carNames) {
-            cars.add(new Car(carname));
-        }
-
-        Race race = new Race();
-        for (int i = 0; i < repeatCount; i++) {
-            cars = race.runOnce(cars,strategy);
-            outputView.printOneRoundResult(cars);
-        }
-
-        List<Car> winners = race.getWinners(cars);
-        outputView.printWinners(winners);
+//        List<String> carNames = outputView.askCarNameAndGetCarNames(carNameParser, inputView);
+//        int repeatCount = outputView.askRepeatCountandGetCounts(moveCountParser,inputView);
+//        outputView.printRaceStart();
+//
+//        List<Car> cars = new ArrayList<>();
+//        for (String carname : carNames) {
+//            cars.add(new Car(carname));
+//        }
+//
+//        RacingGame racingGame = new RacingGame();
+//        for (int i = 0; i < repeatCount; i++) {
+//            cars = racingGame.runOnce(cars,strategy);
+//            outputView.printOneRoundResult(cars);
+//        }
+//
+//        List<Car> winners = racingGame.getWinners();
+//        outputView.printWinners(winners);
     }
 
 }
