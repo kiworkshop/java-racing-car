@@ -1,21 +1,17 @@
+package view;
+
+import domain.Car;
+import utils.CarNameParser;
+import utils.MoveCountParser;
+
 import java.util.List;
 
 public class OutputView {
-    public List<String> askCarNameAndGetCarNames(CarNameParser carnameParser, InputView inputView) {
-        System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)");
-        return carnameParser.splitCarNames(inputView.getInput());
-    }
-
-    public int askRepeatCountandGetCounts(MoveCountParser moveCountParser, InputView inputView) {
-        System.out.println("시도할 횟수는 몇 회인가요?");
-        return moveCountParser.parseCount(inputView.getInput());
-    }
 
     public void printRaceStart() {
         System.out.println("실행 결과");
     }
-
-    public void printOneRoundResult(List<Car> cars) {
+    public static void printCars(List<Car> cars) {
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
             String totalGo = new String(new char[car.getPosition()]).replace("\0", "-");
@@ -24,7 +20,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printWinners(List<Car> winners) {
+    public static void printWinners(List<Car> winners) {
         StringBuilder resultNames = new StringBuilder();
         for (int i = 0; i < winners.size(); i++) {
             resultNames.append(winners.get(i).getName() + ", ");
