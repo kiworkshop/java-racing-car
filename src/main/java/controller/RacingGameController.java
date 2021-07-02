@@ -9,10 +9,8 @@ import view.OutputView;
 import java.util.List;
 
 public class RacingGameController {
-    public static void main(String[] args) {
-        run();
-    }
-    public static void run() {
+
+    public void run() {
         List<String> carNames = InputView.getCarNames();
         int tryNo = InputView.getTryNo();
         MovingStrategy randomMovingStrategy = new RandomMovingStrategy();
