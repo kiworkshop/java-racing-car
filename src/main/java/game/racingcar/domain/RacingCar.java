@@ -12,7 +12,6 @@ public class RacingCar {
         this.position = 0;
     }
 
-    // 메서드 시그니처
     public void moveBy(MoveStrategy moveStrategy) {
         if (moveStrategy.canMove()) {
             position++;
