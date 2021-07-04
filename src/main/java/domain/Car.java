@@ -3,7 +3,7 @@ package domain;
 import strategy.MoveStrategy;
 
 public class Car {
-    private static final int PER_MOVEMENT_RANGE = 1;
+    private static final int PER_MOVEMENT_DISTANCE = 1;
 
     private final Name name;
     private Position position;
@@ -39,7 +39,7 @@ public class Car {
 
     public void move(final MoveStrategy moveStrategy) {
         if (moveStrategy.movable()) {
-            position = position.plus(PER_MOVEMENT_RANGE);
+            position = position.plus(PER_MOVEMENT_DISTANCE);
         }
     }
 
