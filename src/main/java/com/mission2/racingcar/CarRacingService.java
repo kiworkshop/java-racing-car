@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
-    public static final int MAX_CAR_COUNT = 5;
+    public static final int MAX_CAR_NAME_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
     public static final int INIT_SCORE = 1;
     public static final String CAR_NAME_DELIMITER = ",";
@@ -23,7 +23,7 @@ public class CarRacingService {
     }
 
     public boolean checkCarNamesNotOverMaxCarCount(List<String> carNames) {
-        long count = carNames.stream().filter(car -> car.length() > MAX_CAR_COUNT).count();
+        long count = carNames.stream().filter(car -> car.length() > MAX_CAR_NAME_COUNT).count();
 
         return count <= 0;
     }
@@ -49,7 +49,7 @@ public class CarRacingService {
         List<Car> carList = carNames.stream()
                 .map(carName -> new Car(carName, INIT_SCORE))
                 .collect(Collectors.toList());
-        
+
         return new Race
                 .Builder(gameCount, carList)
                 .build();
