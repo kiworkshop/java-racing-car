@@ -28,7 +28,7 @@ public class CarRacingService {
         return count <= 0;
     }
 
-    public List<String> splitCarNamesByCommaToArrayList(String input) {
+    public List<String> splitCarNamesByComma(String input) {
         return Arrays.stream(input.split(CAR_NAME_DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new));

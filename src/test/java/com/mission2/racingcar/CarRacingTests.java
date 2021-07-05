@@ -26,7 +26,7 @@ public class CarRacingTests {
 
         //when
         String input = "AAA,BBB,CCC,DDD,EEE"; // Scanner 입력
-        List<String> carNames = service.splitCarNamesByCommaToArrayList(input);
+        List<String> carNames = service.splitCarNamesByComma(input);
 
         //then
         assertThat(carNames.size()).isEqualTo(5);
