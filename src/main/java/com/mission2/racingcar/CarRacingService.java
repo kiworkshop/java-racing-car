@@ -65,7 +65,7 @@ public class CarRacingService {
     private void racing(Race race) {
         for (Car car : race.getCars()) {
             Random random = new Random();
-            car.addScore(car.stopOrGoByRandomNumber(random.nextInt(10)));
+            car.raceByRandomNumber(random.nextInt(10));
             System.out.println(car);
         }
     }

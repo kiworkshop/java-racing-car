@@ -31,6 +31,10 @@ public class Car {
         return (randomNumber < FORWARD_STANDARD) ? 0 : 1;
     }
 
+    public void raceByRandomNumber(int randomNumber) {
+        addScore(stopOrGoByRandomNumber(randomNumber));
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
