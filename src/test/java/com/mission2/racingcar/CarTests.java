@@ -22,10 +22,10 @@ class CarTests {
         int stopValues = 3;
 
         //when
-        int stop = car.stopOrGoByRandomNumber(stopValues);
+        int stopIsZero = car.stopOrGoByRandomNumber(stopValues);
 
         //then
-        assertThat(stop).isZero();
+        assertThat(stopIsZero).isZero();
     }
 
     @Test
@@ -35,10 +35,10 @@ class CarTests {
         int forwardValues = 4;
 
         //when
-        int forward = car.stopOrGoByRandomNumber(forwardValues);
+        int goForwardIsOne = car.stopOrGoByRandomNumber(forwardValues);
 
         //then
-        assertThat(forward).isEqualTo(1);
+        assertThat(goForwardIsOne).isEqualTo(1);
     }
 
 }

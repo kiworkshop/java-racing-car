@@ -38,10 +38,10 @@ class CarRacingServiceTests {
         String input = "AAA,BBBBBB,CCC,DDD,EEE"; // Scanner 입력
 
         //when
-        boolean checkCarNames = service.checkCarNamesNotOverMaxCarCount(Arrays.asList(input.split(",")));
+        boolean carNamesNotOverMaxCarCount = service.checkCarNamesNotOverMaxCarCount(Arrays.asList(input.split(",")));
 
         //then
-        assertThat(checkCarNames).isFalse();
+        assertThat(carNamesNotOverMaxCarCount).isFalse();
     }
 
     @Test
