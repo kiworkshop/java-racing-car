@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RaceTests {
+class RaceTests {
 
     @Test
     @DisplayName("종료시 우승자를 출력한다")

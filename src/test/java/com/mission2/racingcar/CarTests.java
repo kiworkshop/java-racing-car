@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CarTests {
+class CarTests {
 
     Car car;
 
     @BeforeEach
-    public void beforeEach() {
+    void beforeEach() {
         car = new Car("TestCar", 0);
     }
 

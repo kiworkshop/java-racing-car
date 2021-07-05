@@ -9,12 +9,12 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CarRacingServiceTests {
+class CarRacingServiceTests {
 
     CarRacingService service;
 
     @BeforeEach
-    public void beforeEach() {
+    void beforeEach() {
         service = new CarRacingService();
     }
 
