@@ -31,12 +31,16 @@ public class Race {
     }
 
     public static class Builder {
-        private final int gameCount;
+        private int gameCount;
         private final List<Car> cars;
 
-        public Builder(int gameCount, List<Car> cars) {
-            this.gameCount = gameCount;
+        public Builder(List<Car> cars) {
             this.cars = cars;
+        }
+
+        public Builder gameCount(int gameCount) {
+            this.gameCount = gameCount;
+            return this;
         }
 
         public Race build() {

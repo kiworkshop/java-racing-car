@@ -51,7 +51,8 @@ public class CarRacingService {
                 .collect(Collectors.toList());
 
         return new Race
-                .Builder(gameCount, carList)
+                .Builder(carList)
+                .gameCount(gameCount)
                 .build();
     }
 
