@@ -46,10 +46,12 @@ public class CarRacingService {
     }
 
     public Race initRace(int gameCount, List<String> carNames) {
+        List<Car> carList = carNames.stream()
+                .map(carName -> new Car(carName, INIT_SCORE))
+                .collect(Collectors.toList());
+        
         return new Race
-                .Builder(gameCount, carNames.stream()
-                                    .map(carName -> new Car(carName, INIT_SCORE))
-                                    .collect(Collectors.toList()))
+                .Builder(gameCount, carList)
                 .build();
     }
 
