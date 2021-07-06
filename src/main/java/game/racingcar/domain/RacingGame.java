@@ -1,6 +1,5 @@
 package game.racingcar.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,20 +14,15 @@ public class RacingGame {
         this.cars = cars;
     }
 
-    public RacingGame(GameCount gameCount, Car car) {
-        this(gameCount, Arrays.asList(car));
-    }
-
     public boolean isRunning() {
         return gameCount.value() > 0;
     }
 
-    public List<Car> raceOnce() {
+    public void raceOnce() {
         gameCount.reduce();
         if (moveStrategy.canMove()) {
             cars.forEach(car -> car.move(moveStrategy));
         }
-        return cars;
     }
 
     private int topScore(List<Car> cars) {

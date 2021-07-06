@@ -17,8 +17,9 @@ public class RacingGameTest {
     @DisplayName("")
     void is_running() {
         //given
+        Car[] temp = {new Car("BLUE"), new Car("RED")};
         GameCount gameCount = new GameCount(5);
-        RacingGame racingGame = new RacingGame(gameCount, new Car("BLUE"));
+        RacingGame racingGame = new RacingGame(gameCount, Arrays.asList(temp));
 
         //when
         IntStream.range(0, gameCount.value())
