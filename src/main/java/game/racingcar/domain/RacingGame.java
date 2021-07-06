@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RacingGame {
-    private final RandomMoveStrategy moveStrategy = new RandomMoveStrategy();
+    private static final RandomMoveStrategy moveStrategy = new RandomMoveStrategy();
 
     private final GameCount gameCount;
     private final List<Car> cars;
