@@ -7,14 +7,14 @@ public class Car {
     private static final int INIT_SCORE = 1;
 
     private final String name;
-    private int score;
+    private int position;
 
-    public Car(String name, int score) {
+    public Car(String name, int position) {
         if (validateCarName(name)) {
             throw new IllegalArgumentException("자동차 이름은 1 ~ 5자 사이입니다.");
         }
         this.name = name;
-        this.score = score;
+        this.position = position;
     }
 
     public Car(String name) {
@@ -25,16 +25,18 @@ public class Car {
         return name.length() == 0 || name.length() > MAX_CAR_NAME_COUNT;
     }
 
-    public void addScore(int score) {
-        this.score += score;
+    public void move(MoveStrategy moveStrategy) {
+        if (moveStrategy.canMove()) {
+            position += 1;
+        }
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public int getScore() {
-        return score;
+    public int position() {
+        return position;
     }
 
     @Override
@@ -42,11 +44,11 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return score == car.score && Objects.equals(name, car.name);
+        return position == car.position && Objects.equals(name, car.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, score);
+        return Objects.hash(name, position);
     }
 }

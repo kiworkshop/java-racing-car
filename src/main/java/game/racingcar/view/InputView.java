@@ -14,12 +14,12 @@ public class InputView {
     }
 
     public static List<String> getCarNames() {
-        String input = getUserInput(INIT_GAME_COUNT_MESSAGE);
+        String input = getUserInput(INIT_CAR_NAMES_MESSAGE);
         return inputCarNamesToList(input);
     }
 
     public static String getGameCount() {
-        return getUserInput(INIT_CAR_NAMES_MESSAGE);
+        return getUserInput(INIT_GAME_COUNT_MESSAGE);
     }
 
     public static List<String> inputCarNamesToList(String input) {

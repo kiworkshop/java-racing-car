@@ -10,8 +10,8 @@ public class OutputView {
 
     public static void printCars(List<Car> cars) {
         for (Car car : cars) {
-            String raceResult = String.join("", Collections.nCopies(car.getScore(), RACE_RESULT_DELIMITER));
-            String printFormat = String.format("%s : %s", car.getName(), raceResult);
+            String raceResult = String.join("", Collections.nCopies(car.position(), RACE_RESULT_DELIMITER));
+            String printFormat = String.format("%s : %s", car.name(), raceResult);
             System.out.println(printFormat);
         }
         System.out.println();

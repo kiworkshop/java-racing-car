@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static game.racingcar.view.InputView.inputCarNamesToList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CarNameTest {
+public class CarTest {
     @Test
     @DisplayName("자동차 이름을 입력받아 자동차 객체를 생성한다")
     void create() {
@@ -38,13 +38,13 @@ public class CarNameTest {
 
         //then
         assertThat(cars.size()).isEqualTo(5);
-        assertThat(cars.get(2).getName()).isEqualTo("GREEN");
+        assertThat(cars.get(2).name()).isEqualTo("GREEN");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "YELLOW"})
     @DisplayName("자동차 이름이 공백이거나 5글자 초과이면 예외가 발생한다")
-    void input_car_name_length_validation(String invalidCarName) {
+    void input_car_name_validation(String invalidCarName) {
         //given //when //then
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Car(invalidCarName)).withMessage("자동차 이름은 1 ~ 5자 사이입니다.");

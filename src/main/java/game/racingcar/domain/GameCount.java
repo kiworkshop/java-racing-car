@@ -16,6 +16,10 @@ public class GameCount {
         this(Integer.parseInt(gameCount));
     }
 
+    public void reduce() {
+        this.gameCount--;
+    }
+
     public int value() {
         return gameCount;
     }
