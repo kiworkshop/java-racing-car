@@ -8,6 +8,9 @@ import java.util.List;
 public class OutputView {
     private static final String RACE_RESULT_DELIMITER = "-";
 
+    private OutputView() {
+    }
+
     public static void printCars(List<Car> cars) {
         for (Car car : cars) {
             String raceResult = String.join("", Collections.nCopies(car.position(), RACE_RESULT_DELIMITER));
@@ -15,7 +18,6 @@ public class OutputView {
             System.out.println(printFormat);
         }
         System.out.println();
-
     }
 
     public static void printWinners(List<String> winners) {

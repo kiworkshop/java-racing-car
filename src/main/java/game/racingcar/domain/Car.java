@@ -3,7 +3,7 @@ package game.racingcar.domain;
 import java.util.Objects;
 
 public class Car {
-    public static final int MAX_CAR_NAME_COUNT = 5;
+    private static final int MAX_CAR_NAME_COUNT = 5;
     private static final int INIT_SCORE = 1;
 
     private final String name;
