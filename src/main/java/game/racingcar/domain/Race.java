@@ -4,33 +4,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Race {
-    public static final int MAX_GAME_COUNT = 10;
     private static final int FORWARD_SCORE = 1;
     private static final int STOP_POINT = 3;
 
-    private final int gameCount;
+    private GameCount gameCount;
     private final List<Car> cars;
-    private int tryCount;
 
-    public Race(int gameCount, List<Car> cars) {
+    public Race(GameCount gameCount, List<Car> cars) {
         this.gameCount = gameCount;
-        this.tryCount = gameCount;
         this.cars = cars;
     }
 
-    public static boolean isValidGameCount(String inputCount) {
-        try {
-            int gameCount = Integer.parseInt(inputCount);
-            return gameCount <= MAX_GAME_COUNT;
-
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-    }
-
     public boolean isRunning() {
-        this.tryCount--;
-        return tryCount >= 0;
+        return new GameCount(gameCount.value() - 1).value() == 0;
     }
 
     public void racing() {
@@ -62,13 +48,5 @@ public class Race {
                 .filter(car -> car.getScore() == topScore)
                 .map(Car::getName)
                 .collect(Collectors.toList());
-    }
-
-    public int getGameCount() {
-        return gameCount;
-    }
-
-    public List<Car> getCars() {
-        return cars;
     }
 }

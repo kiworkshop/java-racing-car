@@ -1,8 +1,6 @@
 package game.racingcar.domain;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Car {
     public static final int MAX_CAR_NAME_COUNT = 5;
