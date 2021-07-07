@@ -32,13 +32,18 @@ public class Car {
         }
     }
 
-
     public String name() {
         return name;
     }
 
     public int position() {
         return position;
+    }
+
+    public void advance(int randomNumber) {
+        if (randomNumber >= 4) {
+            position += 1;
+        }
     }
 
 }
