@@ -62,7 +62,6 @@ class CarRacingServiceTests {
         List<String> carNames = Arrays.asList(input.split(","));
         int gameCount = 5;
         Race race = service.initRace(gameCount, carNames);
-        service.proceedGame(race);
 
         //when
 

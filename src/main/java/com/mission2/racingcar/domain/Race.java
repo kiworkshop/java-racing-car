@@ -2,6 +2,7 @@ package com.mission2.racingcar.domain;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 public class Race {
     private int gameCount;
@@ -16,10 +17,6 @@ public class Race {
         return this.gameCount;
     }
 
-    public List<Car> getCars() {
-        return this.cars;
-    }
-
     public String[] getWinners() {
 
         int max = cars.stream()
@@ -28,6 +25,21 @@ public class Race {
                 .orElseThrow(NoSuchElementException::new);
 
         return cars.stream().filter(car -> car.getScore() == max).map(Car::getName).toArray(String[]::new);
+    }
+
+    public void proceedGame() {
+        for (int i = 0; i < gameCount; i++) {
+            System.out.println();
+            racing();
+        }
+    }
+
+    private void racing() {
+        for (Car car : cars) {
+            Random random = new Random();
+            car.raceByRandomNumber(random.nextInt(10));
+            System.out.println(car);
+        }
     }
 
     public static class Builder {

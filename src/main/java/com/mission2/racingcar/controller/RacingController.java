@@ -18,7 +18,7 @@ public class RacingController {
         String inputGameCount = view.getUserInput("시도할 회수는 몇회인가요?");
         int gameCount = ensureGameCountCondition(service, inputGameCount);
 
-        service.game(carNames, gameCount);
+        view.printOutput(carNames, gameCount);
     }
 
     private static int ensureGameCountCondition(CarRacingService service, String inputGameCount) {
