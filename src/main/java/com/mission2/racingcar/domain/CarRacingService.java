@@ -1,4 +1,4 @@
-package com.mission2.racingcar;
+package com.mission2.racingcar.domain;
 
 import java.util.*;
 import java.util.regex.Pattern;

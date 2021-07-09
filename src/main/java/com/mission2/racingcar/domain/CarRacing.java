@@ -1,4 +1,4 @@
-package com.mission2.racingcar;
+package com.mission2.racingcar.domain;
 
 import java.util.List;
 import java.util.Scanner;

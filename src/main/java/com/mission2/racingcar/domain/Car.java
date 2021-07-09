@@ -1,4 +1,4 @@
-package com.mission2.racingcar;
+package com.mission2.racingcar.domain;
 
 public class Car {
     public static final int FORWARD_STANDARD = 4;
