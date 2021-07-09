@@ -15,7 +15,7 @@ public class Car {
         this.name = name;
     }
 
-    public void addScore(int score) {
+    private void addScore(int score) {
         this.score += score;
     }
 
