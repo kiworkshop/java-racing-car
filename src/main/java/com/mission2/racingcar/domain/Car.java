@@ -1,18 +1,15 @@
 package com.mission2.racingcar.domain;
 
 public class Car {
-    public static final int FORWARD_STANDARD = 4;
 
     private String name;
     private int score;
+    MoveStrategy moveStrategy;
 
-    public Car(String name, int score) {
+    public Car(String name, int score, MoveStrategy moveStrategy) {
         this.name = name;
         this.score = score;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.moveStrategy = moveStrategy;
     }
 
     private void addScore(int score) {
@@ -28,7 +25,7 @@ public class Car {
     }
 
     public int stopOrGoByRandomNumber(int randomNumber) {
-        return (randomNumber < FORWARD_STANDARD) ? 0 : 1;
+        return (moveStrategy.forward(randomNumber)) ? 1 : 0;
     }
 
     public void raceByRandomNumber(int randomNumber) {

@@ -14,7 +14,7 @@ public class CarRacingService {
         System.out.println("실행결과");
 
         carNames.stream()
-                .map(name -> new Car(name, INIT_SCORE))
+                .map(name -> new Car(name, INIT_SCORE, new RandomMoveStrategy()))
                 .forEach(System.out::println);
 
         Race race = initRace(gameCount, carNames);
@@ -47,7 +47,7 @@ public class CarRacingService {
 
     public Race initRace(int gameCount, List<String> carNames) {
         List<Car> carList = carNames.stream()
-                .map(carName -> new Car(carName, INIT_SCORE))
+                .map(carName -> new Car(carName, INIT_SCORE, new RandomMoveStrategy()))
                 .collect(Collectors.toList());
 
         return new Race
