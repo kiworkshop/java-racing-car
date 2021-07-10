@@ -1,7 +1,9 @@
 package game.racingcar.service;
 
 import game.racingcar.domain.RacingCar;
-import game.racingcar.domain.RandomMoveStrategy;
+import game.racingcar.domain.result.RacingCarRoundResult;
+import game.racingcar.domain.result.RacingGameResult;
+import game.racingcar.domain.result.RacingGameRoundResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,31 +18,34 @@ public class RacingCarGame {
         this.trialNumbers = trialNumbers;
     }
 
-    public void race() {
-        System.out.println("실행 결과\n");
+    public RacingGameResult race() {
+        RacingGameResult racingGameResult = new RacingGameResult();
         for (int trial = 0; trial < trialNumbers; trial++) {
-            raceOneRound();
+            RacingGameRoundResult roundResult = raceOneRound();
+            racingGameResult.addRoundResult(roundResult);
         }
+
+        return racingGameResult;
     }
 
-    private void raceOneRound() {
+    private RacingGameRoundResult raceOneRound() {
+        RacingGameRoundResult roundResult = new RacingGameRoundResult();
         for (RacingCar racingCar : racingCars) {
-            RandomMoveStrategy randomMoveStrategy = new RandomMoveStrategy();
-            racingCar.moveBy(randomMoveStrategy);
+            racingCar.move();
 
-            System.out.println(racingCar);
+            RacingCarRoundResult carRoundResult = new RacingCarRoundResult(racingCar);
+            roundResult.addCarRoundResult(carRoundResult);
         }
-        System.out.println();
+
+        return roundResult;
     }
 
-    public void printWinner() {
+    public List<String> findWinnerNames() {
         List<RacingCar> winners = findWinners();
-        List<String> winnerNames = winners.stream()
+
+        return winners.stream()
                 .map(RacingCar::getName)
                 .collect(Collectors.toList());
-
-        String joinedWinnerNames = String.join(", ", winnerNames);
-        System.out.printf("%s 이(가) 최종 우승했습니다.%n", joinedWinnerNames);
     }
 
     public List<RacingCar> findWinners() {
