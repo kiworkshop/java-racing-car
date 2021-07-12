@@ -12,9 +12,9 @@ public class InputView {
     private static CarNameParser carNameParser = new CarNameParser();
     private static MoveCountParser moveCountParser = new MoveCountParser();
 
-    public static List<String> getCarNames() {
+    public static String getCarNames() {
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분)");
-        return carNameParser.splitCarNames(scanner.nextLine());
+        return scanner.nextLine();
     }
 
     public static int getTryNo() {

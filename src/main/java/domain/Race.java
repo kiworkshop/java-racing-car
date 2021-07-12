@@ -3,25 +3,32 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RacingGame {
+public class Race {
 
     private int maxPosition = 0;
-    private List<Car> cars = new ArrayList<>();
+    private Cars cars;
     private List<Car> winners = new ArrayList<>();
     private int tryNo;
 
-    public RacingGame(List<String> carNames, int tryNo) {
+    public Race(Cars cars, int tryNo) {
         this.tryNo = tryNo;
-        for (String carname : carNames) {
-            this.cars.add(new Car(carname));
-        }
-    }
-    public void setCars(List<Car> cars) {
         this.cars = cars;
     }
 
-    public List<Car> getCars() {
+    public Cars getCars() {
         return this.cars;
+    }
+
+    public void run() {
+        for (int i=0; i<this.tryNo; i++){
+            raceOneRound();
+        }
+    }
+    private void raceOneRound() {
+
+        for (Car car : this.cars.getCars()){
+            car.move();
+        }
     }
 
     public List<Car> getWinners() {
@@ -30,7 +37,7 @@ public class RacingGame {
     }
 
     private void setWinners() {
-        for (Car car : this.cars) {
+        for (Car car : this.cars.getCars()) {
             updateWinner(car, winners);
         }
     }
@@ -46,11 +53,7 @@ public class RacingGame {
         }
     }
 
-    public void racebyMovingStrategy() {
-        for (Car car : this.cars){
-            car.move();
-        }
-    }
+
 
     public boolean isRunning() {
         tryNo--;

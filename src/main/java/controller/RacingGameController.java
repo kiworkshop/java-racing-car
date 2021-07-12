@@ -1,7 +1,8 @@
 package controller;
 
+import domain.Cars;
 import domain.MovingStrategy;
-import domain.RacingGame;
+import domain.Race;
 import domain.RandomMovingStrategy;
 import view.InputView;
 import view.OutputView;
@@ -11,15 +12,13 @@ import java.util.List;
 public class RacingGameController {
 
     public void run() {
-        List<String> carNames = InputView.getCarNames();
+        String carNames = InputView.getCarNames();
         int tryNo = InputView.getTryNo();
-        MovingStrategy randomMovingStrategy = new RandomMovingStrategy();
+        Cars cars = new Cars(carNames);
 
-        RacingGame racingGame = new RacingGame(carNames, tryNo);
-        while(racingGame.isRunning()) {
-            racingGame.racebyMovingStrategy();
-            OutputView.printCars(racingGame.getCars());
-        }
-        OutputView.printWinners(racingGame.getWinners());
+        Race race = new Race(cars, tryNo);
+        race.run();
+        //OutputView.printCars(race.getCars());
+        OutputView.printWinners(race.getWinners());
     }
 }
