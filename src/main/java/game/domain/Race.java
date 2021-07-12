@@ -1,6 +1,5 @@
 package game.domain;
 
-import game.MoveStrategy;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,9 +19,9 @@ public class Race {
         return roundCount.isMoreRoundLeft();
     }
 
-    public void runWith(MoveStrategy strategy) {
+    public void run() {
         roundCount.increment();
-        cars.runOneRoundWith(strategy);
+        cars.runOneRound();
     }
 
     public Winner findWinners() {

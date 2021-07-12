@@ -1,5 +1,7 @@
 package game.domain;
 
+import game.AlwaysMoveStrategy;
+import game.AlwaysNotMoveStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,44 +45,32 @@ public class CarTest {
     }
 
     @Test
-    void Given_NewCar_When_moveForward_Then_PositionIsOne() throws Exception {
+    void Given_AlwaysMoveCar_When_move_Then_PositionOfCarIsMoveCount() throws Exception {
         // given
-        Car car = Car.builder()
-                .name("car")
-                .build();
+        Car car = new Car("car", new AlwaysMoveStrategy());
+        int moveCount = 1000;
 
         // when
-        car.moveForward();
+        for (int i = 0; i < moveCount; i++) {
+            car.move();
+        }
 
         // then
-        assertThat(car.getPosition()).isEqualTo(1);
+        assertThat(car.getPosition()).isEqualTo(moveCount);
     }
 
     @Test
-    void Given_NewCar_When_Move_Then_PositionOfCarIsOne() throws Exception {
+    void Given_AlwaysNotMoveCar_When_move_Then_PositionOfCarIsZero() throws Exception {
         // given
-        Car car = Car.builder()
-                .name("car")
-                .build();
+        Car car = new Car("car", new AlwaysNotMoveStrategy());
+        int moveCount = 1000;
 
         // when
-        car.moveByFlag(true);
+        for (int i = 0; i < moveCount; i++) {
+            car.move();
+        }
 
         // then
-        assertThat(car.getPosition()).isOne();
-    }
-
-    @Test
-    void Given_NewCar_When_NotMove_Then_PositionOfCarIsZero() throws Exception {
-        // given
-        Car car = Car.builder()
-                .name("car")
-                .build();
-
-        // when
-        car.moveByFlag(false);
-
-        // then
-        assertThat(car.getPosition()).isZero();
+        assertThat(car.getPosition()).isEqualTo(0);
     }
 }

@@ -94,7 +94,7 @@ class WinnerTest {
 
     private void moveCarToPosition(Car car, int position) {
         for (int i = 0; i < position; i++) {
-            car.moveForward();
+            car.move();
         }
     }
 }

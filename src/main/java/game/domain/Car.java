@@ -1,5 +1,7 @@
 package game.domain;
 
+import game.MoveStrategy;
+import game.RandomMoveStrategy;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,6 +16,7 @@ public class Car {
 
     private final String name;
     private int position;
+    private MoveStrategy moveStrategy = new RandomMoveStrategy();
 
     @Builder
     public Car(String name) throws IllegalArgumentException {
@@ -21,6 +24,11 @@ public class Car {
 
         this.name = name;
         this.position = INITIAL_POSITION;
+    }
+
+    public Car(String name, MoveStrategy moveStrategy) {
+        this(name);
+        this.moveStrategy = moveStrategy;
     }
 
     private void validate(String name) throws IllegalArgumentException {
@@ -41,13 +49,13 @@ public class Car {
         return this.position == maxPosition;
     }
 
-    public void moveByFlag(boolean isMove) {
-        if (isMove) {
+    public void move() {
+        if (moveStrategy.isMove()) {
             moveForward();
         }
     }
 
-    public void moveForward() {
+    private void moveForward() {
         this.position++;
     }
 }

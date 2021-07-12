@@ -50,9 +50,9 @@ public class Cars {
         return cars;
     }
 
-    public void runOneRoundWith(MoveStrategy strategy) {
+    public void runOneRound() {
         for (Car car : cars) {
-            car.moveByFlag(strategy.isMove());
+            car.move();
         }
     }
 }
