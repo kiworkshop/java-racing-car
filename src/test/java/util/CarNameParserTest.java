@@ -39,23 +39,23 @@ public class CarNameParserTest {
     }
 
     @Test
-    void Given_NullInputLine_When_parseCarNames_Then_RuntimeExceptionThrown() {
+    void Given_NullInputLine_When_parseCarNames_Then_ThrowIllegalArgumentException() {
         // given
         String inputLine = null;
 
         // when, then
         assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void Given_EmptyInputLine_When_parseCarNames_Then_RuntimeExceptionThrown() {
+    void Given_EmptyInputLine_When_parseCarNames_Then_ThrowIllegalArgumentException() {
         // given
         String inputLine = "";
 
         // when, then
         assertThatThrownBy(() -> CarNameParser.parseCarNames(inputLine))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

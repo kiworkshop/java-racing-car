@@ -29,7 +29,7 @@ public class RaceTest {
     }
 
     @Test
-    void Given_RoundCountSmallerThanOne_When_newRace_ThrowRuntimeException() {
+    void Given_RoundCountSmallerThanOne_When_newRace_ThrowIllegalArgumentException() {
         // given
         int roundCount = 0;
 
@@ -38,7 +38,7 @@ public class RaceTest {
                 .carNames(carNames)
                 .targetRoundCount(roundCount)
                 .build())
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

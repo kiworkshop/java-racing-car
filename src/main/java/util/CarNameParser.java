@@ -11,9 +11,9 @@ public class CarNameParser {
 
     private static final String CAR_NAME_DELIMITER = ",";
 
-    public static List<String> parseCarNames(String inputLine) throws RuntimeException {
+    public static List<String> parseCarNames(String inputLine) throws IllegalArgumentException {
         if (isNullOrEmpty(inputLine)) {
-            throw new RuntimeException(EMPTY_INPUT_FOR_CAR_NAME.getMessage());
+            throw new IllegalArgumentException(EMPTY_INPUT_FOR_CAR_NAME.getMessage());
         }
 
         return Arrays.stream(inputLine.split(CAR_NAME_DELIMITER))

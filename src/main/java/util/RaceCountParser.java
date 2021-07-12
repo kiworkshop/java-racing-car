@@ -8,9 +8,9 @@ public class RaceCountParser {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    public static int parseRaceCount(String inputLine) throws RuntimeException {
+    public static int parseRaceCount(String inputLine) throws IllegalArgumentException {
         if (!Pattern.matches(NUMBER_REGEX, inputLine)) {
-            throw new RuntimeException(NONE_INTEGER_INPUT_FOR_ROUND_COUNT.getMessage());
+            throw new IllegalArgumentException(NONE_INTEGER_INPUT_FOR_ROUND_COUNT.getMessage());
         }
 
         return Integer.parseInt(inputLine);

@@ -16,16 +16,16 @@ public class Car {
     private int position;
 
     @Builder
-    public Car(String name) throws Exception {
+    public Car(String name) throws IllegalArgumentException {
         validate(name);
 
         this.name = name;
         this.position = INITIAL_POSITION;
     }
 
-    private void validate(String name) throws Exception {
+    private void validate(String name) throws IllegalArgumentException {
         if (isLengthOutOfBound(name.length())) {
-            throw new RuntimeException(CAR_NAME_LENGTH_OUT_OF_BOUND.getMessage());
+            throw new IllegalArgumentException(CAR_NAME_LENGTH_OUT_OF_BOUND.getMessage());
         }
     }
 

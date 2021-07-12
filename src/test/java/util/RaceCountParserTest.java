@@ -45,24 +45,24 @@ public class RaceCountParserTest {
     }
 
     @Test
-    void Given_InputLineWithNoneInteger_When_parseCount_Then_RuntimeExceptionThrown() {
+    void Given_InputLineWithNoneInteger_When_parseCount_Then_ThrowIllegalArgumentException() {
         // given
         String inputLine = "가";
 
         //when then
         assertThatThrownBy(() ->
                 RaceCountParser.parseRaceCount(inputLine))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void Given_InputLineWithNegativeInteger_When_parseCount_Then_RuntimeExceptionThrown() {
+    void Given_InputLineWithNegativeInteger_When_parseCount_Then_ThrowIllegalArgumentException() {
         // given
         String inputLine = "-1";
 
         //when then
         assertThatThrownBy(() ->
                 RaceCountParser.parseRaceCount(inputLine))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -22,14 +22,14 @@ public class Race {
     private int currentRoundCount = INITIAL_ROUND_COUNT;
 
     @Builder
-    public Race(List<String> carNames, int targetRoundCount) throws Exception {
+    public Race(List<String> carNames, int targetRoundCount) throws IllegalArgumentException {
         validate(targetRoundCount);
 
         cars = Collections.unmodifiableList(generateCarList(carNames));
         this.targetRoundCount = targetRoundCount;
     }
 
-    private List<Car> generateCarList(List<String> carNames) throws Exception {
+    private List<Car> generateCarList(List<String> carNames) throws IllegalArgumentException {
         List<Car> cars = new ArrayList<>();
         for (String carName : carNames) {
             cars.add(Car.builder()
@@ -41,7 +41,7 @@ public class Race {
 
     private void validate(int targetRaceCount) {
         if (isRaceCountOutOfBound(targetRaceCount)) {
-            throw new RuntimeException(ROUND_COUNT_OUT_OF_BOUND.getMessage());
+            throw new IllegalArgumentException(ROUND_COUNT_OUT_OF_BOUND.getMessage());
         }
     }
 

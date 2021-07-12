@@ -23,23 +23,23 @@ public class CarTest {
     }
 
     @Test
-    void Given_CarNameWithLengthLongerThanLimit_When_newCar_Then_ThrowRuntimeException() {
+    void Given_CarNameWithLengthLongerThanLimit_When_newCar_Then_ThrowIllegalArgumentException() {
         // given
         String name = "123456";
 
         // when, then
         assertThatThrownBy(() -> Car.builder().name(name).build())
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void Given_CarNameWithLengthZero_When_newCar_Then_ThrowRuntimeException() {
+    void Given_CarNameWithLengthZero_When_newCar_Then_ThrowIllegalArgumentException() {
         // given
         String name = "";
 
         // when, then
         assertThatThrownBy(() -> Car.builder().name(name).build())
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
