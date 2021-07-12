@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RacingGameTest {
 
-
     @Test
     void 차_리스트를_받아서_우승자_찾기() {
         // given
@@ -66,65 +65,29 @@ public class RacingGameTest {
     }
 
     @Test
-    void 레이스_한라운드_실행하면_차가_전진전략이_참이면_전진한다() {
+    void 차가_확률만큼_전진한다() {
         // given
         List<String> carNames = new ArrayList<>();
         carNames.add("car1");
         carNames.add("car2");
         carNames.add("car3");
-        Car car1 = new Car("car1", 0);
-        Car car2 = new Car("car2", 0);
-        Car car3 = new Car("car3", 0);
+        Car car1 = new Car("car1", () -> false);
+        Car car2 = new Car("car2", () -> true);
+        Car car3 = new Car("car3", () -> false);
         List<Car> cars = new ArrayList<>();
         cars.add(car1);
         cars.add(car2);
         cars.add(car3);
         int tryNo = 1;
+
         RacingGame racingGame = new RacingGame(carNames, tryNo);
         racingGame.setCars(cars);
         // when
-        racingGame.racebyMovingStrategy(new MovingStrategy() {
-            @Override
-            public boolean strategy() {
-                return true;
-            }
-        });
-
-        // then
-        assertThat(racingGame.getCars().get(0).getPosition()).isEqualTo(1);
-        assertThat(racingGame.getCars().get(1).getPosition()).isEqualTo(1);
-        assertThat(racingGame.getCars().get(2).getPosition()).isEqualTo(1);
-    }
-
-    @Test
-    void 레이스_한라운드_실행하면_차가_전진전략이_거짓이면_전진하지_않는다() {
-        // given
-        List<String> carNames = new ArrayList<>();
-        carNames.add("car1");
-        carNames.add("car2");
-        carNames.add("car3");
-        Car car1 = new Car("car1", 0);
-        Car car2 = new Car("car2", 0);
-        Car car3 = new Car("car3", 0);
-        List<Car> cars = new ArrayList<>();
-        cars.add(car1);
-        cars.add(car2);
-        cars.add(car3);
-        int tryNo = 1;
-        MovingStrategy strategy = new MovingStrategy() {
-            @Override
-            public boolean strategy() {
-                return false;
-            }
-        };
-        RacingGame racingGame = new RacingGame(carNames, tryNo);
-        racingGame.setCars(cars);
-        // when
-        racingGame.racebyMovingStrategy(strategy);
+        racingGame.racebyMovingStrategy();
 
         // then
         assertThat(racingGame.getCars().get(0).getPosition()).isEqualTo(0);
-        assertThat(racingGame.getCars().get(1).getPosition()).isEqualTo(0);
+        assertThat(racingGame.getCars().get(1).getPosition()).isEqualTo(1);
         assertThat(racingGame.getCars().get(2).getPosition()).isEqualTo(0);
     }
 
@@ -136,18 +99,13 @@ public class RacingGameTest {
         carNames.add("car2");
         carNames.add("car3");
         List<Car> cars = new ArrayList<>();
-        cars.add(new Car("winner"));
+        cars.add(new Car("winner", ()-> true));
         int tryNo = 1;
-        MovingStrategy strategy = new MovingStrategy() {
-            @Override
-            public boolean strategy() {
-                return true;
-            }
-        };
+
         RacingGame racingGame = new RacingGame(carNames, tryNo);
         racingGame.setCars(cars);
         // when
-        racingGame.racebyMovingStrategy(strategy);
+        racingGame.racebyMovingStrategy();
 
         // then
         assertThat(racingGame.getWinners().size()).isEqualTo(1);

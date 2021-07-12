@@ -17,7 +17,7 @@ public class RacingGameController {
 
         RacingGame racingGame = new RacingGame(carNames, tryNo);
         while(racingGame.isRunning()) {
-            racingGame.racebyMovingStrategy(randomMovingStrategy);
+            racingGame.racebyMovingStrategy();
             OutputView.printCars(racingGame.getCars());
         }
         OutputView.printWinners(racingGame.getWinners());

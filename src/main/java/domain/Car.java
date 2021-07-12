@@ -4,6 +4,7 @@ public class Car {
 
     private String name;
     private int position;
+    private MovingStrategy movingStrategy =  new RandomMovingStrategy();
 
     public Car(String name) {
         this.name = name;
@@ -15,6 +16,11 @@ public class Car {
         this.position = position;
     }
 
+    public Car(String name, MovingStrategy movingStrategy) {
+        this.name = name;
+        this.movingStrategy = movingStrategy;
+    }
+
     public String getName() {
         return name;
     }
@@ -23,8 +29,8 @@ public class Car {
         return position;
     }
 
-    public void moveByStrategy(MovingStrategy strategy) {
-        if (strategy.strategy())
+    public void move() {
+        if (this.movingStrategy.strategy())
             this.position++;
     }
 }

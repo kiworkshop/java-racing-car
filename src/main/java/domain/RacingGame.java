@@ -6,13 +6,11 @@ import java.util.List;
 public class RacingGame {
 
     private int maxPosition = 0;
-    private List<String> carNames = new ArrayList<>();
     private List<Car> cars = new ArrayList<>();
     private List<Car> winners = new ArrayList<>();
-    private int tryNo = 0;
+    private int tryNo;
 
     public RacingGame(List<String> carNames, int tryNo) {
-        this.carNames = carNames;
         this.tryNo = tryNo;
         for (String carname : carNames) {
             this.cars.add(new Car(carname));
@@ -48,9 +46,9 @@ public class RacingGame {
         }
     }
 
-    public void racebyMovingStrategy(MovingStrategy strategy) {
+    public void racebyMovingStrategy() {
         for (Car car : this.cars){
-            car.moveByStrategy(strategy);
+            car.move();
         }
     }
 
