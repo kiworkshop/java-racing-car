@@ -15,12 +15,12 @@ public class Winner {
     private int maxPosition = INITIAL_MAX_POSITION;
 
     @Builder
-    public Winner(List<Car> candidates) {
+    public Winner(Cars candidates) {
         findWinners(candidates);
     }
 
-    private void findWinners(List<Car> candidates) {
-        for (Car candidate : candidates) {
+    private void findWinners(Cars candidates) {
+        for (Car candidate : candidates.getCars()) {
             updateWinner(candidate);
         }
     }

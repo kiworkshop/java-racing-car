@@ -19,7 +19,7 @@ class WinnerTest {
     @Test
     public void Given_MultipleCarsWithOneWinner_When_newWinner_Then_ReturnWinner() throws Exception {
         // given
-        List<Car> candidates = generateCandidateWithOneWinnerAndOneLoser();
+        Cars candidates = generateCandidateWithOneWinnerAndOneLoser();
 
         // when
         Winner winner = Winner.builder()
@@ -32,19 +32,19 @@ class WinnerTest {
         assertThat(winner.getWinners().get(0).getPosition()).isEqualTo(WINNER_POSITION);
     }
 
-    private List<Car> generateCandidateWithOneWinnerAndOneLoser() throws Exception {
+    private Cars generateCandidateWithOneWinnerAndOneLoser() throws Exception {
         List<Car> candidates = new ArrayList<>();
         candidates.add(Car.builder().name(WINNER_NAME).build());
         candidates.add(Car.builder().name(LOSER_NAME).build());
         moveCarToPosition(candidates.get(WINNER_INDEX), WINNER_POSITION);
         moveCarToPosition(candidates.get(LOSER_INDEX), LOSER_POSITION);
-        return candidates;
+        return new Cars(candidates);
     }
 
     @Test
     public void Given_MultipleCarsWithMultipleWinners_When_newWinner_Then_ReturnWinner() throws Exception {
         // given
-        List<Car> candidates = generateCandidateWithMultipleWinners();
+        Cars candidates = generateCandidateWithMultipleWinners();
 
         // when
         Winner winner = Winner.builder()
@@ -59,20 +59,20 @@ class WinnerTest {
         assertThat(winner.getWinners().get(1).getPosition()).isEqualTo(WINNER_POSITION);
     }
 
-    private List<Car> generateCandidateWithMultipleWinners() throws Exception {
+    private Cars generateCandidateWithMultipleWinners() throws Exception {
         List<Car> candidates = new ArrayList<>();
         candidates.add(Car.builder().name(WINNER_NAME).build());
         candidates.add(Car.builder().name(WINNER_NAME).build());
         for (Car candidate : candidates) {
             moveCarToPosition(candidate, WINNER_POSITION);
         }
-        return candidates;
+        return new Cars(candidates);
     }
 
     @Test
     public void Given_OneCar_When_newWinner_Then_ReturnOneWinner() throws Exception {
         // given
-        List<Car> candidates = generateCandidateWithOneWinner();
+        Cars candidates = generateCandidateWithOneWinner();
 
         // when
         Winner winner = Winner.builder()
@@ -85,11 +85,11 @@ class WinnerTest {
         assertThat(winner.getWinners().get(WINNER_INDEX).getPosition()).isEqualTo(WINNER_POSITION);
     }
 
-    private List<Car> generateCandidateWithOneWinner() throws Exception {
+    private Cars generateCandidateWithOneWinner() throws Exception {
         List<Car> candidates = new ArrayList<>();
         candidates.add(Car.builder().name(WINNER_NAME).build());
         moveCarToPosition(candidates.get(WINNER_INDEX), WINNER_POSITION);
-        return candidates;
+        return new Cars(candidates);
     }
 
     private void moveCarToPosition(Car car, int position) {

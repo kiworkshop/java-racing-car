@@ -3,10 +3,10 @@ package game.view;
 import game.view.dto.OneRoundResultDto;
 import game.view.dto.UserInputDto;
 import game.view.dto.WinnerDto;
-import util.CarNameParser;
-import util.RaceCountParser;
 
-import java.util.List;
+import java.util.Objects;
+
+import static game.exception.ExceptionMessage.EMPTY_INPUT;
 
 public class View {
 
@@ -14,13 +14,21 @@ public class View {
     private static final OutputView outputView = new OutputView();
 
     public static UserInputDto getCarNamesAndRoundCountInput() {
-        List<String> carNames = CarNameParser.parseCarNames(getCarNamesInput());
-        int raceCount = RaceCountParser.parseRaceCount(getRaceCountInput());
+        String carNamesInput = getCarNamesInput();
+        String raceCountInput = getRaceCountInput();
+
+        if (isNullOrEmpty(carNamesInput) || isNullOrEmpty(raceCountInput)) {
+            throw new IllegalArgumentException(EMPTY_INPUT.getMessage());
+        }
 
         return UserInputDto.builder()
-                .carNames(carNames)
-                .roundCount(raceCount)
+                .carNames(carNamesInput)
+                .roundCount(raceCountInput)
                 .build();
+    }
+
+    private static boolean isNullOrEmpty(String inputLine) {
+        return Objects.isNull(inputLine) || inputLine.isEmpty();
     }
 
     private static String getCarNamesInput() {

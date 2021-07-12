@@ -10,6 +10,6 @@ import java.util.List;
 @Builder
 @Getter
 public class UserInputDto {
-    private final List<String> carNames;
-    private final int roundCount;
+    private final String carNames;
+    private final String roundCount;
 }

@@ -24,15 +24,15 @@ public class GameController {
         UserInputDto userInputDto = View.getCarNamesAndRoundCountInput();
 
         Race race = Race.builder()
-                .carNames(userInputDto.getCarNames())
-                .targetRoundCount(userInputDto.getRoundCount())
+                .carNamesInput(userInputDto.getCarNames())
+                .raceCountInput(userInputDto.getRoundCount())
                 .build();
 
         View.printRaceStart();
         while (race.isRunning()) {
             race.runWith(strategy);
             View.printOneRoundResult(OneRoundResultDto.builder()
-                    .cars(race.getCars())
+                    .cars(race.getCars().getCars())
                     .build());
         }
         View.printWinners(WinnerDto.builder()
