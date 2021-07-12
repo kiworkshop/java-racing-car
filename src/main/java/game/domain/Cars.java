@@ -1,6 +1,5 @@
 package game.domain;
 
-import game.MoveStrategy;
 import game.exception.ExceptionMessage;
 import lombok.Getter;
 
@@ -50,7 +49,7 @@ public class Cars {
         return cars;
     }
 
-    public void runOneRound() {
+    public void move() {
         for (Car car : cars) {
             car.move();
         }

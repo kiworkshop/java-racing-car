@@ -1,9 +1,12 @@
 package game.view;
 
 import game.domain.Car;
-import game.view.dto.OneRoundResultDto;
+import game.view.dto.RaceResultDto;
+import game.view.dto.RoundResultDto;
 import game.view.dto.WinnerDto;
 import util.StringUtil;
+
+import java.util.List;
 
 public class OutputView {
 
@@ -22,13 +25,25 @@ public class OutputView {
         System.out.println("\n시도할 횟수는 몇 회인가요?");
     }
 
-    public void printRaceStart() {
+    public void printRaceResult(RaceResultDto raceResultDto) {
+        printRaceResultHeader();
+        printRoundResults(raceResultDto.getRoundResultDtos());
+        printWinners(raceResultDto.getWinnerDto());
+    }
+
+    private void printRaceResultHeader() {
         System.out.println("\n실행 결과");
     }
 
-    public void printOneRoundResult(OneRoundResultDto oneRoundResultDto) {
+    private void printRoundResults(List<RoundResultDto> roundResultDtos) {
+        for (RoundResultDto roundResultDto : roundResultDtos) {
+            printOneRoundResult(roundResultDto);
+        }
+    }
+
+    private void printOneRoundResult(RoundResultDto roundResultDto) {
         StringBuilder sb = new StringBuilder();
-        for (Car car : oneRoundResultDto.getCars()) {
+        for (Car car : roundResultDto.getCars()) {
             sb.append(StringUtil.alignLeft(car.getName(), NAME_ALIGN_STANDARD))
                     .append(COLON)
                     .append(StringUtil.repeat(POSITION_MARK, car.getPosition()))
@@ -37,9 +52,9 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public void printWinners(WinnerDto winnerDto) {
+    private void printWinners(WinnerDto winnerDto) {
         StringBuilder winnerNames = new StringBuilder();
-        for (Car winner : winnerDto.getWinners()) {
+        for (Car winner : winnerDto.getCars()) {
             winnerNames.append(winner.getName()).append(COMMA);
         }
         System.out.print(removeCommaAtTheEnd(winnerNames));

@@ -1,5 +1,7 @@
 package game.domain;
 
+import game.AlwaysMoveStrategy;
+import game.MoveStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnerTest {
 
+    private static final MoveStrategy ALWAYS_MOVE = new AlwaysMoveStrategy();
     private static final int WINNER_POSITION = 5;
     private static final int LOSER_POSITION = 1;
     private static final int WINNER_INDEX = 0;
@@ -22,9 +25,7 @@ class WinnerTest {
         Cars candidates = generateCandidateWithOneWinnerAndOneLoser();
 
         // when
-        Winner winner = Winner.builder()
-                .candidates(candidates)
-                .build();
+        Winner winner = new Winner(candidates);
 
         // then
         assertThat(winner.getWinners().size()).isOne();
@@ -34,8 +35,8 @@ class WinnerTest {
 
     private Cars generateCandidateWithOneWinnerAndOneLoser() throws Exception {
         List<Car> candidates = new ArrayList<>();
-        candidates.add(Car.builder().name(WINNER_NAME).build());
-        candidates.add(Car.builder().name(LOSER_NAME).build());
+        candidates.add(new Car(WINNER_NAME, ALWAYS_MOVE));
+        candidates.add(new Car(LOSER_NAME, ALWAYS_MOVE));
         moveCarToPosition(candidates.get(WINNER_INDEX), WINNER_POSITION);
         moveCarToPosition(candidates.get(LOSER_INDEX), LOSER_POSITION);
         return new Cars(candidates);
@@ -47,9 +48,7 @@ class WinnerTest {
         Cars candidates = generateCandidateWithMultipleWinners();
 
         // when
-        Winner winner = Winner.builder()
-                .candidates(candidates)
-                .build();
+        Winner winner = new Winner(candidates);
 
         // then
         assertThat(winner.getWinners().size()).isEqualTo(2);
@@ -61,8 +60,8 @@ class WinnerTest {
 
     private Cars generateCandidateWithMultipleWinners() throws Exception {
         List<Car> candidates = new ArrayList<>();
-        candidates.add(Car.builder().name(WINNER_NAME).build());
-        candidates.add(Car.builder().name(WINNER_NAME).build());
+        candidates.add(new Car(WINNER_NAME, ALWAYS_MOVE));
+        candidates.add(new Car(WINNER_NAME, ALWAYS_MOVE));
         for (Car candidate : candidates) {
             moveCarToPosition(candidate, WINNER_POSITION);
         }
@@ -75,9 +74,7 @@ class WinnerTest {
         Cars candidates = generateCandidateWithOneWinner();
 
         // when
-        Winner winner = Winner.builder()
-                .candidates(candidates)
-                .build();
+        Winner winner = new Winner(candidates);
 
         // then
         assertThat(winner.getWinners().size()).isOne();
@@ -87,7 +84,7 @@ class WinnerTest {
 
     private Cars generateCandidateWithOneWinner() throws Exception {
         List<Car> candidates = new ArrayList<>();
-        candidates.add(Car.builder().name(WINNER_NAME).build());
+        candidates.add(new Car(WINNER_NAME, ALWAYS_MOVE));
         moveCarToPosition(candidates.get(WINNER_INDEX), WINNER_POSITION);
         return new Cars(candidates);
     }

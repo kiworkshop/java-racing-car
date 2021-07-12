@@ -2,9 +2,8 @@ package game.controller;
 
 import game.domain.Race;
 import game.view.View;
-import game.view.dto.OneRoundResultDto;
-import game.view.dto.UserInputDto;
-import game.view.dto.WinnerDto;
+import game.view.dto.RaceInputDto;
+import game.view.dto.RaceResultDto;
 
 public class GameController {
 
@@ -16,23 +15,10 @@ public class GameController {
         }
     }
 
-    public static void start() throws Exception {
-        UserInputDto userInputDto = View.getCarNamesAndRoundCountInput();
-
-        Race race = Race.builder()
-                .carNamesInput(userInputDto.getCarNames())
-                .raceCountInput(userInputDto.getRoundCount())
-                .build();
-
-        View.printRaceStart();
-        while (race.isRunning()) {
-            race.run();
-            View.printOneRoundResult(OneRoundResultDto.builder()
-                    .cars(race.getCars().getCars())
-                    .build());
-        }
-        View.printWinners(WinnerDto.builder()
-                .winner(race.findWinners())
-                .build());
+    public static void start() throws IllegalArgumentException {
+        RaceInputDto raceInputDto = View.getCarNamesAndRoundCountInput();
+        Race race = new Race(raceInputDto);
+        RaceResultDto raceResultDto = race.run();
+        View.printRaceResult(raceResultDto);
     }
 }

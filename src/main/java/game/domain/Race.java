@@ -1,32 +1,45 @@
 package game.domain;
 
-import lombok.Builder;
-import lombok.Getter;
+import game.view.dto.RaceInputDto;
+import game.view.dto.RaceResultDto;
+import game.view.dto.RoundResultDto;
+import game.view.dto.WinnerDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Race {
 
-    @Getter
     private final Cars cars;
     private final RoundCount roundCount;
 
-    @Builder
-    public Race(String carNamesInput, String raceCountInput) throws IllegalArgumentException {
-        this.cars = new Cars(carNamesInput);
-        this.roundCount = new RoundCount(raceCountInput);
+    public Race(RaceInputDto raceInputDto) throws IllegalArgumentException {
+        this.cars = new Cars(raceInputDto.getCarNames());
+        this.roundCount = new RoundCount(raceInputDto.getRoundCount());
     }
 
-    public boolean isRunning() {
-        return roundCount.isMoreRoundLeft();
+    public RaceResultDto run() {
+        List<RoundResultDto> roundResultDtos = runRounds();
+        WinnerDto winnerDto = findWinners();
+        return new RaceResultDto(roundResultDtos, winnerDto);
     }
 
-    public void run() {
+    private List<RoundResultDto> runRounds() {
+        List<RoundResultDto> roundResultDtos = new ArrayList<>();
+        while (roundCount.isMoreRoundLeft()) {
+            runOneRound();
+            roundResultDtos.add(new RoundResultDto(cars.getCars()));
+        }
+        return roundResultDtos;
+    }
+
+    private void runOneRound() {
+        cars.move();
         roundCount.increment();
-        cars.runOneRound();
     }
 
-    public Winner findWinners() {
-        return Winner.builder()
-                .candidates(cars)
-                .build();
+    private WinnerDto findWinners() {
+        Winner winner = new Winner(cars);
+        return new WinnerDto(winner.getWinners());
     }
 }
