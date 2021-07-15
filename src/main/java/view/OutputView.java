@@ -1,6 +1,7 @@
 package view;
 
 import domain.Car;
+import domain.Cars;
 import utils.CarNameParser;
 import utils.MoveCountParser;
 
@@ -19,7 +20,11 @@ public class OutputView {
         }
         System.out.println();
     }
-
+    public static void printRounds(List<Cars> roundResult){
+        for (Cars cars: roundResult) {
+            printCars(cars.getCars());
+        }
+    }
     public static void printWinners(List<Car> winners) {
         StringBuilder resultNames = new StringBuilder();
         for (int i = 0; i < winners.size(); i++) {

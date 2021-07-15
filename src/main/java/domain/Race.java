@@ -5,58 +5,29 @@ import java.util.List;
 
 public class Race {
 
-    private int maxPosition = 0;
     private Cars cars;
-    private List<Car> winners = new ArrayList<>();
     private int tryNo;
+    private RaceResult raceResult = new RaceResult();
 
     public Race(Cars cars, int tryNo) {
         this.tryNo = tryNo;
         this.cars = cars;
     }
 
-    public Cars getCars() {
-        return this.cars;
-    }
-
-    public void run() {
+    public RaceResult run() {
         for (int i=0; i<this.tryNo; i++){
             raceOneRound();
         }
+        return raceResult;
     }
-    private void raceOneRound() {
 
+    private void raceOneRound() {
+        List<Car> cars = new ArrayList<>();
         for (Car car : this.cars.getCars()){
             car.move();
+            cars.add(new Car(car.getName(), car.getPosition()));
         }
+        raceResult.setRoundResult(new Cars(cars));
     }
 
-    public List<Car> getWinners() {
-        setWinners();
-        return this.winners;
-    }
-
-    private void setWinners() {
-        for (Car car : this.cars.getCars()) {
-            updateWinner(car, winners);
-        }
-    }
-
-    private void updateWinner(Car car, List<Car> winners) {
-        if (car.getPosition() == maxPosition) {
-            this.winners.add(car);
-        }
-        if (car.getPosition() > maxPosition) {
-            this.winners.clear();
-            this.winners.add(car);
-            maxPosition = car.getPosition();
-        }
-    }
-
-
-
-    public boolean isRunning() {
-        tryNo--;
-        return tryNo>=0;
-    }
 }

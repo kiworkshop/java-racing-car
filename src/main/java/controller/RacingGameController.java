@@ -1,24 +1,23 @@
 package controller;
 
-import domain.Cars;
-import domain.MovingStrategy;
-import domain.Race;
-import domain.RandomMovingStrategy;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
 
 public class RacingGameController {
-
-    public void run() {
+    public static void main(String[] args) {
+        run();
+    }
+    public static void run() {
         String carNames = InputView.getCarNames();
         int tryNo = InputView.getTryNo();
         Cars cars = new Cars(carNames);
 
         Race race = new Race(cars, tryNo);
-        race.run();
-        //OutputView.printCars(race.getCars());
-        OutputView.printWinners(race.getWinners());
+        RaceResult result = race.run();
+        OutputView.printRounds(result.getRoundResult());
+        OutputView.printWinners(result.getWinners());
     }
 }
