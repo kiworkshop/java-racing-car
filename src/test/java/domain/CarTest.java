@@ -31,18 +31,4 @@ public class CarTest {
         assertThat(cars.get(1).getPosition()).isEqualTo(0);
     }
 
-    @Test
-    void 차_객체_초기화_이름과_위치를_넣으면_자동차_이름과_포지션값으로_초기화된다() {
-        // given
-        String name = "car1";
-        int position = 3;
-
-        // when
-        Car car = new Car(name, position);
-
-        // then
-        assertThat(car.getPosition()).isEqualTo(position);
-        assertThat(car.getName()).isEqualTo(name);
-    }
-
 }

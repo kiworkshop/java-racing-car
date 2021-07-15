@@ -1,7 +1,6 @@
 package utils;
 
 import org.junit.jupiter.api.Test;
-import utils.CarNameParser;
 
 import java.util.List;
 
