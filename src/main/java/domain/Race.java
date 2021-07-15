@@ -15,7 +15,7 @@ public class Race {
     }
 
     public RaceResult run() {
-        for (int i=0; i<this.tryNo; i++){
+        for (int i = 0; i < this.tryNo; i++) {
             raceOneRound();
         }
         return raceResult;
@@ -23,7 +23,7 @@ public class Race {
 
     private void raceOneRound() {
         List<Car> cars = new ArrayList<>();
-        for (Car car : this.cars.getCars()){
+        for (Car car : this.cars.getCars()) {
             car.move();
             cars.add(new Car(car.getName(), car.getPosition()));
         }

@@ -18,10 +18,10 @@ public class RaceResult {
     }
 
     public List<Car> getWinners() {
-        if(this.winners.size()>0){
+        if (this.winners.size() > 0) {
             return this.winners;
         }
-        for (Car car : roundResult.get(roundResult.size()-1).getCars()) {
+        for (Car car : roundResult.get(roundResult.size() - 1).getCars()) {
             updateWinner(car, winners);
         }
         return this.winners;

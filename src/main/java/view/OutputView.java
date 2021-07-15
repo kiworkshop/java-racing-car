@@ -12,6 +12,7 @@ public class OutputView {
     public void printRaceStart() {
         System.out.println("실행 결과");
     }
+
     public static void printCars(List<Car> cars) {
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
@@ -20,11 +21,13 @@ public class OutputView {
         }
         System.out.println();
     }
-    public static void printRounds(List<Cars> roundResult){
-        for (Cars cars: roundResult) {
+
+    public static void printRounds(List<Cars> roundResult) {
+        for (Cars cars : roundResult) {
             printCars(cars.getCars());
         }
     }
+
     public static void printWinners(List<Car> winners) {
         StringBuilder resultNames = new StringBuilder();
         for (int i = 0; i < winners.size(); i++) {

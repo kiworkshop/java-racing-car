@@ -4,7 +4,7 @@ public class Car {
 
     private String name;
     private int position;
-    private MovingStrategy movingStrategy =  new RandomMovingStrategy();
+    private MovingStrategy movingStrategy = new RandomMovingStrategy();
 
     public Car(String name) {
         this.name = name;
