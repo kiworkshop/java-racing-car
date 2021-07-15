@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarNameParserTest {
+
     static CarNameParser carNameParser = new CarNameParser();
 
     @Test

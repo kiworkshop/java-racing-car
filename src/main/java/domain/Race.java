@@ -25,7 +25,7 @@ public class Race {
         List<Car> cars = new ArrayList<>();
         for (Car car : this.cars.getCars()) {
             car.move();
-            cars.add(new Car(car.getName(), car.getPosition()));
+            cars.add(new Car(car));
         }
         raceResult.setRoundResult(new Cars(cars));
     }

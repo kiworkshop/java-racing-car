@@ -8,7 +8,11 @@ public class Car {
 
     public Car(String name) {
         this.name = name;
-        this.position = 0;
+    }
+
+    public Car(Car car) {
+        this.name = car.getName();
+        this.position = car.getPosition();
     }
 
     public Car(String name, MovingStrategy movingStrategy) {

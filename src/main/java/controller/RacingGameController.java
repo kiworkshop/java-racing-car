@@ -7,8 +7,10 @@ import view.OutputView;
 import java.util.List;
 
 public class RacingGameController {
-
-    public void run() {
+    public static void main(String[] args) {
+        run();
+    }
+    public static void run() {
         String carNames = InputView.getCarNames();
         int tryNo = InputView.getTryNo();
         Cars cars = new Cars(carNames);
