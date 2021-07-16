@@ -9,47 +9,32 @@ import java.util.List;
 public class Winner {
 
     private static final int INITIAL_MAX_POSITION = 0;
-    private static final String COMMA = ", ";
 
     @Getter
     private final List<Car> winners = new ArrayList<>();
-    private int maxPosition;
+    private int maxPosition = INITIAL_MAX_POSITION;
 
     @Builder
-    public Winner(Candidate candidate) {
-        this.maxPosition = INITIAL_MAX_POSITION;
-        findWinners(candidate);
+    public Winner(Cars candidates) {
+        findWinners(candidates);
     }
 
-    private void findWinners(Candidate candidate) {
-        for (Car car : candidate.getCars()) {
-            updateWinner(car);
+    private void findWinners(Cars candidates) {
+        for (Car candidate : candidates.getCars()) {
+            updateWinner(candidate);
         }
     }
 
-    private void updateWinner(Car car) {
-        if (car.isPositionEqualTo(maxPosition)) {
-            winners.add(car);
+    private void updateWinner(Car candidate) {
+        if (candidate.isPositionEqualTo(maxPosition)) {
+            winners.add(candidate);
             return;
         }
 
-        if (car.isPositionGreaterThan(maxPosition)) {
+        if (candidate.isPositionGreaterThan(maxPosition)) {
             winners.clear();
-            winners.add(car);
-            maxPosition = car.getPosition();
+            winners.add(candidate);
+            maxPosition = candidate.getPosition();
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder winnerNames = new StringBuilder();
-        for (Car winner : winners) {
-            winnerNames.append(winner.getName()).append(COMMA);
-        }
-        return removeCommaAtTheEnd(winnerNames);
-    }
-
-    private String removeCommaAtTheEnd(StringBuilder winnerNames) {
-        return winnerNames.substring(0, winnerNames.length() - COMMA.length());
     }
 }

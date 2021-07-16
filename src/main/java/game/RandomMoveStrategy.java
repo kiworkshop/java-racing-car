@@ -1,8 +1,8 @@
 package game;
 
-import game.util.RandomUtil;
+import util.RandomUtil;
 
-public class RandomStrategyImpl implements RandomStrategy {
+public class RandomMoveStrategy implements MoveStrategy {
 
     private static final int STANDARD_VALUE = 4;
 

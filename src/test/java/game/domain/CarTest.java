@@ -1,13 +1,16 @@
 package game.domain;
 
+import game.AlwaysMoveStrategy;
+import game.AlwaysNotMoveStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarTest {
 
     @Test
-    void Given_Name_When_newCar_Then_CarInstanceCreatedWithPositionZero() {
+    void Given_CarNameWithValidLength_When_newCar_Then_CarInstanceCreatedWithPositionZero() throws Exception {
         // given
         String name = "car";
 
@@ -22,44 +25,52 @@ public class CarTest {
     }
 
     @Test
-    void Given_NewCar_When_moveForward_Then_PositionIsOne() {
+    void Given_CarNameWithLengthLongerThanLimit_When_newCar_Then_ThrowIllegalArgumentException() {
         // given
-        Car car = Car.builder()
-                .name("car")
-                .build();
+        String name = "123456";
 
-        // when
-        car.moveForward();
-
-        // then
-        assertThat(car.getPosition()).isEqualTo(1);
+        // when, then
+        assertThatThrownBy(() -> Car.builder().name(name).build())
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void Given_NewCar_When_Move_Then_PositionOfCarIsOne() {
+    void Given_CarNameWithLengthZero_When_newCar_Then_ThrowIllegalArgumentException() {
         // given
-        Car car = Car.builder()
-                .name("car")
-                .build();
+        String name = "";
 
-        // when
-        car.moveByFlag(true);
-
-        // then
-        assertThat(car.getPosition()).isOne();
+        // when, then
+        assertThatThrownBy(() -> Car.builder().name(name).build())
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void Given_NewCar_When_NotMove_Then_PositionOfCarIsZero() {
+    void Given_AlwaysMoveCar_When_move_Then_PositionOfCarIsMoveCount() throws Exception {
         // given
-        Car car = Car.builder()
-                .name("car")
-                .build();
+        Car car = new Car("car", new AlwaysMoveStrategy());
+        int moveCount = 1000;
 
         // when
-        car.moveByFlag(false);
+        for (int i = 0; i < moveCount; i++) {
+            car.move();
+        }
 
         // then
-        assertThat(car.getPosition()).isZero();
+        assertThat(car.getPosition()).isEqualTo(moveCount);
+    }
+
+    @Test
+    void Given_AlwaysNotMoveCar_When_move_Then_PositionOfCarIsZero() throws Exception {
+        // given
+        Car car = new Car("car", new AlwaysNotMoveStrategy());
+        int moveCount = 1000;
+
+        // when
+        for (int i = 0; i < moveCount; i++) {
+            car.move();
+        }
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(0);
     }
 }

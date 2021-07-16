@@ -1,5 +1,5 @@
 package game;
 
-public interface RandomStrategy {
+public interface MoveStrategy {
     boolean isMove();
 }
