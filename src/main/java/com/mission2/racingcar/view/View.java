@@ -4,8 +4,8 @@ import java.util.List;
 
 public class View {
 
-    InputView inputView = new InputView();
-    OutputView outputView = new OutputView();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public String getUserInput(String message) {
         return inputView.getUserInput(message);

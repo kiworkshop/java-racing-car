@@ -11,7 +11,7 @@ import static com.mission2.racingcar.domain.CarRacingService.INIT_SCORE;
 
 public class OutputView {
 
-    CarRacingService carRacingService = new CarRacingService();
+    private final CarRacingService carRacingService = new CarRacingService();
 
     public void printOutput(List<String> carNames, int gameCount) {
         System.out.println("실행결과");

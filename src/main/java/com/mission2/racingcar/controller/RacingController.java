@@ -7,8 +7,8 @@ import java.util.List;
 
 public class RacingController {
 
-    static CarRacingService service = new CarRacingService();
-    static View view = new View();
+    private static final CarRacingService service = new CarRacingService();
+    private static final View view = new View();
 
     public static void main(String[] args) {
 
