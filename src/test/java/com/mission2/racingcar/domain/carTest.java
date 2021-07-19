@@ -7,11 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class carTest {
 
+    private final MoveStrategy moveStrategy = new ThresholdFourStrategy();
+
     @Test
     @DisplayName("Random 숫자의 값이 0~3 이면 전진하지 않는다")
     void Random_값_정지() {
         //given
-        Car car = new Car("TestCar", 0, new ThresholdFourStrategy());
+        Car car = new Car("TestCar", 0, moveStrategy);
         int stopValues = 3;
 
         //when
@@ -25,7 +27,7 @@ class carTest {
     @DisplayName("Random 숫자의 값이 4~9 이면 전진한다")
     void Random_값_전진() {
         //given
-        Car car = new Car("TestCar", 0, new ThresholdFourStrategy());
+        Car car = new Car("TestCar", 0, moveStrategy);
         int forwardValues = 4;
 
         //when
