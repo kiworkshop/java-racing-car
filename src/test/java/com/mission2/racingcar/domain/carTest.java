@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CarTests {
+class carTest {
 
     @Test
     @DisplayName("Random 숫자의 값이 0~3 이면 전진하지 않는다")

@@ -8,7 +8,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CarRacingServiceTests {
+class CarRacingServiceTest {
 
     @Test
     @DisplayName("입력받은 자동차 이름의 개수를 확인한다")

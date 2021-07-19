@@ -6,6 +6,7 @@ import com.mission2.racingcar.domain.Race;
 import com.mission2.racingcar.domain.ThresholdFourStrategy;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.mission2.racingcar.domain.CarRacingService.INIT_SCORE;
 
@@ -20,8 +21,23 @@ public class OutputView {
                 .forEach(System.out::println);
 
         Race race = carRacingService.initRace(gameCount, carNames);
-        race.proceedGame();
+        proceedGame(race);
         printWinner(race.getWinners());
+    }
+
+    public void proceedGame(Race race) {
+        for (int i = 0; i < race.getGameCount(); i++) {
+            System.out.println();
+            racing(race);
+        }
+    }
+
+    private void racing(Race race) {
+        for (Car car : race.getCars()) {
+            Random random = new Random();
+            car.raceByRandomNumber(random.nextInt(10));
+            System.out.println(car);
+        }
     }
 
     public void printWinner(String[] winners) {
