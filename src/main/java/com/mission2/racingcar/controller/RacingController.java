@@ -7,10 +7,9 @@ import java.util.List;
 
 public class RacingController {
 
-    private static final CarRacingService service = new CarRacingService();
-    private static final View view = new View();
-
     public static void main(String[] args) {
+        CarRacingService service = new CarRacingService();
+        View view = new View();
 
         String inputCarNames = view.getUserInput("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분");
         List<String> carNames = view.ensureCarNameCondition(service, inputCarNames);

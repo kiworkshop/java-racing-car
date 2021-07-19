@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class StrategyTest {
+class MoveStrategyTest {
 
     @DisplayName("4 이상의 정수를 입력 시 True를 반환한다")
     @Test

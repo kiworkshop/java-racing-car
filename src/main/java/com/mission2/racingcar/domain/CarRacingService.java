@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CarRacingService {
+
     public static final int MAX_CAR_NAME_COUNT = 5;
     public static final int MAX_GAME_COUNT = 10;
     public static final int INIT_SCORE = 1;
@@ -28,7 +29,7 @@ public class CarRacingService {
 
     public int getGameCount(String input) {
         if (!Pattern.matches("^[0-9]*$", input)) {
-            throw new RuntimeException("잘못된 입력입니다.");
+            throw new RuntimeException("숫자만 입력해주세요.");
         }
         return Integer.parseInt(input);
     }

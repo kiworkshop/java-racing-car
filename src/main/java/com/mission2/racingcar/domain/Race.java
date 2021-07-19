@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Race {
+
     private final int gameCount;
     private final List<Car> cars;
 
