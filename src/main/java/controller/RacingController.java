@@ -22,12 +22,12 @@ public class RacingController {
 
         // 시도 횟수만큼 게임 판을 실행
         RacingGame racingGame = new RacingGame(racingCars, trials);
-        racingGame.race();
 
         // 실행한 게임판마다 진행상황 출력
+        racingGame.race();
 
         // 가장 멀리 위치한 자동차를 우승자로 반환
-
+        racingGame.printWinners();
 
     }
 
