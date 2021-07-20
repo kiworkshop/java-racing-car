@@ -3,7 +3,6 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,18 +42,19 @@ public class CarTest {
                 .withMessage("이름은 5자 이하까지 입력할 수 있습니다.");
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"4,1", "3,0"})
-    @DisplayName("4이상의 값을 인자로 받으면 전진한다.")
-    void advance(int randomNumber, int expected) {
+
+    @Test
+    @DisplayName("전진하는 전략이 채택되면 자동차의 위치가 1씩 증가한다.")
+    void advance() {
         //given
-        Car car = new Car("name");
+        Car car = new Car("name", () -> true);
 
         //when
-        car.advance(randomNumber);
+        car.advance();
+        car.advance();
 
         //then
-        assertThat(car.position()).isEqualTo(expected);
+        assertThat(car.position()).isEqualTo(2);
     }
 }
 
