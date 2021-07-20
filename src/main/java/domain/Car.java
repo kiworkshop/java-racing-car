@@ -2,8 +2,6 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
-
 public class Car {
 
     private final String name;
@@ -49,11 +47,4 @@ public class Car {
     public int position() {
         return position;
     }
-
-    @Override
-    public String toString() {
-        String positionMark = String.join("", Collections.nCopies(position, "-"));
-        return String.format("%s : %s", name, positionMark);
-    }
-
 }

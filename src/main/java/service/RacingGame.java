@@ -2,15 +2,16 @@ package service;
 
 import domain.Car;
 import domain.RandomAdvanceStrategy;
+import view.OutputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RacingGame {
 
-    private static final int MIN_TRIALS = 0;
     private final List<Car> racingCars;
     private int trials;
+    private static final int MIN_TRIALS = 0;
 
 
     public RacingGame(List<Car> racingCars, int trials) {
@@ -19,7 +20,7 @@ public class RacingGame {
     }
 
     public void race() {
-        System.out.println("실행 결과\n");
+        OutputView.printGameStatus();
         while (isNotOver()) {
             raceEachRound();
             trials--;
@@ -35,9 +36,8 @@ public class RacingGame {
             RandomAdvanceStrategy randomAdvanceStrategy = new RandomAdvanceStrategy();
             car.advance(randomAdvanceStrategy);
 
-            System.out.println(car);
+            OutputView.printEachRound(racingCars);
         }
-        System.out.println();
     }
 
 
@@ -47,8 +47,7 @@ public class RacingGame {
                 .map(Car::name)
                 .collect(Collectors.toList());
 
-        String winnersNamesList = String.join(", ", winnersNames);
-        System.out.printf("%s 이(가) 최종 우승했습니다.%n", winnersNamesList);
+        OutputView.printWinners(winnersNames);
     }
 
 
