@@ -20,7 +20,7 @@ public class CarTest {
         Car car = new Car(name);
 
         //then
-        assertThat(car.position()).isEqualTo(0);
+        assertThat(car.position()).isZero();
         assertThat(car.name()).isEqualTo(name);
     }
 
@@ -56,6 +56,5 @@ public class CarTest {
         //then
         assertThat(car.position()).isEqualTo(expected);
     }
-
 }
 

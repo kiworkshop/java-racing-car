@@ -11,6 +11,8 @@ public class Car {
     private static final int MAXIMUM_NAME_LENGTH = 5;
     private static final String ALERT_NULL_OR_EMPTY = "이름을 1자 이상 입력해주세요.";
     private static final String ALERT_NAME_LENGTH = String.format("이름은 %d자 이하까지 입력할 수 있습니다.", MAXIMUM_NAME_LENGTH);
+    private static final int NUMBER_TO_ADVANCE = 4;
+    private static final int DISTANCE_TO_ADVANCE = 1;
 
     public Car(String name) {
         validateNullOrEmpty(name);
@@ -40,10 +42,18 @@ public class Car {
         return position;
     }
 
-    public void advance(int randomNumber) {
-        if (randomNumber >= 4) {
-            position += 1;
-        }
+    public void advance(int advanceDistance) {
+        this.position += advanceDistance;
     }
 
+    public void advanceOrStop(int randomNumber) {
+        advance(advanceDistance(randomNumber));
+    }
+
+    public int advanceDistance(int randomNumber) {
+        if (randomNumber > NUMBER_TO_ADVANCE) {
+            return DISTANCE_TO_ADVANCE;
+        }
+        return 0;
+    }
 }
