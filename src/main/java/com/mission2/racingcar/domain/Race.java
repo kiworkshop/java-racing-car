@@ -1,11 +1,12 @@
-package com.mission2.racingcar;
+package com.mission2.racingcar.domain;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Race {
-    private int gameCount;
-    private List<Car> cars;
+
+    private final int gameCount;
+    private final List<Car> cars;
 
     public Race(int gameCount, List<Car> cars) {
         this.gameCount = gameCount;
@@ -32,14 +33,19 @@ public class Race {
 
     public static class Builder {
         private int gameCount;
-        private final List<Car> cars;
+        private List<Car> cars;
 
-        public Builder(List<Car> cars) {
-            this.cars = cars;
+        public Builder() {
+
         }
 
         public Builder gameCount(int gameCount) {
             this.gameCount = gameCount;
+            return this;
+        }
+
+        public Builder cars(List<Car> cars) {
+            this.cars = cars;
             return this;
         }
 
