@@ -16,7 +16,7 @@ public class InputView {
 
     public static int getTryNo() {
         OutputView.askTryNumber();
-        return moveCountParser.parseCount(SCANNER.nextLine());
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
 }

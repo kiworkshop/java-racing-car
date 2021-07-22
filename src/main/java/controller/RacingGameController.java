@@ -15,8 +15,8 @@ public class RacingGameController {
         int tryNo = InputView.getTryNo();
         Cars cars = new Cars(carNames);
 
-        Race race = new Race(cars, tryNo);
-        RaceResult result = race.run();
+        Race race = new Race(cars);
+        RaceResult result = race.run(tryNo);
         OutputView.printRounds(result.getRoundResult());
         OutputView.printWinners(result.getWinners());
     }

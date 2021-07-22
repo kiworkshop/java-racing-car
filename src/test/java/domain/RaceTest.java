@@ -21,10 +21,10 @@ public class RaceTest {
         carList.add(car3);
         Cars cars = new Cars(carList);
         int tryNo = 1;
-        Race race = new Race(cars, tryNo);
+        Race race = new Race(cars);
 
         // when
-        RaceResult result = race.run();
+        RaceResult result = race.run(tryNo);
 
         // then
         assertThat(result.roundResult.get(0).getCars().get(0).getPosition()).isEqualTo(0);

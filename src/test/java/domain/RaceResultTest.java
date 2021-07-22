@@ -23,10 +23,10 @@ public class RaceResultTest {
         Cars cars = new Cars(carList);
         int tryNo = 1;
 
-        Race race = new Race(cars, tryNo);
+        Race race = new Race(cars);
 
         // when
-        RaceResult result  = race.run();
+        RaceResult result  = race.run(tryNo);
         List<Car> winners = result.getWinners();
         // then
         assertThat(winners.size()).isEqualTo(1);
@@ -46,9 +46,9 @@ public class RaceResultTest {
         carList.add(car3);
         Cars cars = new Cars(carList);
         int tryNo = 1;
-        Race race = new Race(cars, tryNo);
+        Race race = new Race(cars);
         // when
-        RaceResult result  = race.run();
+        RaceResult result  = race.run(tryNo);
         List<Car> winners = result.getWinners();
 
         // then
@@ -67,9 +67,9 @@ public class RaceResultTest {
         Cars cars = new Cars(carList);
         int tryNo = 1;
 
-        Race race = new Race(cars, tryNo);
+        Race race = new Race(cars);
         // when
-        RaceResult result  = race.run();
+        RaceResult result  = race.run(tryNo);
         List<Car> winners = result.getWinners();
         // then
         assertThat(winners.size()).isEqualTo(1);

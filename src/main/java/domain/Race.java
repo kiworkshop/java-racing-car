@@ -1,21 +1,23 @@
 package domain;
 
+import utils.MoveCountParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Race {
 
     private Cars cars;
-    private int tryNo;
+    private static MoveCountParser moveCountParser = new MoveCountParser();
     private RaceResult raceResult = new RaceResult();
 
-    public Race(Cars cars, int tryNo) {
-        this.tryNo = tryNo;
+    public Race(Cars cars) {
         this.cars = cars;
     }
 
-    public RaceResult run() {
-        for (int i = 0; i < this.tryNo; i++) {
+    public RaceResult run( int tryNo) {
+        moveCountParser.checkTryNo(tryNo);
+        for (int i = 0; i < tryNo; i++) {
             raceOneRound();
         }
         return raceResult;
