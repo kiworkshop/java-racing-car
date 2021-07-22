@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cars {
-    private static CarNameParser carNameParser = new CarNameParser();
     private List<Car> cars = new ArrayList<>();
 
     public Cars(String inputName) {
-        List<String> carNames = carNameParser.splitCarNames(inputName);
+        List<String> carNames = CarNameParser.splitCarNames(inputName);
         for (String carName : carNames) {
             cars.add(new Car(carName));
         }

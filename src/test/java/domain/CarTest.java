@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CarTest {
+class CarTest {
 
     @Test
     void 차_객체_초기화_이름만_넣을경우_넣은이름_포지션은_0으로_초기화된다() {
