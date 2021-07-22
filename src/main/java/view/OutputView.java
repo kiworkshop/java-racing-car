@@ -1,7 +1,7 @@
 package view;
 
-import domain.Car;
-import domain.Cars;
+import domain.CarResult;
+import domain.CarResults;
 
 import java.util.List;
 
@@ -15,26 +15,26 @@ public class OutputView {
         System.out.println("시도할 횟수는 몇 회인가요?");
     }
 
-    public static void printCars(List<Car> cars) {
-        for (int i = 0; i < cars.size(); i++) {
-            Car car = cars.get(i);
-            String totalGo = new String(new char[car.getPosition()]).replace("\0", "-");
-            System.out.printf("%-7s : %s\n", car.getName(), totalGo);
+    public static void printCars(List<CarResult> carResults) {
+        for (int i = 0; i < carResults.size(); i++) {
+            CarResult carResult = carResults.get(i);
+            String totalGo = new String(new char[carResult.getPosition()]).replace("\0", "-");
+            System.out.printf("%-7s : %s\n", carResult.getCarName(), totalGo);
         }
         System.out.println();
     }
 
-    public static void printRounds(List<Cars> roundResult) {
+    public static void printRounds(List<CarResults> roundResult) {
         System.out.println("실행 결과");
-        for (Cars cars : roundResult) {
-            printCars(cars.getCars());
+        for (CarResults result : roundResult) {
+            printCars(result.getCarResults());
         }
     }
 
-    public static void printWinners(List<Car> winners) {
+    public static void printWinners(List<CarResult> winners) {
         StringBuilder resultNames = new StringBuilder();
         for (int i = 0; i < winners.size(); i++) {
-            resultNames.append(winners.get(i).getName() + ", ");
+            resultNames.append(winners.get(i).getCarName() + ", ");
         }
 
         System.out.println(resultNames.toString().substring(0, resultNames.length() - 2) + "(이)가 최종 우승했습니다.");

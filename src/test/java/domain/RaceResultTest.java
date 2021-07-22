@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RaceResultTest {
+class RaceResultTest {
 
     @Test
     void 차_리스트를_받아서_우승자_찾기() {
@@ -27,10 +27,10 @@ public class RaceResultTest {
 
         // when
         RaceResult result  = race.run(tryNo);
-        List<Car> winners = result.getWinners();
+        List<CarResult> winners = result.getWinners();
         // then
         assertThat(winners.size()).isEqualTo(1);
-        assertThat(winners.get(0).getName()).isEqualTo("car1");
+        assertThat(winners.get(0).getCarName()).isEqualTo("car1");
         assertThat(winners.get(0).getPosition()).isEqualTo(1);
     }
 
@@ -49,12 +49,12 @@ public class RaceResultTest {
         Race race = new Race(cars);
         // when
         RaceResult result  = race.run(tryNo);
-        List<Car> winners = result.getWinners();
+        List<CarResult> winners = result.getWinners();
 
         // then
         assertThat(winners.size()).isEqualTo(2);
-        assertThat(winners.get(0).getName()).isEqualTo("car2");
-        assertThat(winners.get(1).getName()).isEqualTo("car3");
+        assertThat(winners.get(0).getCarName()).isEqualTo("car2");
+        assertThat(winners.get(1).getCarName()).isEqualTo("car3");
         assertThat(winners.get(0).getPosition()).isEqualTo(1);
         assertThat(winners.get(1).getPosition()).isEqualTo(1);
     }
@@ -70,10 +70,10 @@ public class RaceResultTest {
         Race race = new Race(cars);
         // when
         RaceResult result  = race.run(tryNo);
-        List<Car> winners = result.getWinners();
+        List<CarResult> winners = result.getWinners();
         // then
         assertThat(winners.size()).isEqualTo(1);
-        assertThat(winners.get(0).getName()).isEqualTo("winner");
+        assertThat(winners.get(0).getCarName()).isEqualTo("winner");
     }
 
 }

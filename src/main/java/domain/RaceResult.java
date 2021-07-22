@@ -4,37 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaceResult {
+
     private int maxPosition = 0;
+    private final List<CarResults> roundResult;
 
-    List<Cars> roundResult = new ArrayList<>();
-    List<Car> winners = new ArrayList<>();
+    public RaceResult(List<CarResults> roundResult) {
+        this.roundResult = roundResult;
+    }
 
-    public List<Cars> getRoundResult() {
+    public List<CarResults> getRoundResult() {
         return roundResult;
     }
 
-    public void setRoundResult(Cars cars) {
-        this.roundResult.add(cars);
+    public List<CarResult> getWinners() {
+        maxPosition = 0;
+        List<CarResult> winners = new ArrayList<>();
+        for (CarResult carResult : roundResult.get(roundResult.size() - 1).getCarResults()) {
+            winners = updateWinner(carResult, winners);
+        }
+        return winners;
     }
 
-    public List<Car> getWinners() {
-        if (this.winners.size() > 0) {
-            return this.winners;
+    private List<CarResult> updateWinner(CarResult carResult, List<CarResult> winners) {
+        if (carResult.getPosition() == maxPosition) {
+            winners.add(carResult);
         }
-        for (Car car : roundResult.get(roundResult.size() - 1).getCars()) {
-            updateWinner(car, winners);
+        if (carResult.getPosition() > maxPosition) {
+            winners.clear();
+            winners.add(carResult);
+            maxPosition = carResult.getPosition();
         }
-        return this.winners;
-    }
-
-    private void updateWinner(Car car, List<Car> winners) {
-        if (car.getPosition() == maxPosition) {
-            this.winners.add(car);
-        }
-        if (car.getPosition() > maxPosition) {
-            this.winners.clear();
-            this.winners.add(car);
-            maxPosition = car.getPosition();
-        }
+        return winners;
     }
 }

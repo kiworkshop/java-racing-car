@@ -7,10 +7,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RaceTest {
+class RaceTest {
 
     @Test
-    void 차가_확률만큼_전진한다() {
+    void 레이스가_1회_실행되면_레이스_결과값을_리턴한다() {
         // given
         Car car1 = new Car("car1", () -> false);
         Car car2 = new Car("car2", () -> true);
@@ -27,8 +27,8 @@ public class RaceTest {
         RaceResult result = race.run(tryNo);
 
         // then
-        assertThat(result.roundResult.get(0).getCars().get(0).getPosition()).isEqualTo(0);
-        assertThat(result.roundResult.get(0).getCars().get(1).getPosition()).isEqualTo(1);
-        assertThat(result.roundResult.get(0).getCars().get(2).getPosition()).isEqualTo(0);
+        assertThat(result.getRoundResult().get(0).getCarResults().get(0).getPosition()).isZero();
+        assertThat(result.getRoundResult().get(0).getCarResults().get(1).getPosition()).isEqualTo(1);
+        assertThat(result.getRoundResult().get(0).getCarResults().get(2).getPosition()).isZero();
     }
 }

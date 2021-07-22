@@ -8,28 +8,28 @@ import java.util.List;
 public class Race {
 
     private Cars cars;
-    private static MoveCountParser moveCountParser = new MoveCountParser();
-    private RaceResult raceResult = new RaceResult();
 
     public Race(Cars cars) {
         this.cars = cars;
     }
 
     public RaceResult run( int tryNo) {
-        moveCountParser.checkTryNo(tryNo);
+        MoveCountParser.checkTryNo(tryNo);
+        List<CarResults> carResults = new ArrayList<>();
         for (int i = 0; i < tryNo; i++) {
-            raceOneRound();
+            CarResults carResult = raceOneRound();
+            carResults.add(carResult);
         }
-        return raceResult;
+        return new RaceResult(carResults);
     }
 
-    private void raceOneRound() {
-        List<Car> cars = new ArrayList<>();
+    private CarResults raceOneRound() {
+        CarResults carResult = new CarResults();
         for (Car car : this.cars.getCars()) {
             car.move();
-            cars.add(new Car(car));
+            carResult.getCarResults().add(new CarResult(car.getName(), car.getPosition()));
         }
-        raceResult.setRoundResult(new Cars(cars));
+        return carResult;
     }
 
 }
