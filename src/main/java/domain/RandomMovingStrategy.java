@@ -1,5 +1,7 @@
-public class RandomMovingStrategy implements MovingStrategy{
-    public static final int STANDARD_NUMBER = 4;
+package domain;
+
+public class RandomMovingStrategy implements MovingStrategy {
+    public static final int STANDARD_NUMBER = 5;
     public static final int MAX_RANDOM_NUMBER = 10;
 
     @Override
