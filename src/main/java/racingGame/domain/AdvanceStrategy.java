@@ -1,4 +1,4 @@
-package domain;
+package racingGame.domain;
 
 public interface AdvanceStrategy {
 

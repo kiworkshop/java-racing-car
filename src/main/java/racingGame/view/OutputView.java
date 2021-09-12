@@ -1,7 +1,7 @@
-package view;
+package racingGame.view;
 
-import domain.Car;
 import org.apache.commons.lang3.StringUtils;
+import racingGame.domain.Car;
 
 import java.util.List;
 

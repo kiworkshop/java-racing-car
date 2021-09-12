@@ -1,7 +1,8 @@
-package utils;
+package racingGameTest.utils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingGame.utils.SplitUtils;
 
 import java.util.Arrays;
 import java.util.List;

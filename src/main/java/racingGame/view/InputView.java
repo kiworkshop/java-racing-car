@@ -1,6 +1,6 @@
-package view;
+package racingGame.view;
 
-import utils.SplitUtils;
+import racingGame.utils.SplitUtils;
 
 import java.util.List;
 import java.util.Scanner;

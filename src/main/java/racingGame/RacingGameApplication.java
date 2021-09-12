@@ -1,4 +1,6 @@
-import controller.RacingController;
+package racingGame;
+
+import racingGame.controller.RacingController;
 
 public class RacingGameApplication {
 

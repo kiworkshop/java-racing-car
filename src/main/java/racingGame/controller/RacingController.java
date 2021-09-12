@@ -1,9 +1,9 @@
-package controller;
+package racingGame.controller;
 
-import domain.AdvanceStrategy;
-import domain.Car;
-import service.RacingGame;
-import view.InputView;
+import racingGame.domain.AdvanceStrategy;
+import racingGame.domain.Car;
+import racingGame.service.RacingGame;
+import racingGame.view.InputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,10 +18,10 @@ public class RacingController {
         int trials = InputView.inputTrials();
 
         // 입력받은 이름으로 자동차 생성(위치 0)
-        List<Car> racingCars = createCars(carNames, advanceStrategy);
+        List<Car> cars = createCars(carNames, advanceStrategy);
 
         // 시도 횟수만큼 게임 판을 실행
-        RacingGame racingGame = new RacingGame(racingCars, trials);
+        RacingGame racingGame = new RacingGame(cars, trials);
 
         // 실행한 게임판마다 진행상황 출력
         racingGame.race();

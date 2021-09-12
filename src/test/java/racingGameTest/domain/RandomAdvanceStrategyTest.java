@@ -1,8 +1,10 @@
-package domain;
+package racingGameTest.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import racingGame.domain.AdvanceStrategy;
+import racingGame.domain.RandomAdvanceStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
