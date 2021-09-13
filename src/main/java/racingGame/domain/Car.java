@@ -6,12 +6,11 @@ import java.util.Objects;
 
 public class Car {
 
-    private final String name;
-    private int position;
-
-
     private static final int START_POSITION = 0;
     private static final int MAXIMUM_NAME_LENGTH = 5;
+
+    private final String name;
+    private int position;
 
     public Car(String name) {
         if (validateNullOrEmpty(name) || validateNameLength(name)) {
