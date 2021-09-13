@@ -55,7 +55,7 @@ public class CarTest {
     @DisplayName("자동차의 현재 위치를 반환한다.")
     void position() {
         //given
-        Car advancedTwiceCar = new Car("carWithPositionTwo");
+        Car advancedTwiceCar = new Car("car");
 
         AdvanceStrategy advanceStrategy = new RandomAdvanceStrategy() {
             @Override

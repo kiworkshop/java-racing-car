@@ -34,7 +34,7 @@ public class CarsTest {
         Car car3 = new Car("Becca");
 
         //when //then
-        assertThat(cars.list()).containsExactly(car1, car2, car3);
+        assertThat(cars.list()).contains(car1, car2, car3);
     }
 
 
