@@ -8,17 +8,17 @@ import racingGame.view.OutputView;
 import java.util.List;
 
 public class RacingGame {
+    private static final int MIN_TRIALS = 0;
 
     private Cars cars;
     private int trials;
-    private static final int MIN_TRIALS = 0;
 
     public RacingGame(final Cars cars, int trials) {
         this.cars = cars;
         this.trials = trials;
     }
 
-    public RacingGame(final String carNames, int trials) {
+    public RacingGame(List<String> carNames, int trials) {
         this(new Cars(carNames), trials);
     }
 
@@ -35,11 +35,11 @@ public class RacingGame {
     }
 
     private void raceEachRound() {
-        for (Car car : cars) {
+        for (Car car : cars.list()) {
             RandomAdvanceStrategy randomAdvanceStrategy = new RandomAdvanceStrategy();
             car.advance(randomAdvanceStrategy);
 
-            OutputView.printEachRound(cars);
+            OutputView.printEachRound(cars.list());
         }
     }
 

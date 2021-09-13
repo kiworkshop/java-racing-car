@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import racingGame.domain.AdvanceStrategy;
 import racingGame.domain.Car;
+import racingGame.domain.RandomAdvanceStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,6 +38,39 @@ public class CarTest {
 
         //then
         assertThat(car.position()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("자동차의 이름을 반환한다.")
+    void name() {
+        //given
+        String name = "name";
+        Car car = new Car(name);
+
+        //when //then
+        assertThat(car.name()).isEqualTo(name);
+    }
+
+    @Test
+    @DisplayName("자동차의 현재 위치를 반환한다.")
+    void position() {
+        //given
+        Car advancedTwiceCar = new Car("carWithPositionTwo");
+
+        AdvanceStrategy advanceStrategy = new RandomAdvanceStrategy() {
+            @Override
+            protected int createRandomNumber() {
+                return 5;
+            }
+
+        };
+
+        advancedTwiceCar.advance(advanceStrategy);
+        advancedTwiceCar.advance(advanceStrategy);
+
+        //when //then
+        assertThat(advancedTwiceCar.position()).isEqualTo(2);
+
     }
 }
 

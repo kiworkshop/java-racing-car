@@ -1,7 +1,5 @@
 package racingGame.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,14 +8,10 @@ public class Cars {
     private static final int START_POSITION = 0;
     private final List<Car> cars;
 
-    public Cars(List<Car> cars) {
-        this.cars = new ArrayList<>(cars);
-    }
-
-    public Cars(final String... name) {
-        this(Arrays.stream(name)
+    public Cars(List<String> carNames) {
+        this.cars = carNames.stream()
                 .map(Car::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     public List<Car> list() {
@@ -33,7 +27,7 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    public int findMaxPosition() {
+    private int findMaxPosition() {
         return cars.stream()
                 .map(Car::position)
                 .max(Integer::compareTo)

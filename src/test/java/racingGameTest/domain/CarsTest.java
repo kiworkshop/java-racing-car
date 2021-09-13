@@ -16,7 +16,7 @@ public class CarsTest {
     @DisplayName("이름을 인자로 받아서 이름만큼 자동차를 생성한다.")
     void create() {
         //given //when
-        Cars cars = new Cars("Ariel", "Scott", "Pete", "Alice");
+        Cars cars = new Cars(Arrays.asList("Ariel", "Scott", "Pete", "Alice"));
 
         //then
         assertThat(cars.list().size()).isEqualTo(4);
@@ -26,10 +26,12 @@ public class CarsTest {
     @DisplayName("자동차의 리스트를 반환한다.")
     void list() {
         //given
+        List<String> carNames = Arrays.asList("Chris", "Scott", "Becca");
+        Cars cars = new Cars(carNames);
+
         Car car1 = new Car("Chris");
-        Car car2 = new Car("Scott");
+        Car car2 = new Car("Becca");
         Car car3 = new Car("Becca");
-        Cars cars = new Cars(Arrays.asList(car1, car2, car3));
 
         //when //then
         assertThat(cars.list()).containsExactly(car1, car2, car3);
@@ -43,19 +45,17 @@ public class CarsTest {
         String expectedWinner1 = "car1";
         String expectedWinner2 = "car2";
 
-        Car car1 = new Car(expectedWinner1, () -> true);
-        Car car2 = new Car(expectedWinner2, () -> true);
-        Car car3 = new Car("car3", () -> false);
+        List<String> carNames = Arrays.asList(expectedWinner1, expectedWinner2, "car3");
+        Cars cars = new Cars(carNames);
 
-        RacingGame racingGame = new RacingGame(new Cars(Arrays.asList(car1, car2, car3)), 8);
+        RacingGame racingGame = new RacingGame(carNames, 8);
         racingGame.race();
 
         //when
-        Cars cars;
         List<String> winners = cars.findWinners();
 
         //then
-
+        assertThat(winners).contains("car1", "car2");
     }
 
 }
