@@ -22,12 +22,12 @@ public class Cars {
         int maxPosition = findMaxPosition();
 
         return cars.stream()
-                .filter(Car -> Car.position() == maxPosition)
+                .filter(Car -> Car.isMaxPosition(maxPosition))
                 .map(Car::name)
                 .collect(Collectors.toList());
     }
 
-    private int findMaxPosition() {
+    public int findMaxPosition() {
         return cars.stream()
                 .map(Car::position)
                 .max(Integer::compareTo)

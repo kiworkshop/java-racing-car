@@ -9,6 +9,8 @@ import racingGame.domain.Car;
 import racingGame.domain.RandomAdvanceStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CarTest {
     @Test
@@ -62,7 +64,6 @@ public class CarTest {
             protected int createRandomNumber() {
                 return 5;
             }
-
         };
 
         advancedTwiceCar.advance(advanceStrategy);
@@ -70,7 +71,30 @@ public class CarTest {
 
         //when //then
         assertThat(advancedTwiceCar.position()).isEqualTo(2);
+    }
 
+    @Test
+    @DisplayName("가장 높은 위치값을 인자로 받아 자동차의 현재 위치와 비교하여 boolean 으로 결과를 반환한다.")
+    void isMaxPosition() {
+        //given
+        int maxPosition = 2;
+        Car advancedTwiceCar = new Car("car1");
+        Car advancedOnceCar = new Car("car2");
+
+        AdvanceStrategy advanceStrategy = new RandomAdvanceStrategy() {
+            @Override
+            protected int createRandomNumber() {
+                return 5;
+            }
+        };
+
+        advancedTwiceCar.advance(advanceStrategy);
+        advancedTwiceCar.advance(advanceStrategy);
+        advancedOnceCar.advance(advanceStrategy);
+
+        //when //then
+        assertTrue(advancedTwiceCar.isMaxPosition(maxPosition));
+        assertFalse(advancedOnceCar.isMaxPosition(maxPosition));
     }
 }
 

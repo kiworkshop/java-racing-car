@@ -2,8 +2,10 @@ package racingGameTest.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingGame.domain.AdvanceStrategy;
 import racingGame.domain.Car;
 import racingGame.domain.Cars;
+import racingGame.domain.RandomAdvanceStrategy;
 import racingGame.service.RacingGame;
 
 import java.util.Arrays;
@@ -58,4 +60,28 @@ public class CarsTest {
         assertThat(winners).contains("car1", "car2");
     }
 
+    @Test
+    @DisplayName("자동차 경주에서 가장 멀리 간 자동차의 위치를 구한다.")
+    void findMaxPosition() {
+        //given
+        String expectedWinner = "car1";
+
+        List<String> carNames = Arrays.asList(expectedWinner, "car2");
+        Cars cars = new Cars(carNames);
+
+        AdvanceStrategy advanceStrategy = new RandomAdvanceStrategy() {
+            @Override
+            protected int createRandomNumber() {
+                return 5;
+            }
+        };
+
+        cars.list().get(0).advance(advanceStrategy);
+
+        //when
+        List<String> winner = cars.findWinners();
+
+        //then
+        assertThat(winner).containsExactly("car1");
+    }
 }
